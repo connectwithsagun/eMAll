@@ -27,14 +27,14 @@ public class SettingsFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
     ListView listView;
     TextView textView;
     String[] listItem;
-
+    Context mContext;
+    View view;
+    // TODO: Rename and change types of parameters
+    private String mParam1;
+    private String mParam2;
 
 
     public SettingsFragment() {
@@ -68,41 +68,42 @@ public class SettingsFragment extends Fragment {
         }
 
 
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mContext = context;
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        view = inflater.inflate(R.layout.fragment_settings, container, false);
+        init(view);
+        return view;
+    }
 
 
-        setContentView(R.layout.fragment_settings);
-        listView=(ListView)findViewById(R.id.listView);
-        textView=(TextView)findViewById(R.id.textView);
+    void init(View view) {
+
+        listView = view.findViewById(R.id.listView);
+        textView = view.findViewById(R.id.textView);
         listItem = getResources().getStringArray(R.array.seting_list);
-        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, listItem);
+        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_list_item_1, android.R.id.text1, listItem);
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 // TODO Auto-generated method stub
-                String value=adapter.getItem(position);
-                Toast.makeText(getApplicationContext(),value,Toast.LENGTH_SHORT).show();
+                String value = adapter.getItem(position);
+                Toast.makeText(mContext, value, Toast.LENGTH_SHORT).show();
 
             }
         });
-   }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_settings, container, false);
     }
-
-
-
-
-
-
-
-
-
 
 
 }

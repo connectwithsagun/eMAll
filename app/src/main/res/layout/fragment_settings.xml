@@ -5,30 +5,30 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.SettingsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <ListView
-        android:id="@+id/listView"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        />
+        android:orientation="vertical">
 
-    <Button
-        android:layout_below="@id/listView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="LOGOUT"
-        android:id="@+id/textView"
-        android:layout_marginHorizontal="@dimen/margin"
-        android:layout_marginTop="20dp"
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        />
+        <Button
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/listView"
+            android:layout_marginHorizontal="@dimen/margin"
+            android:layout_marginTop="20dp"
+            android:text="LOGOUT"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
-<!--        app:backgroundTint="@color/primary"-->
 
-
+    </LinearLayout>
 
 
 </FrameLayout>
