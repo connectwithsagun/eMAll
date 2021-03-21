@@ -1,10 +1,17 @@
 package com.savatechnology.emall.Fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import com.savatechnology.emall.R;
 
 /**
@@ -19,26 +26,16 @@ public class SettingsFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-<<<<<<< HEAD
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-=======
+
     ListView listView;
     TextView textView;
     String[] listItem;
     Context mContext;
     View view;
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-
-    public SettingsFragment() {
-        // Required empty public constructor
-    }
->>>>>>> 6fba40e19d324fb50c5d45799c131ce27fbeb372
 
     /**
      * Use this factory method to create a new instance of
@@ -69,8 +66,7 @@ public class SettingsFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-<<<<<<< HEAD
-=======
+
 
 
     }
@@ -79,17 +75,14 @@ public class SettingsFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         mContext = context;
->>>>>>> 6fba40e19d324fb50c5d45799c131ce27fbeb372
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-<<<<<<< HEAD
-        return inflater.inflate(R.layout.fragment_settings, container, false);
-    }
-=======
+
         view = inflater.inflate(R.layout.fragment_settings, container, false);
         init(view);
         return view;
@@ -115,6 +108,4 @@ public class SettingsFragment extends Fragment {
         });
     }
 
-
->>>>>>> 6fba40e19d324fb50c5d45799c131ce27fbeb372
 }
