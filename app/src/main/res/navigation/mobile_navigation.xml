@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/action_home">
+
+    <fragment
+        android:id="@+id/nav_notification"
+        android:name="com.savatechnology.emall.Fragments.NotificationFragment"
+        android:label="@string/menu_notification"
+        tools:layout="@layout/fragment_notification" />
+
+    <fragment
+        android:id="@+id/nav_order"
+        android:name="com.savatechnology.emall.Fragments.OrderFragment"
+        android:label="@string/menu_order"
+        tools:layout="@layout/fragment_order" />
+
+    <fragment
+        android:id="@+id/nav_help"
+        android:name="com.savatechnology.emall.Fragments.HomeFragment"
+        android:label="@string/menu_help"
+        tools:layout="@layout/fragment_help" />
+
+    <fragment
+        android:id="@+id/nav_settings"
+        android:name="com.savatechnology.emall.Fragments.SettingsFragment"
+        android:label="@string/menu_setting"
+        tools:layout="@layout/fragment_settings" />
+
+    <fragment
+        android:id="@+id/nav_dark_mode"
+        android:name="com.savatechnology.emall.Fragments.DarkModeFragment"
+        android:label="@string/menu_dark_mode"
+        tools:layout="@layout/fragment_dark_mode" />
+
+    <fragment
+        android:id="@+id/nav_login"
+        android:name="com.savatechnology.emall.Fragments.LoginFragment"
+        android:label="@string/menu_login"
+        tools:layout="@layout/fragment_login" />
+
+    <fragment
+        android:id="@+id/nav_register"
+        android:name="com.savatechnology.emall.Fragments.RegisterFragment"
+        android:label="@string/menu_register"
+        tools:layout="@layout/fragment_register" />
+
+
+
+
+
+
+
+    <fragment
+        android:id="@+id/action_home"
+        android:name="com.savatechnology.emall.Fragments.HomeFragment"
+        android:label="@string/nav_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/action_account"
+        android:name="com.savatechnology.emall.Fragments.AccountFragment"
+        android:label="@string/nav_account"
+        tools:layout="@layout/fragment_account" />
+
+    <fragment
+        android:id="@+id/action_category"
+        android:name="com.savatechnology.emall.Fragments.CategoriesFragment"
+        android:label="@string/nav_category"
+        tools:layout="@layout/fragment_categories" />
+
+    <fragment
+        android:id="@+id/action_favourites"
+        android:name="com.savatechnology.emall.Fragments.FavouritesFragment"
+        android:label="@string/nav_fav"
+        tools:layout="@layout/fragment_favourites" />
+
+
+</navigation>

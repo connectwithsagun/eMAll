@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/action_home"
+        android:icon="@drawable/home_icon"
+        android:title="Home" />
+
+    <item
+        android:id="@+id/action_category"
+        android:icon="@drawable/category_icon"
+        android:title="Categories" />
+
+    <item
+        android:id="@+id/action_favourites"
+        android:icon="@drawable/favourite_icon"
+
+        android:title="Favourites" />
+    <item
+        android:id="@+id/action_account"
+        android:icon="@drawable/username_icon"
+        android:actionLayout="@layout/fragment_account"
+        android:title="Account" />
+
+</menu>
