@@ -1,4 +1,15 @@
 <resources>
+
+    <string-array name="seting_list">
+        <item>Account Information</item>
+        <item>Address Book</item>
+        <item>General</item>
+        <item>Policies</item>
+        <item>Help</item>
+
+    </string-array>
+
+
     <string name="app_name">eMall</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -22,5 +33,11 @@
     <string name="nav_fav">Favourites</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">This is home fragment</string>
+
+
+
+    <string name="long_lorem_ipsum">
+        Duis tellus metus, elementum a lectus id, aliquet interdum mauris. Nam bibendum efficitur sollicitudin. Proin eleifend libero velit, nec fringilla dolor finibus quis. nMorbi eu libero pellentesque, rutrum metus quis, blandit est. Fusce bibendum accumsan nisi vulputate feugiat. In fermentum laoreet euismod.
+    </string>
 
 </resources>

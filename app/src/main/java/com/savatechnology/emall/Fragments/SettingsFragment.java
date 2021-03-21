@@ -1,5 +1,6 @@
 package com.savatechnology.emall.Fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,6 +8,11 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.savatechnology.emall.R;
 
@@ -25,6 +31,11 @@ public class SettingsFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    ListView listView;
+    TextView textView;
+    String[] listItem;
+
+
 
     public SettingsFragment() {
         // Required empty public constructor
@@ -55,7 +66,27 @@ public class SettingsFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-    }
+
+
+
+
+        setContentView(R.layout.fragment_settings);
+        listView=(ListView)findViewById(R.id.listView);
+        textView=(TextView)findViewById(R.id.textView);
+        listItem = getResources().getStringArray(R.array.seting_list);
+        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, listItem);
+        listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                // TODO Auto-generated method stub
+                String value=adapter.getItem(position);
+                Toast.makeText(getApplicationContext(),value,Toast.LENGTH_SHORT).show();
+
+            }
+        });
+   }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -63,4 +94,15 @@ public class SettingsFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_settings, container, false);
     }
+
+
+
+
+
+
+
+
+
+
+
 }
