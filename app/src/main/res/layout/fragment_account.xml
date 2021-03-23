@@ -36,7 +36,7 @@
                         android:id="@+id/imgage"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:src="@drawable/ic_menu_send" />
+                        android:src="@drawable/username_icon" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"

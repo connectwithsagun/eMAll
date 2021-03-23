@@ -3,16 +3,22 @@ package com.savatechnology.emall.Fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.savatechnology.emall.Adapters.AdapterFavouriteList;
+import com.savatechnology.emall.Models.FavouriteList;
 import com.savatechnology.emall.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link FavouritesFragment#newInstance} factory method to
+ * Use the {@link HelpFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
 public class FavouritesFragment extends Fragment {
@@ -26,6 +32,9 @@ public class FavouritesFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+
+
+
     public FavouritesFragment() {
         // Required empty public constructor
     }
@@ -36,7 +45,7 @@ public class FavouritesFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment FavouritesFragment.
+     * @return A new instance of fragment HelpFragment.
      */
     // TODO: Rename and change types and number of parameters
     public static FavouritesFragment newInstance(String param1, String param2) {
@@ -60,7 +69,17 @@ public class FavouritesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
+
+
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_favourites, container, false);
+
     }
+
+
+
+
 }

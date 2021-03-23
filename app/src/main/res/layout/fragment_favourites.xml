@@ -6,11 +6,33 @@
     tools:context=".Fragments.FavouritesFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nested_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="This is favourites fragments"
+        android:clipToPadding="false"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        android:scrollingCache="true"
+        >
 
-        />
+
+
+
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/favRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:background="#ffffff"
+                android:scrollbars="vertical"
+                android:scrollingCache="true" />
+
+
+
+    </androidx.core.widget.NestedScrollView>
+
 
 </FrameLayout>

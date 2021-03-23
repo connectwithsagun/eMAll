@@ -6,6 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".Activities.CheckOutActivity">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+
+
+
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -75,7 +89,7 @@
         android:text="Product"
         android:layout_below="@+id/cv1"
         android:textSize="@dimen/heading"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:layout_marginHorizontal="@dimen/margin"
         android:textColor="@color/black"/>
 
@@ -148,7 +162,7 @@
                             android:textColor="@color/black"
                             android:layout_marginTop="10dp"
                             android:padding="2dp"
-                            android:layout_marginLeft="100dp"
+                            android:layout_marginLeft="50dp"
                             android:textSize="@dimen/description"
                             tools:ignore="MissingConstraints" />
 
@@ -180,7 +194,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/cv3"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="15dp"
         android:layout_marginHorizontal="@dimen/margin"
         app:cardBackgroundColor="@color/secodary"
         android:layout_below="@+id/cv2"
@@ -233,7 +247,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/cv4"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:layout_marginHorizontal="@dimen/margin"
         app:cardBackgroundColor="@color/secodary"
         android:layout_below="@+id/cv3"
@@ -291,7 +305,7 @@
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:padding="2dp"
-                android:layout_marginLeft="140dp"
+                android:layout_marginLeft="50dp"
                 android:textSize="@dimen/description"
                 />
 
@@ -302,7 +316,7 @@
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:padding="2dp"
-                android:layout_marginLeft="140dp"
+                android:layout_marginLeft="50dp"
                 android:textSize="@dimen/description"
                 />
 
@@ -326,11 +340,11 @@
         android:textColor="@color/black"
         android:textStyle="bold"
         android:id="@+id/tvTotal"
-        android:layout_marginTop="60dp"
-        android:layout_marginStart="265dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="230dp"
         android:layout_marginHorizontal="@dimen/margin"
         android:layout_below="@+id/cv4"
-        android:layout_marginLeft="260dp" />
+        android:layout_marginLeft="10dp" />
 
 <!--    android:gravity="right"-->
 <!--    android:layout_alignParentEnd="true"-->
@@ -343,11 +357,14 @@
     android:background="@drawable/edit_text_bg"
     android:text="proceed to pay"
     android:textStyle="bold"
-    android:layout_marginTop="20dp"
+    android:layout_marginTop="10dp"
     android:textSize="@dimen/button_size"
     android:layout_marginHorizontal="@dimen/margin"
     />
 
+    </LinearLayout>
 
+
+    </ScrollView>
 
 </RelativeLayout>

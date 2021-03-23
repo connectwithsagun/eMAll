@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.savatechnology.emall">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.savatechnology.emall" >
 
     <application
         android:allowBackup="true"
@@ -8,29 +9,34 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.EMall">
-        <activity android:name=".Activities.ProductDetailsActivity"
-            android:label="Product Details"
-            android:parentActivityName=".Activities.MainActivity">
+        android:theme="@style/Theme.EMall" >
+
+        <activity android:name=".Activities.FavouriteActivity"
+            tools:ignore="Instantiatable">
 
 
 
         </activity>
+
+       <activity
+            android:name=".Activities.ProductDetailsActivity"
+            android:label="Product Details"
+            android:parentActivityName=".Activities.MainActivity" />
         <activity
             android:name=".Activities.CheckOutActivity"
             android:label="Check Out"
-            android:parentActivityName=".Activities.MainActivity"></activity>
+            android:parentActivityName=".Activities.MainActivity" />
         <activity
             android:name=".Activities.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.EMall.NoActionBar" >
+
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
 
         </activity>
     </application>
