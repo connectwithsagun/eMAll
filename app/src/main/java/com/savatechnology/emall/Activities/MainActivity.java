@@ -1,7 +1,9 @@
 package com.savatechnology.emall.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -124,6 +126,18 @@ public class MainActivity extends AppCompatActivity {
             super.onBackPressed();
         }
 
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.action_search:
+                Intent i = new Intent(this,CartActivity.class);
+                this.startActivity(i);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 
