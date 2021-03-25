@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:layout_marginHorizontal="@dimen/margin"
+    tools:context=".Activities.CartActivity">
+
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/favRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="430dp"
+                android:layout_marginTop="10dp"
+                android:background="#ffffff"
+                android:scrollbars="vertical"
+                android:scrollingCache="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total    : "
+                android:textSize="@dimen/heading"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp"
+                android:id="@+id/tvTotal"
+                android:layout_below="@+id/favRecyclerView"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="80dp"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rs. 2000"
+            android:textSize="@dimen/heading"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            android:id="@+id/tvTotalPrice"
+            android:layout_below="@+id/favRecyclerView"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="5dp"
+            />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="check out"
+                android:textStyle="bold"
+                android:textSize="@dimen/button_size"
+                android:id="@+id/btnCheckOut"
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/tvTotal"
+                />
+
+
+
+
+
+    </RelativeLayout>
+
+
+
+
+</ScrollView>
+
+</RelativeLayout>
+
+
+
+
+
+
+

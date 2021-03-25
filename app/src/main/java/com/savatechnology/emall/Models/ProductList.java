@@ -3,36 +3,42 @@ package com.savatechnology.emall.Models;
 
 public class ProductList {
 
-    private int imageProduct;
-    private String tvProductName;
-    private String tvProductPrice;
+    private String imageProduct;
+    private String tvProductTitle;
+    private int tvProductPrice;
+    private double productRating;
+    private String tvSupplierName;
 
 
 
 
-
-    public void setImageProduct(int imageProduct) {
+    public void setimageProduct(String imageProduct) {
         this.imageProduct = imageProduct;
     }
 
-    public void setTvProductName(String tvProductName) {
-        this.tvProductName = tvProductName;
+    public void settvProductTitle(String tvProductTitle) {
+        this.tvProductTitle = tvProductTitle;
     }
 
-    public void setTvProductPrice(String tvProductPrice) {
+    public void settvProductPrice(int tvProductPrice) {
         this.tvProductPrice = tvProductPrice;
     }
+    public void setproductRating(double productRating){ this.productRating= productRating;}
+
+    public void setTvSupplierName(String tvSupplierName) {
+        this.tvSupplierName = tvSupplierName;
+    }
 
 
 
 
 
-
-    public ProductList(int imageProduct, String tvProductName, String tvProductPrice){
+    public ProductList(String imageProduct, String tvProductTitle, int tvProductPrice,double productRating,String tvSupplierName){
         this.imageProduct=imageProduct;
-        this.tvProductName=tvProductName;
+        this.tvProductTitle=tvProductTitle;
         this.tvProductPrice=tvProductPrice;
-
+        this.productRating=productRating;
+        this.tvSupplierName=tvSupplierName;
 
     }
 
@@ -41,16 +47,23 @@ public class ProductList {
     }
 
 
-    public int getimageProduct() {
+    public String getimageProduct() {
         return imageProduct;
     }
 
-    public String gettvProductName() {
-        return tvProductName;
+    public String gettvProductTitle() {
+        return tvProductTitle;
+    }
+    public int gettvProductPrice() {
+        return tvProductPrice;
     }
 
-    public String gettvProductPrice() {
-        return tvProductPrice;
+    public double getproductRating() {
+        return productRating;
+    }
+
+    public String gettvSupplierName() {
+        return tvSupplierName;
     }
 
 

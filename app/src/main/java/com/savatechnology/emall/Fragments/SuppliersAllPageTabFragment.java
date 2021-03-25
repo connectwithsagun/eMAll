@@ -5,18 +5,16 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 
 
-import com.savatechnology.emall.Adapters.AdapterProduct;
+import com.savatechnology.emall.Adapters.AdapterSupplierProduct;
 
-import com.savatechnology.emall.Models.ProductList;
+import com.savatechnology.emall.Models.SupplierProductList;
 import com.savatechnology.emall.R;
 
 import java.util.ArrayList;
@@ -31,8 +29,8 @@ public class SuppliersAllPageTabFragment extends Fragment {
 
 
     RecyclerView recyclerView;
-    List<ProductList> lists;
-    AdapterProduct adapter;
+    List<SupplierProductList> lists;
+    AdapterSupplierProduct adapter;
     Context mContext;
     GridLayoutManager layoutManager;
     private View view;
@@ -100,7 +98,7 @@ public class SuppliersAllPageTabFragment extends Fragment {
         layoutManager=new GridLayoutManager(mContext,2);
         //layoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new AdapterProduct(lists);
+        adapter = new AdapterSupplierProduct(lists);
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
@@ -109,10 +107,10 @@ public class SuppliersAllPageTabFragment extends Fragment {
 
         lists = new ArrayList<>();
 
-        lists.add(new ProductList(R.drawable.laptop,"Gaming Laptop","86000"));
-        lists.add(new ProductList(R.drawable.laptop,"Gaming Laptop","86000"));
-        lists.add(new ProductList(R.drawable.laptop,"Gaming Laptop","86000"));
-        lists.add(new ProductList(R.drawable.laptop,"Gaming Laptop","86000"));
+        lists.add(new SupplierProductList(R.drawable.laptop,"Gaming Laptop","86000"));
+        lists.add(new SupplierProductList(R.drawable.laptop,"Gaming Laptop","86000"));
+        lists.add(new SupplierProductList(R.drawable.laptop,"Gaming Laptop","86000"));
+        lists.add(new SupplierProductList(R.drawable.laptop,"Gaming Laptop","86000"));
 
 
     }

@@ -11,31 +11,30 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.savatechnology.emall.Models.ProductList;
+import com.savatechnology.emall.Models.CartList;
 import com.savatechnology.emall.R;
 
 import java.util.List;
 
-public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.MyViewHolder> {
+public class AdapterCart extends RecyclerView.Adapter<AdapterCart.MyViewHolder> {
     Context context;
-    private List<ProductList> lists;
-    public AdapterProduct(List<ProductList> lists,Context context) {
+    private List<CartList> lists;
+    public AdapterCart(List<CartList> lists,Context context) {
         this.lists = lists;
         this.context = context;
     }
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_products, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_cart, parent, false);
         return new MyViewHolder(view);
     }
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        String image = lists.get(position).getimageProduct();
+        String image = lists.get(position).getimgProduct();
         String product_name = lists.get(position).gettvProductTitle();
         int product_price = lists.get(position).gettvProductPrice();
-        double product_rating = lists.get(position).getproductRating();
-        String supplier_name = lists.get(position).gettvSupplierName();
+        int product_shipping_cost = lists.get(position).gettvShippingCost();
 
         //Log.v("abc",image);
 
@@ -46,14 +45,14 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.MyViewHo
         Glide.with(context)
                 .asBitmap()
                 .load(image)
-                .into(holder.imageProduct);
+                .into(holder.imgProduct);
 
 
         holder.tvProductTitle.setText(product_name);
-
         holder.tvProductPrice.setText("Rs " +product_price);
-        holder.productRating.setRating((float) product_rating);
-        holder.tvSupplierName.setText(supplier_name);
+        holder.tvShippingCost.setText("Rs "+product_shipping_cost);
+
+
 
 
 
@@ -63,18 +62,16 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.MyViewHo
         return lists.size();
     }
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        ImageView imageProduct;
+        ImageView imgProduct;
         TextView tvProductTitle;
         TextView tvProductPrice;
-        RatingBar productRating;
-        TextView tvSupplierName;
+        TextView tvShippingCost;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            imageProduct = itemView.findViewById(R.id.imageProduct);
+            imgProduct = itemView.findViewById(R.id.imgProduct);
             tvProductTitle =(TextView) itemView.findViewById(R.id.tvProductTitle);
             tvProductPrice =(TextView) itemView.findViewById(R.id.tvProductPrice);
-            productRating = itemView.findViewById(R.id.productRating);
-            tvSupplierName =(TextView) itemView.findViewById(R.id.tvSupplierName);
+            tvShippingCost =(TextView) itemView.findViewById(R.id.tvShippingCost);
 
 
         }
