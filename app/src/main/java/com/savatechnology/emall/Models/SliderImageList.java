@@ -5,6 +5,14 @@ public class SliderImageList {
     private String description;
     private String imageUrl;
 
+    SliderImageList(){
+
+    }
+    public SliderImageList(String description, String img){
+        this.description = description;
+        this.imageUrl = img;
+    }
+
     public String getDescription() {
         return description;
     }

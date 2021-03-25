@@ -21,7 +21,9 @@ public class AdapterSlider extends
     private Context context;
     private List<SliderImageList> mSliderItems = new ArrayList<>();
 
-    public AdapterSlider(Context context) {
+    public AdapterSlider(Context context,List<SliderImageList> slider)
+    {
+        this.mSliderItems = slider;
         this.context = context;
     }
 
