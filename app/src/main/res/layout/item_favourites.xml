@@ -5,24 +5,38 @@
     android:id="@+id/relativeLyt"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cv1"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="@dimen/margin"
+        app:cardCornerRadius="4dp">
+
+
+
+
+
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="95dp"
-        android:background="#ffffff">
+        android:layout_height="wrap_content"
+        android:id="@+id/relativeLyt1"
+        android:background="@color/secodary">
 
         <androidx.cardview.widget.CardView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:id="@+id/imageview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/cv2"
             app:cardCornerRadius="60dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginLeft="20dp">
 
             <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:scaleType="centerCrop"
-                android:id="@+id/imageview1"
+                android:id="@+id/imgProduct"
                 android:src="@drawable/username_icon">
 
             </ImageView>
@@ -35,54 +49,48 @@
 
 
         <TextView
-            android:layout_width="120dp"
-            android:layout_height="30dp"
-            android:text="Sagun"
-            android:id="@+id/textview"
-            android:textColor="#000000"
-            android:textSize="20sp"
-            android:layout_toRightOf="@+id/imageview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Women's Jacket"
+            android:id="@+id/tvProductTitle"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="@dimen/heading"
+            android:layout_toRightOf="@+id/cv2"
             android:layout_marginTop="20dp"
             android:layout_marginLeft="20dp"/>
 
 
-        <TextView
-            android:layout_width="80dp"
-            android:layout_height="30dp"
-            android:text="10:43 AM"
-            android:id="@+id/textview2"
-            android:textSize="12sp"
-            android:layout_toRightOf="@+id/textview"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="75dp"/>
+
+
 
         <TextView
             android:layout_width="140dp"
             android:layout_height="30dp"
-            android:text="Hoe are you?"
-            android:textSize="15sp"
-            android:id="@+id/textview3"
-            android:layout_toRightOf="@+id/imageview"
-            android:layout_below="@+id/textview"
+            android:text="Pangeni Traders"
+            android:textSize="@dimen/description"
+            android:id="@+id/tvSupplierName"
+            android:layout_toRightOf="@+id/cv2"
+            android:layout_below="@+id/tvProductTitle"
             android:layout_marginLeft="20dp"/>
 
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/favourite_icon"
+            android:id="@+id/ImgIcon"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="75dp"
+            android:layout_alignParentRight="true" />
 
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:text="----------------------"
-            android:textColor="#CDC7C7"
-            android:textSize="15sp"
-            android:id="@+id/divider"
-            android:layout_toRightOf="@+id/imageview"
-            android:layout_below="@+id/imageview"
-            android:layout_marginLeft="20dp"
-            android:layout_toEndOf="@+id/imageview"
-            android:layout_marginStart="20dp" />
+
+
+
 
     </RelativeLayout>
 
 
-
+    </androidx.cardview.widget.CardView>
 </RelativeLayout>

@@ -1,14 +1,23 @@
 package com.savatechnology.emall.Fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+
+import com.savatechnology.emall.Adapters.AdapterOrderList;
+import com.savatechnology.emall.Models.OrderList;
 import com.savatechnology.emall.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,6 +25,18 @@ import com.savatechnology.emall.R;
  * create an instance of this fragment.
  */
 public class OrderFragment extends Fragment {
+
+
+
+
+    RecyclerView recyclerView;
+    List<OrderList> lists;
+    AdapterOrderList adapter;
+    Context mContext;
+    LinearLayoutManager layoutManager;
+    private View view;
+
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -61,6 +82,45 @@ public class OrderFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_order, container, false);
+        initData();
+        view = inflater.inflate(R.layout.fragment_order, container, false);
+        initRecycleView(view);
+        return view;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mContext = context;
+    }
+
+    private void initRecycleView(View view) {
+
+        recyclerView = view.findViewById(R.id.favRecyclerView);
+        layoutManager=new LinearLayoutManager(mContext);
+        layoutManager.setOrientation(RecyclerView.VERTICAL);
+        recyclerView.setLayoutManager(layoutManager);
+        adapter = new AdapterOrderList(lists);
+        recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+    }
+
+    private void initData() {
+
+        lists = new ArrayList<>();
+
+
+        lists.add(new OrderList(R.drawable.pepsicola,"Cold Drinks","Lungeli Traders","Accepted"));
+        lists.add(new OrderList(R.drawable.pepsicola,"Cold Drinks","Lungeli Traders","Accepted"));
+        lists.add(new OrderList(R.drawable.pepsicola,"Cold Drinks","Lungeli Traders","Accepted"));
+        lists.add(new OrderList(R.drawable.pepsicola,"Cold Drinks","Lungeli Traders","Accepted"));
+        lists.add(new OrderList(R.drawable.pepsicola,"Cold Drinks","Lungeli Traders","Accepted"));
+        lists.add(new OrderList(R.drawable.pepsicola,"Cold Drinks","Lungeli Traders","Accepted"));
+        lists.add(new OrderList(R.drawable.pepsicola,"Cold Drinks","Lungeli Traders","Accepted"));
+        lists.add(new OrderList(R.drawable.pepsicola,"Cold Drinks","Lungeli Traders","Accepted"));
+
+
     }
 }
+
+

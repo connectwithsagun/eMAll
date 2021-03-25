@@ -4,17 +4,19 @@ import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
-import com.savatechnology.emall.Adapters.AdapterNotificationList;
-import com.savatechnology.emall.Adapters.AdapterOrderList;
-import com.savatechnology.emall.Models.NotificationList;
-import com.savatechnology.emall.Models.OrderList;
+
+import com.savatechnology.emall.Adapters.AdapterProduct;
+
+import com.savatechnology.emall.Models.ProductList;
 import com.savatechnology.emall.R;
 
 import java.util.ArrayList;
@@ -22,17 +24,17 @@ import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link NotificationFragment#newInstance} factory method to
+ * Use the {@link SuppliersHomePageTabFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class NotificationFragment extends Fragment {
+public class SuppliersAllPageTabFragment extends Fragment {
 
 
     RecyclerView recyclerView;
-    List<NotificationList> lists;
-    AdapterNotificationList adapter;
+    List<ProductList> lists;
+    AdapterProduct adapter;
     Context mContext;
-    LinearLayoutManager layoutManager;
+    GridLayoutManager layoutManager;
     private View view;
 
 
@@ -45,7 +47,7 @@ public class NotificationFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public NotificationFragment() {
+    public SuppliersAllPageTabFragment() {
         // Required empty public constructor
     }
 
@@ -55,11 +57,11 @@ public class NotificationFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment NotificationFragment.
+     * @return A new instance of fragment SuppliersHomePageTabFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static NotificationFragment newInstance(String param1, String param2) {
-        NotificationFragment fragment = new NotificationFragment();
+    public static SuppliersHomePageTabFragment newInstance(String param1, String param2) {
+        SuppliersHomePageTabFragment fragment = new SuppliersHomePageTabFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -81,7 +83,7 @@ public class NotificationFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         initData();
-        view = inflater.inflate(R.layout.fragment_notification, container, false);
+        view = inflater.inflate(R.layout.fragment_suppliers_all_page_tab, container, false);
         initRecycleView(view);
         return view;
     }
@@ -94,11 +96,11 @@ public class NotificationFragment extends Fragment {
 
     private void initRecycleView(View view) {
 
-        recyclerView = view.findViewById(R.id.favRecyclerView);
-        layoutManager=new LinearLayoutManager(mContext);
-        layoutManager.setOrientation(RecyclerView.VERTICAL);
+        recyclerView = view.findViewById(R.id.recyclerView);
+        layoutManager=new GridLayoutManager(mContext,2);
+        //layoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new AdapterNotificationList(lists);
+        adapter = new AdapterProduct(lists);
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
@@ -107,17 +109,11 @@ public class NotificationFragment extends Fragment {
 
         lists = new ArrayList<>();
 
+        lists.add(new ProductList(R.drawable.laptop,"Gaming Laptop","86000"));
+        lists.add(new ProductList(R.drawable.laptop,"Gaming Laptop","86000"));
+        lists.add(new ProductList(R.drawable.laptop,"Gaming Laptop","86000"));
+        lists.add(new ProductList(R.drawable.laptop,"Gaming Laptop","86000"));
 
-        lists.add(new NotificationList(R.drawable.notification_icon,"Lungeli Traders","24/03/2021","This is demo of notification"));
-        lists.add(new NotificationList(R.drawable.notification_icon,"Lungeli Traders","24/03/2021","This is demo of notification"));
-        lists.add(new NotificationList(R.drawable.notification_icon,"Lungeli Traders","24/03/2021","This is demo of notification"));
-        lists.add(new NotificationList(R.drawable.notification_icon,"Lungeli Traders","24/03/2021","This is demo of notification"));
-        lists.add(new NotificationList(R.drawable.notification_icon,"Lungeli Traders","24/03/2021","This is demo of notification"));
-        lists.add(new NotificationList(R.drawable.notification_icon,"Lungeli Traders","24/03/2021","This is demo of notification"));
-        lists.add(new NotificationList(R.drawable.notification_icon,"Lungeli Traders","24/03/2021","This is demo of notification"));
-        lists.add(new NotificationList(R.drawable.notification_icon,"Lungeli Traders","24/03/2021","This is demo of notification"));
-        lists.add(new NotificationList(R.drawable.notification_icon,"Lungeli Traders","24/03/2021","This is demo of notification"));
-        lists.add(new NotificationList(R.drawable.notification_icon,"Lungeli Traders","24/03/2021","This is demo of notification"));
 
     }
 }

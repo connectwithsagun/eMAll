@@ -1,11 +1,12 @@
 package com.savatechnology.emall.Models;
 
 
-public class FavouriteList {
+public class OrderList {
 
     private int imgProduct;
     private String tvProductTitle;
     private String tvSupplierName;
+    private String tvProductStatusResult;
 
 
 
@@ -14,27 +15,32 @@ public class FavouriteList {
         this.imgProduct = imgProduct;
     }
 
-    public void setTvProductTitle(String tvProductTitle) {
+    public void settvProductTitle(String tvProductTitle) {
         this.tvProductTitle = tvProductTitle;
     }
 
-    public void setTvSupplierName(String tvSupplierName) {
+    public void settvSupplierName(String tvSupplierName) {
         this.tvSupplierName = tvSupplierName;
     }
 
+    public void settvProductStatusResult(String tvProductStatusResult) {
+        this.tvProductStatusResult = tvProductStatusResult;
+    }
 
 
 
 
-    public FavouriteList(int imgProduct, String tvProductTitle, String tvSupplierName){
+
+
+    public OrderList(int imgProduct, String tvProductTitle, String tvSupplierName, String tvProductStatusResult){
         this.imgProduct=imgProduct;
         this.tvProductTitle=tvProductTitle;
         this.tvSupplierName=tvSupplierName;
-
+        this.tvProductStatusResult=tvProductStatusResult;
 
     }
 
-    public FavouriteList(){
+    public OrderList(){
 
     }
 
@@ -50,6 +56,14 @@ public class FavouriteList {
     public String gettvSupplierName() {
         return tvSupplierName;
     }
+
+
+
+    public String gettvProductStatusResult() {
+        return tvProductStatusResult;
+    }
+
+
 
 
 

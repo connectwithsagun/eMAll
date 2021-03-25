@@ -1,13 +1,14 @@
 package com.savatechnology.emall.Fragments;
 
+import android.content.Context;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.savatechnology.emall.Adapters.AdapterFavouriteList;
 import com.savatechnology.emall.Models.FavouriteList;
@@ -23,16 +24,23 @@ import java.util.List;
  */
 public class FavouritesFragment extends Fragment {
 
+
+    RecyclerView recyclerView;
+    List<FavouriteList> lists;
+    AdapterFavouriteList adapter;
+    Context mContext;
+    LinearLayoutManager layoutManager;
+    private View view;
+
+
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
-
 
 
     public FavouritesFragment() {
@@ -70,16 +78,44 @@ public class FavouritesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
-
-
-
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_favourites, container, false);
-
+        initData();
+        view = inflater.inflate(R.layout.fragment_favourites, container, false);
+        initRecycleView(view);
+        return view;
     }
 
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mContext = context;
+    }
+
+    private void initRecycleView(View view) {
+
+        recyclerView = view.findViewById(R.id.favRecyclerView);
+        layoutManager=new LinearLayoutManager(mContext);
+        layoutManager.setOrientation(RecyclerView.VERTICAL);
+        recyclerView.setLayoutManager(layoutManager);
+        adapter = new AdapterFavouriteList(lists);
+        recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+    }
+
+    private void initData() {
+
+        lists = new ArrayList<>();
+
+        lists.add(new FavouriteList(R.drawable.pepsicola,"Cold Drinks","Lungeli Traders"));
+        lists.add(new FavouriteList(R.drawable.laptop,"Gaming Laptop","Pangeni Traders"));
+        lists.add(new FavouriteList(R.drawable.pepsicola,"Cold Drinks","Lungeli Traders"));
+        lists.add(new FavouriteList(R.drawable.laptop,"Gaming Laptop","Pangeni Traders"));
+        lists.add(new FavouriteList(R.drawable.pepsicola,"Cold Drinks","Lungeli Traders"));
+        lists.add(new FavouriteList(R.drawable.laptop,"Gaming Laptop","Pangeni Traders"));
+        lists.add(new FavouriteList(R.drawable.pepsicola,"Cold Drinks","Lungeli Traders"));
+        lists.add(new FavouriteList(R.drawable.laptop,"Gaming Laptop","Pangeni Traders"));
+
+    }
 
 
 }

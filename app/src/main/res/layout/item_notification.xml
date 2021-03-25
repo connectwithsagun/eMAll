@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/relativeLyt"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/cv1"
+        android:backgroundTint="@color/secodary"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="@dimen/margin"
+        app:cardCornerRadius="4dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/relativeLyt1">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/cv2">
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="90dp"
+                    android:id="@+id/imgNotification"
+                    android:src="@drawable/notification_icon"/>
+
+
+
+            </androidx.cardview.widget.CardView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Please let us know about your experience "
+                android:layout_below="@+id/cv2"
+                android:id="@+id/tvNotificationDescription"
+                android:textColor="@color/black"
+                android:textSize="@dimen/description"
+
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pangeni Traders"
+                android:id="@+id/tvNotficationTitle"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="@dimen/heading"
+                android:layout_toRightOf="@+id/cv2"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"/>
+
+
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2077/12/11"
+                android:textSize="@dimen/description"
+                android:id="@+id/tvDate"
+                android:textColor="@color/black"
+                android:layout_toRightOf="@+id/cv2"
+                android:layout_below="@+id/tvNotficationTitle"
+                android:layout_marginLeft="20dp"/>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

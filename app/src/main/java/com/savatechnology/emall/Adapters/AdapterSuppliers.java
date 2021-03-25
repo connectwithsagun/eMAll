@@ -7,46 +7,50 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.savatechnology.emall.Models.SuppliersList;
 import com.savatechnology.emall.R;
-import com.savatechnology.emall.Models.FavouriteList;
+
 import java.util.List;
 
-public class AdapterFavouriteList extends RecyclerView.Adapter<AdapterFavouriteList.MyViewHolder> {
-    private List<FavouriteList> lists;
-    public AdapterFavouriteList(List<FavouriteList> lists) {
+public class AdapterSuppliers extends RecyclerView.Adapter<AdapterSuppliers.MyViewHolder> {
+    private List<SuppliersList> lists;
+    public AdapterSuppliers(List<SuppliersList> lists) {
         this.lists = lists;
     }
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_favourites, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_suppliers, parent, false);
         return new MyViewHolder(view);
     }
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        int image = lists.get(position).getimgProduct();
-        String product_title = lists.get(position).gettvProductTitle();
+        int image = lists.get(position).getimgSupplier();
         String supplier_name = lists.get(position).gettvSupplierName();
+        String supplier_address = lists.get(position).gettvSupplierAddress();
 
 
 
-        holder.imgProduct.setImageResource(image);
-        holder.tvProductTitle.setText(product_title);
+        holder.imgSupplier.setImageResource(image);
         holder.tvSupplierName.setText(supplier_name);
+        holder.tvSupplierAddress.setText(supplier_address);
+
     }
     @Override
     public int getItemCount() {
         return lists.size();
     }
     public class MyViewHolder extends RecyclerView.ViewHolder {
-         ImageView imgProduct;
-         TextView tvProductTitle;
-         TextView tvSupplierName;
+        ImageView imgSupplier;
+        TextView tvSupplierName;
+        TextView tvSupplierAddress;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            imgProduct = itemView.findViewById(R.id.imgProduct);
-            tvProductTitle = (TextView)itemView.findViewById(R.id.tvProductTitle);
+            imgSupplier = itemView.findViewById(R.id.imgSupplier);
             tvSupplierName =(TextView) itemView.findViewById(R.id.tvSupplierName);
+            tvSupplierAddress =(TextView) itemView.findViewById(R.id.tvSupplierAddress);
+
 
         }
     }
