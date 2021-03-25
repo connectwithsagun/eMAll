@@ -82,9 +82,9 @@ public class OrderFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        initData();
+
         view = inflater.inflate(R.layout.fragment_order, container, false);
-        initRecycleView(view);
+        initRecycleViewForSlider(view);
         return view;
     }
 
@@ -94,18 +94,9 @@ public class OrderFragment extends Fragment {
         mContext = context;
     }
 
-    private void initRecycleView(View view) {
+    private void initRecycleViewForSlider(View view) {
 
-        recyclerView = view.findViewById(R.id.favRecyclerView);
-        layoutManager=new LinearLayoutManager(mContext);
-        layoutManager.setOrientation(RecyclerView.VERTICAL);
-        recyclerView.setLayoutManager(layoutManager);
-        adapter = new AdapterOrderList(lists);
-        recyclerView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-    }
 
-    private void initData() {
 
         lists = new ArrayList<>();
 
@@ -120,7 +111,17 @@ public class OrderFragment extends Fragment {
         lists.add(new OrderList(R.drawable.pepsicola,"Cold Drinks","Lungeli Traders","Accepted"));
 
 
+
+        recyclerView = view.findViewById(R.id.favRecyclerView);
+        layoutManager=new LinearLayoutManager(mContext);
+        layoutManager.setOrientation(RecyclerView.VERTICAL);
+        recyclerView.setLayoutManager(layoutManager);
+        adapter = new AdapterOrderList(lists);
+        recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
+
+
 }
 
 

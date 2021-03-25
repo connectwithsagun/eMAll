@@ -4,19 +4,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginHorizontal="@dimen/margin"
     tools:context=".Fragments.HomeFragment">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cv_slider_mainActivity"
+
+
+
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nested_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:fillViewport="true"
+        android:scrollbars="vertical"
+        android:scrollingCache="true"
+        android:layout_marginBottom="25dp"
+        >
+
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+
+
+        <androidx.cardview.widget.CardView
+        android:id="@+id/cvImageSlider"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_margin="16dp"
+
         app:cardCornerRadius="8dp">
 
         <com.smarteist.autoimageslider.SliderView
             android:id="@+id/imageSlider"
             android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
             android:layout_height="200dp"
             app:sliderAnimationDuration="1500"
             app:sliderAutoCycleDirection="back_and_forth"
@@ -33,5 +60,221 @@
 
     </androidx.cardview.widget.CardView>
 
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/cvImageSlider"
+            android:layout_marginTop="10dp"
+            android:id="@+id/cvCollection">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tvCollection"
+                    android:text="Collection"
+                    android:textSize="@dimen/heading"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tvShopMore"
+                    android:text="Shop More"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:layout_alignParentEnd="true"
+                    android:textSize="@dimen/heading"
+                    android:layout_alignParentRight="true" />
+
+
+            </RelativeLayout>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcvHomeProduct"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:background="#ffffff"
+                android:scrollbars="vertical"
+                android:layout_marginBottom="5dp"
+                android:scrollingCache="true" />
+
+
+
+
+        </androidx.cardview.widget.CardView>
+
+
+
+
+
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/cvCollection"
+                android:layout_marginTop="10dp"
+                android:id="@+id/cvFeaturedProduct">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tvFeaturedProduct"
+                        android:text="Featured"
+                        android:textSize="@dimen/heading"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tvFeaturedShopMore"
+                        android:text="Shop More"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:layout_alignParentEnd="true"
+                        android:textSize="@dimen/heading"
+                        android:layout_alignParentRight="true" />
+
+
+                </RelativeLayout>
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcvHomeFeaturedProduct"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:background="#ffffff"
+                    android:scrollbars="vertical"
+                    android:layout_marginBottom="5dp"
+                    android:scrollingCache="true" />
+
+            </androidx.cardview.widget.CardView>
+
+
+
+
+
+
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/cvFeaturedProduct"
+                android:layout_marginTop="10dp"
+                android:id="@+id/cvNewArrivals">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tvNewArrivals"
+                        android:text="New Arrivals"
+                        android:textSize="@dimen/heading"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tvNewArrivalsShopMore"
+                        android:text="Shop More"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:layout_alignParentEnd="true"
+                        android:textSize="@dimen/heading"
+                        android:layout_alignParentRight="true" />
+
+
+                </RelativeLayout>
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcvNewArrivalproduct"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:background="#ffffff"
+                    android:scrollbars="vertical"
+                    android:layout_marginBottom="5dp"
+                    android:scrollingCache="true" />
+
+            </androidx.cardview.widget.CardView>
+
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/cvNewArrivals"
+                android:layout_marginTop="10dp"
+                android:id="@+id/cvSupplier">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tvSupplier"
+                        android:text="Suppliers"
+                        android:textSize="@dimen/heading"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tvSupplierShopMore"
+                        android:text="Show More"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:layout_alignParentEnd="true"
+                        android:textSize="@dimen/heading"
+                        android:layout_alignParentRight="true" />
+
+
+                </RelativeLayout>
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcvSupplier"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:background="#ffffff"
+                    android:scrollbars="vertical"
+                    android:layout_marginBottom="5dp"
+                    android:scrollingCache="true" />
+
+            </androidx.cardview.widget.CardView>
+
+
+
+
+
+        </LinearLayout>
+</androidx.core.widget.NestedScrollView>
 
 </android.widget.RelativeLayout>
