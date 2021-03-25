@@ -1,7 +1,7 @@
 package com.savatechnology.emall.Models;
 
 
-public class HomeNewArrivalsProductList {
+public class HomeJustForYouList {
 
     private String imgProduct;
     private String tvProductName;
@@ -11,7 +11,7 @@ public class HomeNewArrivalsProductList {
 
 
 
-    public void setimgSupplier(String imgProduct) {
+    public void setimgProduct(String imgProduct) {
         this.imgProduct = imgProduct;
     }
 
@@ -30,7 +30,7 @@ public class HomeNewArrivalsProductList {
 
 
 
-    public HomeNewArrivalsProductList(String imgProduct, String tvProductName, int tvProductPrice){
+    public HomeJustForYouList(String imgProduct, String tvProductName, int tvProductPrice){
         this.imgProduct=imgProduct;
         this.tvProductName=tvProductName;
         this.tvProductPrice=tvProductPrice;
@@ -38,7 +38,7 @@ public class HomeNewArrivalsProductList {
 
     }
 
-    public HomeNewArrivalsProductList(){
+    public HomeJustForYouList(){
 
     }
 

@@ -13,30 +13,30 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 
 
-import com.savatechnology.emall.Models.HomeNewArrivalsProductList;
+import com.savatechnology.emall.Models.HomeJustForYouList;
 import com.savatechnology.emall.R;
 
 import java.util.List;
 
-public class AdapterHomeNewArrivalsProduct extends RecyclerView.Adapter<AdapterHomeNewArrivalsProduct.MyViewHolder> {
+public class AdapterHomeJustForYou extends RecyclerView.Adapter<AdapterHomeJustForYou.MyViewHolder> {
     Context context;
-    private List<HomeNewArrivalsProductList> homeNewArrivalsProductList;
+    private List<HomeJustForYouList> homeJustForYouList;
 
-    public AdapterHomeNewArrivalsProduct(List<HomeNewArrivalsProductList> lists, Context cntx ) {
-        this.homeNewArrivalsProductList = lists;
+    public AdapterHomeJustForYou(List<HomeJustForYouList> lists, Context cntx ) {
+        this.homeJustForYouList = lists;
         this.context = cntx;
     }
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_home_new_arrivals_product, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_just_for_you, parent, false);
         return new MyViewHolder(view);
     }
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        String image = homeNewArrivalsProductList.get(position).getimgProduct();
-        String product_name = homeNewArrivalsProductList.get(position).gettvProductName();
-        int product_price = homeNewArrivalsProductList.get(position).gettvProductPrice();
+        String image = homeJustForYouList.get(position).getimgProduct();
+        String product_name = homeJustForYouList.get(position).gettvProductName();
+        int product_price = homeJustForYouList.get(position).gettvProductPrice();
 
         //Log.v("SDc",image+product_name);
 
@@ -54,7 +54,7 @@ public class AdapterHomeNewArrivalsProduct extends RecyclerView.Adapter<AdapterH
     }
     @Override
     public int getItemCount() {
-        return homeNewArrivalsProductList.size();
+        return homeJustForYouList.size();
     }
     public class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView imageProduct;
@@ -62,9 +62,9 @@ public class AdapterHomeNewArrivalsProduct extends RecyclerView.Adapter<AdapterH
         TextView tvProductPrice;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            imageProduct = itemView.findViewById(R.id.imageHomeNewArrivalsProduct);
-            tvProductName =(TextView) itemView.findViewById(R.id.tvHomeNewArrivalsdProductName);
-            tvProductPrice =(TextView) itemView.findViewById(R.id.tvHomeNewArrivalsProductPrice);
+            imageProduct = itemView.findViewById(R.id.imageHomeJustForYou);
+            tvProductName =(TextView) itemView.findViewById(R.id.tvHomeJustForYou);
+            tvProductPrice =(TextView) itemView.findViewById(R.id.tvHomeJustForYouProductPrice);
 
 
         }

@@ -24,7 +24,7 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/imageHomeNewArrivalsProduct"
+                    android:id="@+id/imageHomeJustForYou"
                     android:layout_width="170dp"
                     android:layout_height="100dp"
                     android:src="@drawable/logo" />
@@ -34,7 +34,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/heading"
                     android:layout_marginHorizontal="10dp"
-                    android:id="@+id/tvHomeNewArrivalsdProductName"
+                    android:id="@+id/tvHomeJustForYou"
                     android:textColor="@color/black"
                     android:text="Skirt for girls"
                     android:layout_gravity="start"
@@ -45,7 +45,7 @@
                     android:textSize="@dimen/heading"
                     android:layout_marginHorizontal="10dp"
                     android:textColor="@color/black"
-                    android:id="@+id/tvHomeNewArrivalsProductPrice"
+                    android:id="@+id/tvHomeJustForYouProductPrice"
                     android:textStyle="bold"
                     android:text="Rs.900"
                     android:layout_gravity="start"

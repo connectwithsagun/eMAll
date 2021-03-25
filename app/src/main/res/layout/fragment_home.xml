@@ -273,6 +273,50 @@
 
 
 
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/cvSupplier"
+                android:layout_marginTop="10dp"
+                android:id="@+id/cvJustForU">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tvJustFor"
+                        android:text="Just For You"
+                        android:textSize="@dimen/heading"
+                        android:layout_centerHorizontal="true"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+
+                        />
+
+
+
+
+                </RelativeLayout>
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcvJustForYou"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:background="#ffffff"
+                    android:scrollbars="vertical"
+                    android:layout_marginBottom="25dp"
+                    android:scrollingCache="true" />
+
+            </androidx.cardview.widget.CardView>
+
+
+
+
 
         </LinearLayout>
 </androidx.core.widget.NestedScrollView>

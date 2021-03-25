@@ -12,11 +12,13 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.savatechnology.emall.Adapters.AdapterHomeFeaturedProduct;
+import com.savatechnology.emall.Adapters.AdapterHomeJustForYou;
 import com.savatechnology.emall.Adapters.AdapterHomeNewArrivalsProduct;
 import com.savatechnology.emall.Adapters.AdapterHomeProductCollection;
 import com.savatechnology.emall.Adapters.AdapterHomeSupplier;
 import com.savatechnology.emall.Adapters.AdapterSlider;
 import com.savatechnology.emall.Models.HomeFeaturedProductList;
+import com.savatechnology.emall.Models.HomeJustForYouList;
 import com.savatechnology.emall.Models.HomeNewArrivalsProductList;
 import com.savatechnology.emall.Models.HomeProductCollectionList;
 import com.savatechnology.emall.Models.HomeSupplierList;
@@ -62,6 +64,11 @@ public class HomeFragment extends Fragment {
     List<HomeSupplierList> homeSupplierLists;
     AdapterHomeSupplier adapterHomeSupplier;
 
+    //for just for you
+
+    List<HomeJustForYouList> homeJustForYouList;
+    AdapterHomeJustForYou adapterHomeJustForYou;
+
 
 
     public HomeFragment() {
@@ -104,6 +111,7 @@ public class HomeFragment extends Fragment {
         initRecycleViewForHomeFeaturedProduct(view);
         initRecycleViewForHomeNewArrivalsProduct(view);
         initRecycleViewForHomeSupplier(view);
+        initRecycleViewForHomeJustForYou(view);
 
         //for image slider
 
@@ -125,6 +133,29 @@ public class HomeFragment extends Fragment {
             }
         });
         return view;
+    }
+
+    private void initRecycleViewForHomeJustForYou(View view) {
+
+        homeJustForYouList = new ArrayList<>();
+
+
+
+        homeJustForYouList.add(new HomeJustForYouList("https://newsladder.net/wp-content/uploads/2016/05/luxury-watches-mens.jpg", "Watch",5000));
+        homeJustForYouList.add(new HomeJustForYouList("https://www.naviforce.in/wp-content/uploads/2019/12/Women-Watches-NAVIFORCE-Top-Brand-Luxury-Watch-Quartz-Waterproof-Women-s-Wristwatch-Ladies-Girls-Fashion-Clock.jpg", "Watch",6000));
+
+
+
+        recyclerView = view.findViewById(R.id.rcvJustForYou);
+        layoutManager = new GridLayoutManager(mContext, 2);
+        //layoutManager.setOrientation(RecyclerView.VERTICAL);
+        recyclerView.setLayoutManager(layoutManager);
+        adapterHomeJustForYou = new AdapterHomeJustForYou(homeJustForYouList,mContext);
+        recyclerView.setAdapter(adapterHomeJustForYou);
+        adapterHomeJustForYou.notifyDataSetChanged();
+
+
+
     }
 
     private void initRecycleViewForHomeSupplier(View view) {

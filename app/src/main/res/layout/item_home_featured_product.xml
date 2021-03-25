@@ -9,7 +9,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:id="@+id/linearLyt1"
-        android:layout_marginHorizontal="@dimen/margin"
         android:orientation="horizontal">
 
         <androidx.cardview.widget.CardView
@@ -26,7 +25,7 @@
 
                 <ImageView
                     android:id="@+id/imageHomeFeaturedProduct"
-                    android:layout_width="150dp"
+                    android:layout_width="170dp"
                     android:layout_height="100dp"
                     android:src="@drawable/logo" />
 
