@@ -1,5 +1,6 @@
 package com.savatechnology.emall.Adapters;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
+import com.savatechnology.emall.Activities.ProductDetailsActivity;
 import com.savatechnology.emall.Models.HomeFeaturedProductList;
 import com.savatechnology.emall.R;
 
@@ -64,6 +66,21 @@ public class AdapterHomeFeaturedProduct extends RecyclerView.Adapter<AdapterHome
             imageProduct = itemView.findViewById(R.id.imageHomeFeaturedProduct);
             tvProductName =(TextView) itemView.findViewById(R.id.tvHomeFeaturedProductName);
             tvProductPrice =(TextView) itemView.findViewById(R.id.tvHomeFeaturedProductPrice);
+
+
+//calling for product detail screen
+
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, ProductDetailsActivity.class);
+                    // intent.putExtra("product", (Serializable) homeFeaturedProductList.get(getAdapterPosition()));
+                    context.startActivity(intent);
+                }
+            });
+
+
 
 
         }

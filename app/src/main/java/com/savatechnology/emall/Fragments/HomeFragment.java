@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -41,6 +42,7 @@ public class HomeFragment extends Fragment {
     Context mContext;
 
 
+
     //for home product collection items
 
     RecyclerView recyclerView;
@@ -71,6 +73,9 @@ public class HomeFragment extends Fragment {
 
 
 
+
+
+
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -81,6 +86,9 @@ public class HomeFragment extends Fragment {
 
         fragment.setArguments(args);
         return fragment;
+
+
+
     }
 
     @Override
@@ -96,6 +104,7 @@ public class HomeFragment extends Fragment {
         if (getArguments() != null) {
 
         }
+
     }
 
     @Override
@@ -105,6 +114,7 @@ public class HomeFragment extends Fragment {
 
         //for image slider
         view = inflater.inflate(R.layout.fragment_home, container, false);
+
 
 //for home product items
         initRecycleViewForHomeProduct(view);
@@ -142,7 +152,7 @@ public class HomeFragment extends Fragment {
 
 
         homeJustForYouList.add(new HomeJustForYouList("https://newsladder.net/wp-content/uploads/2016/05/luxury-watches-mens.jpg", "Watch",5000));
-        homeJustForYouList.add(new HomeJustForYouList("https://www.naviforce.in/wp-content/uploads/2019/12/Women-Watches-NAVIFORCE-Top-Brand-Luxury-Watch-Quartz-Waterproof-Women-s-Wristwatch-Ladies-Girls-Fashion-Clock.jpg", "Watch",6000));
+        homeJustForYouList.add(new HomeJustForYouList("https://1000logos.net/wp-content/uploads/2017/05/Logo-Red-Bull.png", "Cold drink",600));
 
 
 
@@ -187,8 +197,8 @@ public class HomeFragment extends Fragment {
 
 
 
-        homeNewArrivalsProductLists.add(new HomeNewArrivalsProductList("https://weneedfun.com/wp-content/uploads/2016/07/Muscle-Cars-16.jpg", "Car",50));
-        homeNewArrivalsProductLists.add(new HomeNewArrivalsProductList("https://weneedfun.com/wp-content/uploads/2016/07/Muscle-Cars-16.jpg", "Car",50));
+        homeNewArrivalsProductLists.add(new HomeNewArrivalsProductList("https://weneedfun.com/wp-content/uploads/2016/07/Muscle-Cars-16.jpg", "Car",500000));
+        homeNewArrivalsProductLists.add(new HomeNewArrivalsProductList("https://weneedfun.com/wp-content/uploads/2016/07/Muscle-Cars-16.jpg", "Car",500000));
 
 
 
@@ -211,8 +221,8 @@ public class HomeFragment extends Fragment {
 
 
 
-        homeFeaturedProductLists.add(new HomeFeaturedProductList("https://getwallpapers.com/wallpaper/full/b/a/7/1404433-pepsi-logo-wallpaper-2560x1600-mobile.jpg", "Cold Drinks",50));
-        homeFeaturedProductLists.add(new HomeFeaturedProductList("https://getwallpapers.com/wallpaper/full/b/a/7/1404433-pepsi-logo-wallpaper-2560x1600-mobile.jpg", "Cold Drinks",50));
+        homeFeaturedProductLists.add(new HomeFeaturedProductList("https://www.sheffield-systems.co.uk/wp-content/uploads/2017/06/mobile-phones.jpg", "Mobiles",10000));
+        homeFeaturedProductLists.add(new HomeFeaturedProductList("https://www.sheffield-systems.co.uk/wp-content/uploads/2017/06/mobile-phones.jpg", "Mobiles",10000));
 
 
 
@@ -239,9 +249,7 @@ public class HomeFragment extends Fragment {
 
 
 
-        lists.add(new HomeProductCollectionList("https://getwallpapers.com/wallpaper/full/b/a/7/1404433-pepsi-logo-wallpaper-2560x1600-mobile.jpg", "Cold Drinks"));
-        lists.add(new HomeProductCollectionList("https://getwallpapers.com/wallpaper/full/b/a/7/1404433-pepsi-logo-wallpaper-2560x1600-mobile.jpg", "Cold Drinks"));
-        lists.add(new HomeProductCollectionList("https://getwallpapers.com/wallpaper/full/b/a/7/1404433-pepsi-logo-wallpaper-2560x1600-mobile.jpg", "Cold Drinks"));
+
         lists.add(new HomeProductCollectionList("https://getwallpapers.com/wallpaper/full/b/a/7/1404433-pepsi-logo-wallpaper-2560x1600-mobile.jpg", "Cold Drinks"));
         lists.add(new HomeProductCollectionList("https://getwallpapers.com/wallpaper/full/b/a/7/1404433-pepsi-logo-wallpaper-2560x1600-mobile.jpg", "Cold Drinks"));
         lists.add(new HomeProductCollectionList("https://getwallpapers.com/wallpaper/full/b/a/7/1404433-pepsi-logo-wallpaper-2560x1600-mobile.jpg", "Cold Drinks"));

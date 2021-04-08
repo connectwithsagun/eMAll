@@ -1,6 +1,7 @@
 package com.savatechnology.emall.Activities;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -93,7 +94,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
         ((AppCompatButton) findViewById(R.id.bt_visit_store)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.make(parent_view, "Store Visited", Snackbar.LENGTH_SHORT).show();
+              //  Snackbar.make(parent_view, "Store Visited", Snackbar.LENGTH_SHORT).show();
+                startActivity(new Intent(ProductDetailsActivity.this,SuppliersDetailActivity.class));
             }
         });
 
@@ -101,6 +103,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Snackbar.make(parent_view, "Product Items Added to Cart", Snackbar.LENGTH_SHORT).show();
+                startActivity(new Intent(ProductDetailsActivity.this,CartActivity.class));
             }
         });
 

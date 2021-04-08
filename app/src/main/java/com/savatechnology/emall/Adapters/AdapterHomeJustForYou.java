@@ -1,5 +1,6 @@
 package com.savatechnology.emall.Adapters;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,9 +14,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 
 
+import com.savatechnology.emall.Activities.ProductDetailsActivity;
 import com.savatechnology.emall.Models.HomeJustForYouList;
 import com.savatechnology.emall.R;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class AdapterHomeJustForYou extends RecyclerView.Adapter<AdapterHomeJustForYou.MyViewHolder> {
@@ -65,6 +68,19 @@ public class AdapterHomeJustForYou extends RecyclerView.Adapter<AdapterHomeJustF
             imageProduct = itemView.findViewById(R.id.imageHomeJustForYou);
             tvProductName =(TextView) itemView.findViewById(R.id.tvHomeJustForYou);
             tvProductPrice =(TextView) itemView.findViewById(R.id.tvHomeJustForYouProductPrice);
+
+
+
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, ProductDetailsActivity.class);
+                   // intent.putExtra("Course", (Serializable) topCourseList.get(getAdapterPosition()));
+                    context.startActivity(intent);
+                }
+            });
+
 
 
         }

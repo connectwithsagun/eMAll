@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/nav_help"
-        android:name="com.savatechnology.emall.Fragments.HomeFragment"
+        android:name="com.savatechnology.emall.Fragments.HelpFragment"
         android:label="@string/menu_help"
         tools:layout="@layout/fragment_help" />
 

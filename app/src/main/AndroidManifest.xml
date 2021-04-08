@@ -12,29 +12,32 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.EMall">
+        <activity android:name=".Activities.EditProfileActivity"
+            android:label="Edit Profile"
+            android:parentActivityName=".Activities.EditProfileActivity">
+
+        </activity>
+        <activity
+            android:name=".Activities.PasswordChangeActivity"
+            android:label="Change Password"
+            android:parentActivityName=".Activities.PasswordChangeActivity">
+
+        </activity>
         <activity
             android:name=".Activities.CartActivity"
             android:label="Cart"
-            android:parentActivityName=".Activities.MainActivity">
-
-
-
-        </activity>
-        <activity android:name=".Activities.ProductSearchActivity">
-
-        </activity>
+            android:parentActivityName=".Activities.MainActivity"></activity>
+        <activity android:name=".Activities.ProductSearchActivity"></activity>
+        <activity android:name=".Activities.SignUpActivity" />
+        <activity android:name=".Activities.ForgetPasswordVerificationActivity" />
+        <activity android:name=".Activities.PasswordResetEmailVerificationActivity" />
+        <activity android:name=".Activities.ResetPasswordActivity" />
+        <activity android:name=".Activities.VerificationActivity" />
+        <activity android:name=".Activities.LoginActivity"></activity>
         <activity
             android:name=".Activities.SuppliersSearchActivity"
             android:label="Search Suppliers"
-            android:parentActivityName=".Activities.MainActivity">
-
-        </activity>
-        <activity
-            android:name=".Activities.SuppliersDetailActivity"
-            android:label="Suppliers Details"
-            android:parentActivityName=".Activities.MainActivity">
-
-        </activity>
+            android:parentActivityName=".Activities.MainActivity"></activity>
         <activity
             android:name=".Activities.ProductDetailsActivity"
             android:label="Product Details"
@@ -46,16 +49,17 @@
         <activity
             android:name=".Activities.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/Theme.EMall.NoActionBar" >
-
+            android:theme="@style/Theme.EMall.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-
         </activity>
+        <activity
+            android:name=".Activities.SuppliersDetailActivity"
+            android:label="Suppliers Details"
+            android:parentActivityName=".Activities.MainActivity"></activity>
     </application>
 
 </manifest>

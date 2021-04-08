@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.SignUpActivity">
+
+
+
+
+    <ImageView
+        android:id="@+id/imgLogo"
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/logo" />
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imgLogo"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="5dp"
+        android:text="Register your new account"
+        android:textColor="@color/primary"
+        android:textSize="@dimen/textview_size"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/etUsername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvTitle"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginHorizontal="@dimen/margin"
+        android:background="@drawable/edit_text_bg"
+        android:drawableLeft="@drawable/username_icon"
+        android:drawablePadding="5dp"
+        android:hint="Username"
+        android:inputType="text"
+        android:padding="8dp"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etUsername"
+        android:layout_marginTop="15dp"
+        android:layout_marginHorizontal="@dimen/margin"
+        android:background="@drawable/edit_text_bg"
+        android:hint="Password"
+        android:inputType="text"
+        android:drawableLeft="@drawable/password_icon"
+        android:drawablePadding="5dp"
+        android:padding="8dp"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/etConfirmPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etPassword"
+        android:layout_marginTop="15dp"
+        android:layout_marginHorizontal="@dimen/margin"
+        android:background="@drawable/edit_text_bg"
+        android:hint="Confirm Password"
+        android:inputType="text"
+        android:drawableLeft="@drawable/password_icon"
+        android:drawablePadding="5dp"
+        android:padding="8dp"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+
+    <EditText
+        android:id="@+id/etPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etConfirmPassword"
+        android:layout_marginTop="15dp"
+        android:layout_marginHorizontal="@dimen/margin"
+        android:background="@drawable/edit_text_bg"
+        android:hint="Phone No."
+        android:inputType="text"
+        android:drawableLeft="@drawable/phone_icon"
+        android:drawablePadding="5dp"
+        android:padding="8dp"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/etEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etPhone"
+        android:layout_marginTop="15dp"
+        android:layout_marginHorizontal="@dimen/margin"
+        android:background="@drawable/edit_text_bg"
+        android:hint="Email"
+        android:inputType="text"
+        android:drawableLeft="@drawable/mail_icon"
+        android:drawablePadding="5dp"
+        android:padding="8dp"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+
+
+
+
+    <Button
+        android:id="@+id/btRegister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etEmail"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="@dimen/margin"
+        android:text="REGISTER"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:backgroundTint="@color/primary"
+
+        />
+
+
+    <TextView
+        android:id="@+id/tvAlreadyHaveAnAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btRegister"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="10dp"
+        android:text="Already have an account?"
+        android:textColor="@color/black"
+        android:textSize="12sp" />
+
+
+    <TextView
+        android:id="@+id/tvLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvAlreadyHaveAnAccount"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="10dp"
+        android:text="Login"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+
+
+
+</RelativeLayout>

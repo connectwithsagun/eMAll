@@ -38,7 +38,7 @@ public class SuppliersSearchActivity extends AppCompatActivity {
         layoutManager=new GridLayoutManager(this,2);
         //layoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager((layoutManager));
-        adapter=new AdapterSuppliers(lists);
+        adapter=new AdapterSuppliers(lists,this);
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
