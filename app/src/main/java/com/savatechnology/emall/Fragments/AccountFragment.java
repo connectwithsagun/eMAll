@@ -37,7 +37,7 @@ public class AccountFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     ///////
-    TextView editProfile,changePassword,fav;
+    TextView editProfile,changePassword;
    // CircularImageView userPicture;
 
     View view;

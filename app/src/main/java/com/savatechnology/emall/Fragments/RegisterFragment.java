@@ -1,5 +1,7 @@
 package com.savatechnology.emall.Fragments;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,7 +9,14 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
+import com.savatechnology.emall.Activities.ForgetPasswordVerificationActivity;
+import com.savatechnology.emall.Activities.LoginActivity;
+import com.savatechnology.emall.Activities.MainActivity;
+import com.savatechnology.emall.Activities.SignUpActivity;
+import com.savatechnology.emall.Activities.VerificationActivity;
 import com.savatechnology.emall.R;
 
 /**
@@ -25,6 +34,13 @@ public class RegisterFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+
+    Button register;
+    TextView login;
+
+    View view;
+    private Context mContext;
 
     public RegisterFragment() {
         // Required empty public constructor
@@ -54,6 +70,7 @@ public class RegisterFragment extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+
         }
     }
 
@@ -61,11 +78,45 @@ public class RegisterFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_register, container, false);
+        View view= inflater.inflate(R.layout.activity_sign_up, container, false);
+        init(view);
+        return view;
+    }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mContext = context;
+    }
+    void init(View view) {
+
+
+
+        register = view.findViewById(R.id.btRegister);
+        login=view.findViewById(R.id.tvLogin);
+
+
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(mContext, VerificationActivity.class));
+
+
+            }
+        });
+
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(mContext, LoginActivity.class));
+
+
+            }
+        });
 
 
 
 
     }
+
 }

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.savatechnology.emall">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -26,18 +27,54 @@
         <activity
             android:name=".Activities.CartActivity"
             android:label="Cart"
-            android:parentActivityName=".Activities.MainActivity"></activity>
-        <activity android:name=".Activities.ProductSearchActivity"></activity>
-        <activity android:name=".Activities.SignUpActivity" />
-        <activity android:name=".Activities.ForgetPasswordVerificationActivity" />
-        <activity android:name=".Activities.PasswordResetEmailVerificationActivity" />
-        <activity android:name=".Activities.ResetPasswordActivity" />
-        <activity android:name=".Activities.VerificationActivity" />
-        <activity android:name=".Activities.LoginActivity"></activity>
+            android:parentActivityName=".Activities.MainActivity">
+
+        </activity>
+
+        <activity android:name=".Activities.ProductSearchActivity">
+
+        </activity>
+
+        <activity android:name=".Activities.SignUpActivity">
+
+
+        </activity>
+
+
+
+
+        <activity
+            android:name=".Activities.PasswordResetEmailVerificationActivity"
+            android:label="Forget Password"
+            android:parentActivityName=".Activities.LoginActivity" />
+        <activity
+            android:name=".Activities.ResetPasswordActivity"
+            android:label="Reset Password"
+            android:parentActivityName=".Activities.ForgetPasswordVerificationActivity" />
+        <activity
+            android:name=".Activities.ForgetPasswordVerificationActivity"
+            android:label="Verify Code"
+            android:parentActivityName=".Activities.PasswordResetEmailVerificationActivity" />
+        <activity
+            android:name=".Activities.VerificationActivity"
+            android:label="Verification"
+            android:parentActivityName=".Activities.SignUpActivity" />
+
+
+
+        <activity android:name=".Activities.LoginActivity">
+
+
+
+        </activity>
+
         <activity
             android:name=".Activities.SuppliersSearchActivity"
             android:label="Search Suppliers"
-            android:parentActivityName=".Activities.MainActivity"></activity>
+            android:parentActivityName=".Activities.MainActivity">
+
+        </activity>
+
         <activity
             android:name=".Activities.ProductDetailsActivity"
             android:label="Product Details"
@@ -46,20 +83,28 @@
             android:name=".Activities.CheckOutActivity"
             android:label="Check Out"
             android:parentActivityName=".Activities.MainActivity" />
+
+
         <activity
             android:name=".Activities.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.EMall.NoActionBar">
+
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+
         </activity>
         <activity
             android:name=".Activities.SuppliersDetailActivity"
             android:label="Suppliers Details"
-            android:parentActivityName=".Activities.MainActivity"></activity>
+            android:parentActivityName=".Activities.MainActivity">
+
+        </activity>
     </application>
 
 </manifest>

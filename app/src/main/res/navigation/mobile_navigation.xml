@@ -39,13 +39,13 @@
         android:id="@+id/nav_login"
         android:name="com.savatechnology.emall.Fragments.LoginFragment"
         android:label="@string/menu_login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/activity_login" />
 
     <fragment
         android:id="@+id/nav_register"
         android:name="com.savatechnology.emall.Fragments.RegisterFragment"
         android:label="@string/menu_register"
-        tools:layout="@layout/fragment_register" />
+        tools:layout="@layout/activity_sign_up" />
 
 
 
