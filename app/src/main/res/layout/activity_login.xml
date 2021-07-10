@@ -53,7 +53,7 @@
         android:layout_marginHorizontal="@dimen/margin"
         android:background="@drawable/edit_text_bg"
         android:hint="Password"
-        android:inputType="text"
+        android:inputType="textPassword"
         android:drawableLeft="@drawable/password_icon"
         android:drawablePadding="5dp"
         android:padding="8dp"

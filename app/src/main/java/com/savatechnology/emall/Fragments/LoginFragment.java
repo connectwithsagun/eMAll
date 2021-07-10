@@ -30,6 +30,7 @@ import com.savatechnology.emall.Activities.ForgetPasswordVerificationActivity;
 import com.savatechnology.emall.Activities.HomeActivity;
 import com.savatechnology.emall.Activities.LoginActivity;
 import com.savatechnology.emall.Activities.MainActivity;
+import com.savatechnology.emall.Activities.PasswordResetEmailVerificationActivity;
 import com.savatechnology.emall.Activities.SignUpActivity;
 import com.savatechnology.emall.R;
 import com.savatechnology.emall.Remote.ApiService;
@@ -173,7 +174,8 @@ public class LoginFragment extends Fragment {
         ForgetPsw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(mContext, ForgetPasswordVerificationActivity.class));
+                startActivity(new Intent(mContext, PasswordResetEmailVerificationActivity.class));
+
 
 
             }
@@ -182,33 +184,10 @@ public class LoginFragment extends Fragment {
 
     }
 
-//    private void validateUser(){
-//
-//
-//        Login.setOnClickListener(view -> {
-//            Toast.makeText(getActivity(),"Clicked", Toast.LENGTH_SHORT).show();
-//
-//            ApiService apiService = ApiUtil.getApiService();
-//            apiService.getUserList().enqueue(new Callback<ResponseBody>() {
-//                @Override
-//                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-//                    try {
-//                        Toast.makeText(getActivity(),""+response.body().string(), Toast.LENGTH_SHORT).show();
-//                        startActivity(new Intent(mContext, MainActivity.class));
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//                @Override
-//                public void onFailure(Call<ResponseBody> call, Throwable t) {
-//                    Toast.makeText(getActivity(),"On Failure", Toast.LENGTH_SHORT).show();
-//
-//                }
-//            });
-//        });
-//    }
 
-private void userLogin() {
+
+
+    private void userLogin() {
 
         ApiService apiService = ApiUtil.getApiService();
         apiService.loginUser(Email.getText().toString(), Password.getText().toString()).enqueue(new Callback<ResponseBody>() {
@@ -225,12 +204,7 @@ private void userLogin() {
                     startActivity(new Intent(mContext, MainActivity.class));
 
 
-//                    SettingsFragment settingsFragment = new SettingsFragment();
-//                    FragmentManager fragmentManager = getFragmentManager();
-//                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//                    fragmentTransaction.replace(R.id.container, settingsFragment);
-//                    fragmentTransaction.addToBackStack(null);
-//                    fragmentTransaction.commit();
+
 
 
 

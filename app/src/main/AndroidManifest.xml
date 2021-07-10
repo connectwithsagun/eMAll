@@ -51,11 +51,22 @@
         <activity
             android:name=".Activities.ResetPasswordActivity"
             android:label="Reset Password"
-            android:parentActivityName=".Activities.ForgetPasswordVerificationActivity" />
+            android:parentActivityName=".Activities.ForgetPasswordVerificationActivity" >
+
+
+
+        </activity>
+
         <activity
             android:name=".Activities.ForgetPasswordVerificationActivity"
             android:label="Verify Code"
-            android:parentActivityName=".Activities.PasswordResetEmailVerificationActivity" />
+            android:parentActivityName=".Activities.PasswordResetEmailVerificationActivity" >
+
+
+
+        </activity>
+
+
         <activity
             android:name=".Activities.VerificationActivity"
             android:label="Verification"

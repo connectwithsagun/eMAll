@@ -327,10 +327,7 @@ public class RegisterFragment extends Fragment {
             Password.setError("Password field cannot be empty");
             return false;
         }
-//        else if (!val.matches(passwordVal)) {
-//            Password.setError("Password is too weak");
-//            return false;
-//        }
+
         else {
             Password.setError(null);
             // Password.setErrorEnabled(false);
