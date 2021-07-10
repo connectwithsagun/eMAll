@@ -11,6 +11,8 @@ import android.os.Build;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.text.TextUtils;
 import android.util.Log;
@@ -221,6 +223,17 @@ private void userLogin() {
                     Toast.makeText(getActivity(), "Login Successfully", Toast.LENGTH_SHORT).show();
                     Toast.makeText(getActivity(), "Welcome "+Email.getText(), Toast.LENGTH_LONG).show();
                     startActivity(new Intent(mContext, MainActivity.class));
+
+
+//                    SettingsFragment settingsFragment = new SettingsFragment();
+//                    FragmentManager fragmentManager = getFragmentManager();
+//                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//                    fragmentTransaction.replace(R.id.container, settingsFragment);
+//                    fragmentTransaction.addToBackStack(null);
+//                    fragmentTransaction.commit();
+
+
+
                 }
 
                 else

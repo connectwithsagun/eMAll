@@ -12,7 +12,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.EMall">
+        android:theme="@style/Theme.EMall"
+        android:usesCleartextTraffic="true">
         <activity android:name=".Activities.EditProfileActivity"
             android:label="Edit Profile"
             android:parentActivityName=".Activities.EditProfileActivity">
