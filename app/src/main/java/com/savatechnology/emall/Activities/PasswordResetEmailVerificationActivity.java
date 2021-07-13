@@ -2,6 +2,7 @@ package com.savatechnology.emall.Activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -66,11 +67,11 @@ EditText Email;
                         Toast.makeText(PasswordResetEmailVerificationActivity.this, "" + message, Toast.LENGTH_SHORT).show();
 
 
-                        //passing email address for forget password verification
-
-                        Intent intent = new Intent(getApplicationContext(), ForgetPasswordVerificationActivity.class);
-                        intent.putExtra("email", Email.getText().toString().trim());
-                        startActivity(intent);
+//                        //passing email address for forget password verification
+//
+//                        Intent intent = new Intent(getApplicationContext(), ForgetPasswordVerificationActivity.class);
+//                        intent.putExtra("email", Email.getText().toString().trim());
+//                        startActivity(intent);
                         finish();
 
 
@@ -79,6 +80,17 @@ EditText Email;
                     }
 
                     //Toast.makeText(PasswordResetEmailVerificationActivity.this, "Email is valid ", Toast.LENGTH_SHORT).show();
+
+
+
+                    //adding email data to shared preferences which is used for forget password
+                    SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref",MODE_PRIVATE);
+
+                    SharedPreferences.Editor forgotPasswordPreferences = sharedPreferences.edit();
+                    forgotPasswordPreferences.putString("emailForForgetPassword", Email.getText().toString());
+                    forgotPasswordPreferences.apply();
+
+
 
                     startActivity(new Intent(PasswordResetEmailVerificationActivity.this, ForgetPasswordVerificationActivity.class));
                 }

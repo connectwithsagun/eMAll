@@ -1,12 +1,15 @@
 package com.savatechnology.emall.Fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ToggleButton;
 
 import com.savatechnology.emall.R;
 
@@ -25,6 +28,11 @@ public class DarkModeFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    ToggleButton darkMode;
+
+    View view;
+    private Context mContext;
 
     public DarkModeFragment() {
         // Required empty public constructor
@@ -55,12 +63,91 @@ public class DarkModeFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_dark_mode, container, false);
+//        AppCompatDelegate
+//                .setDefaultNightMode(
+//                        AppCompatDelegate
+//                                .MODE_NIGHT_YES);
+
+
+
+
+
+
+        View view= inflater.inflate(R.layout.fragment_dark_mode, container, false);
+        init(view);
+        return view;
+
     }
-}
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mContext = context;
+    }
+    void init(View view) {
+        darkMode = view.findViewById(R.id.tbDarkMode);
+
+        darkMode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AppCompatDelegate
+                        .setDefaultNightMode(
+                                AppCompatDelegate
+                                        .MODE_NIGHT_YES);
+
+
+
+//
+//                if (isDarkModeOn) {
+//
+//                    // if dark mode is on it
+//                    // will turn it off
+//                    AppCompatDelegate
+//                            .setDefaultNightMode(
+//                                    AppCompatDelegate
+//                                            .MODE_NIGHT_NO);
+//                    // it will set isDarkModeOn
+//                    // boolean to false
+//                    editor.putBoolean(
+//                            "isDarkModeOn", false);
+//                    editor.apply();
+//
+//                    // change text of Button
+//                    btnToggleDark.setText(
+//                            "Enable Dark Mode");
+//                }
+//                else {
+//
+//                    // if dark mode is off
+//                    // it will turn it on
+//                    AppCompatDelegate
+//                            .setDefaultNightMode(
+//                                    AppCompatDelegate
+//                                            .MODE_NIGHT_YES);
+//
+//                    // it will set isDarkModeOn
+//                    // boolean to true
+//                    editor.putBoolean(
+//                            "isDarkModeOn", true);
+//                    editor.apply();
+//
+//                    // change text of Button
+//                    btnToggleDark.setText(
+//                            "Disable Dark Mode");
+//                }
+
+
+            }
+        });
+
+    }
+
+    }

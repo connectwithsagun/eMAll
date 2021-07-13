@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,12 +29,15 @@ import com.savatechnology.emall.Remote.ApiUtil;
 
 import java.io.IOException;
 import java.util.regex.Pattern;
+import java.util.zip.Inflater;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.http.PATCH;
+
+import static android.view.View.GONE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -53,11 +57,14 @@ public class RegisterFragment extends Fragment {
 
 
     Button register;
-    TextView login;
+    TextView login,registerTitle,allreadyHaveAccount;
     EditText Email, Password, Cpassword;
+    ImageView imgLogo;
+
 
     View view;
     private Context mContext;
+    private Inflater inflater;
 
     public RegisterFragment() {
         // Required empty public constructor
@@ -89,15 +96,18 @@ public class RegisterFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
 
         }
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.activity_sign_up, container, false);
+        view = inflater.inflate(R.layout.fragment_register, container, false);
         init(view);
         return view;
+
     }
 
     @Override
@@ -106,7 +116,7 @@ public class RegisterFragment extends Fragment {
         mContext = context;
     }
 
-    void init(View view) {
+     void init (View view) {
 
 
         register = view.findViewById(R.id.btRegister);
@@ -114,7 +124,9 @@ public class RegisterFragment extends Fragment {
         Email = view.findViewById(R.id.etEmail);
         Password = view.findViewById(R.id.etPassword);
         Cpassword = view.findViewById(R.id.etConfirmPassword);
-
+        imgLogo = view.findViewById(R.id.imgLogo);
+        registerTitle = view.findViewById(R.id.tvTitle);
+        allreadyHaveAccount = view.findViewById(R.id.tvAlreadyHaveAnAccount);
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,117 +137,28 @@ public class RegisterFragment extends Fragment {
                 else{
                     userRegister();
                 }
-
-//                | !validatePasswordCheck()
-//            validateEmail();
-//            validatePassword();
-
-
-//                if(Cpassword.getText().toString().equals(Password.getText().toString()) && isValidEmailId(Email.getText().toString().trim()))
-//                {
-//                    userRegister();
-//                }
-//                else if (TextUtils.isEmpty(Email.getText().toString()) && TextUtils.isEmpty(Password.getText().toString()) && TextUtils.isEmpty(Cpassword.getText().toString()))
-//                {
-//                    Toast.makeText(getActivity(), "Email & Password are Required", Toast.LENGTH_SHORT).show();
-//                }
-//
-//               else if (TextUtils.isEmpty(Password.getText().toString()) && TextUtils.isEmpty(Cpassword.getText().toString()))
-//                {
-//                    Toast.makeText(getActivity(), "Password are Required", Toast.LENGTH_SHORT).show();
-//                }
-
-//                else if (TextUtils.isEmpty(Password.getText().toString()) || TextUtils.isEmpty(Cpassword.getText().toString()))
-//                {
-//                    Toast.makeText(getActivity(), "Password are Required", Toast.LENGTH_SHORT).show();
-//                }
-//                else if (TextUtils.isEmpty(Password.getText().toString()))
-//                {
-//                    Toast.makeText(getActivity(), "Please Set Password", Toast.LENGTH_SHORT).show();
-//                }
-//                else if (TextUtils.isEmpty(Cpassword.getText().toString()))
-//                {
-//                    Toast.makeText(getActivity(), "Please re-type Password", Toast.LENGTH_SHORT).show();
-//                }
-//               else if((!Cpassword.getText().toString().equals(Password.getText().toString()) )){
-//                    Toast.makeText(getActivity(), "Password didnot matched", Toast.LENGTH_SHORT).show();
-//                }
-//                else if (TextUtils.isEmpty(Email.getText().toString()))
-//                {
-//                    Toast.makeText(getActivity(), "Email is Required", Toast.LENGTH_SHORT).show();
-//                }
-//                else if(!TextUtils.isEmpty(Email.getText().toString()) && TextUtils.isEmpty(Password.getText().toString()) && TextUtils.isEmpty(Cpassword.getText().toString())){
-//                    Toast.makeText(getActivity(), "Password is also Required", Toast.LENGTH_SHORT).show();
-//                }
-//
-//
-//
-//                if (!TextUtils.isEmpty(Email.getText().toString())){
-//                    if (isValidEmailId(Email.getText().toString().trim())) {
-//                        //Toast.makeText(getActivity(), "Valid Email Address.", Toast.LENGTH_SHORT).show();
-//                    } else {
-//                        Toast.makeText(getActivity(), "InValid Email Address.", Toast.LENGTH_SHORT).show();
-//                    }
-//                }
-
-
-//
-//                if (TextUtils.isEmpty(Email.getText().toString()))
-//                    {
-//                         Toast.makeText(getActivity(), "Email is Required", Toast.LENGTH_SHORT).show();
-//                     }
-//                else
-//                    {
-//                     if (isValidEmailId(Email.getText().toString().trim())) {
-//                        //Toast.makeText(getActivity(), "Valid Email Address.", Toast.LENGTH_SHORT).show();
-//                     } else {
-//                        Toast.makeText(getActivity(), "InValid Email Address.", Toast.LENGTH_SHORT).show();
-//                    }
-//                }
-//
-//                if (TextUtils.isEmpty(Email.getText().toString()) && TextUtils.isEmpty(Password.getText().toString()) && TextUtils.isEmpty(Cpassword.getText().toString()))
-//                {
-//                    Toast.makeText(getActivity(), "Email & Password are Required", Toast.LENGTH_SHORT).show();
-//                }
-//
-//                if (TextUtils.isEmpty(Password.getText().toString()) && TextUtils.isEmpty(Cpassword.getText().toString()))
-//                {
-//                    Toast.makeText(getActivity(), "Password are Required", Toast.LENGTH_SHORT).show();
-//                }
-//
-//               else if (TextUtils.isEmpty(Password.getText().toString()) || TextUtils.isEmpty(Cpassword.getText().toString()))
-//                {
-//                    Toast.makeText(getActivity(), "Password are Required", Toast.LENGTH_SHORT).show();
-//                }
-//               else if (TextUtils.isEmpty(Password.getText().toString()))
-//                {
-//                    Toast.makeText(getActivity(), "Please Set Password", Toast.LENGTH_SHORT).show();
-//                }
-//                else if (TextUtils.isEmpty(Cpassword.getText().toString()))
-//                {
-//                    Toast.makeText(getActivity(), "Please re-type Password", Toast.LENGTH_SHORT).show();
-//                }
-//
-//
-//                if((!Cpassword.getText().toString().equals(Password.getText().toString()) )){
-//                    Toast.makeText(getActivity(), "Password didnot matched", Toast.LENGTH_SHORT).show();
-//                }
-//
-//                if(Cpassword.getText().toString().equals(Password.getText().toString()) && isValidEmailId(Email.getText().toString().trim()))
-//                    {
-//                        userRegister();
-//                    }
-
-
             }
-
-
         });
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(mContext, LoginActivity.class));
+                //setDisplayShowTitleEnabled(false);
+                //startActivity(new Intent(mContext, LoginActivity.class));
+                LoginFragment fragment1=new LoginFragment();
+                FragmentManager manager=getParentFragmentManager();
+                FragmentTransaction transaction=manager.beginTransaction();
+                transaction.replace(R.id.registerFragment,fragment1);
+                transaction.addToBackStack(null);
+                register.setVisibility(GONE);
+                login.setVisibility(GONE);
+                Email.setVisibility(GONE);
+                Password.setVisibility(GONE);
+                Cpassword.setVisibility(GONE);
+                imgLogo.setVisibility(GONE);
+                registerTitle.setVisibility(GONE);
+                allreadyHaveAccount.setVisibility(GONE);
+                transaction.commit();
 
 
             }
@@ -260,7 +183,16 @@ public class RegisterFragment extends Fragment {
 
                     if (response.isSuccessful()) {
                         Toast.makeText(getActivity(), "User Created Successfully", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(mContext, LoginActivity.class));
+
+                        //passing email address for user registration verification
+
+                        Intent intent = new Intent(mContext, VerificationActivity.class);
+                        intent.putExtra("email", Email.getText().toString().trim());
+                        startActivity(intent);
+//                        finish();
+//
+
+                       // startActivity(new Intent(mContext, VerificationActivity.class));
 
                     }
                     else
@@ -281,23 +213,11 @@ public class RegisterFragment extends Fragment {
         }
 
 
-        //}
-
-
-    private boolean isValidEmailId(String email) {
-
-        return Pattern.compile("^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]{1}|[\\w-]{2,}))@"
-                + "((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
-                + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\."
-                + "([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
-                + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
-                + "([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$").matcher(email).matches();
-    }
 
     private Boolean validateEmail() {
         String val = Email.getText().toString();
-        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-
+       // String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+        String emailPattern = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
         if (val.isEmpty()) {
             Email.setError("Email field cannot be empty");
             return false;

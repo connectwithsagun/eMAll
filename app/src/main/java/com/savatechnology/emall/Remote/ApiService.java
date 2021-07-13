@@ -27,17 +27,29 @@ public interface ApiService {
     );
 
     @FormUrlEncoded
+    @POST("auth/verify-user/{email}")
+
+
+    Call<ResponseBody> userRegistrationVerify(
+            @Field("token") String token,
+            @Path("email") String email
+    );
+
+    @FormUrlEncoded
     @POST("auth/forgot-password")
     Call<ResponseBody> forgotPassword(@Field("email") String email);
 
     @FormUrlEncoded
-    @POST("auth/verify-token")
-    Call<ResponseBody> forgetPasswordTokenVerify(@Field("token") String email);
+    @POST("auth/verify-token/{email}")
+    Call<ResponseBody> forgetPasswordTokenVerify(
+            @Field("token") String token,
+            @Path("email") String email
+    );
 
     @FormUrlEncoded
     @PUT("auth/changepassword/{email}")
     Call<ResponseBody> passwordChangeByForgetPassword(
-            @Query("email") String email,
+            @Path("email") String email,
             @Field("password") String password
     );
 

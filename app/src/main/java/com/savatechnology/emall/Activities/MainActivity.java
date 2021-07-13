@@ -1,11 +1,15 @@
 package com.savatechnology.emall.Activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -19,6 +23,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+import com.savatechnology.emall.Fragments.SettingsFragment;
 import com.savatechnology.emall.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -39,10 +44,36 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
 
         initToolbar();
 
         initNavigation();
+
+
+        // Fetching the stored data
+        // from the SharedPreference
+        SharedPreferences sh = getSharedPreferences("MySharedPref", MODE_PRIVATE);
+
+//        String s1 = sh.getString("email", "");
+//
+        Boolean b1 = sh.getBoolean("isLoggedIn",false);
+//        Log.v("sdcds",b1.toString());
+//        Toast.makeText(MainActivity.this, "Your Email Id is "+s1, Toast.LENGTH_LONG).show();
+//
+        if(b1){
+
+            navigationView.getMenu().findItem(R.id.nav_login).setEnabled(false);
+            navigationView.getMenu().findItem(R.id.nav_register).setEnabled(false);
+
+        }
+//        else{
+//            NavigationView navigation = (NavigationView) findViewById(R.id.nav_view);
+//            navigation.getMenu().findItem(R.id.nav_login1).setEnabled(true);
+//        }
+
+
+
     }
 
     private void initToolbar() {
@@ -51,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
     }
+
 
 
     private void initNavigation() {
@@ -78,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
         NavigationUI.setupWithNavController(bottomNavView, navController);
         animateNavigationDrawer();
+
 
     }
 
@@ -131,9 +164,13 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()){
-            case R.id.action_search:
+            case R.id.action_cart:
                 Intent i = new Intent(this,CartActivity.class);
                 this.startActivity(i);
+                return true;
+            case R.id.action_settings:
+                Intent i1 = new Intent(this, SettingsFragment.class);
+                this.startActivity(i1);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

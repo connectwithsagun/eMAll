@@ -3,6 +3,7 @@ package com.savatechnology.emall.Activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.speech.RecognitionService;
 import android.util.Log;
@@ -28,7 +29,7 @@ import retrofit2.Response;
 public class ResetPasswordActivity extends AppCompatActivity {
     Button btDone;
     EditText Password, Cpassword;
-    String email;
+  //  String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,11 +43,17 @@ public class ResetPasswordActivity extends AppCompatActivity {
         //getting data of email address which is passed through intent from PasswordResetEmailVerificationActivity to ForgetPasswordVerificationActivity
 
 
-        Bundle bundle = getIntent().getExtras();
-        if (bundle != null) {
-            email = bundle.getString("email");
-        }
+//        Bundle bundle = getIntent().getExtras();
+//        if (bundle != null) {
+//            email = bundle.getString("email");
+//        }
         //Log.v("abc",Email);
+
+
+        SharedPreferences sh = getSharedPreferences("MySharedPref", MODE_PRIVATE);
+        SharedPreferences.Editor myEdit = sh.edit();
+        String email = sh.getString("emailForForgetPassword", "");
+
         btDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

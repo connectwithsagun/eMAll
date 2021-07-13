@@ -173,7 +173,11 @@ public class SignUpActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     Toast.makeText(SignUpActivity.this, "User Created Successfully", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
+                    //passing email address for user registration verification
 
+                    Intent intent = new Intent(SignUpActivity.this, VerificationActivity.class);
+                    intent.putExtra("email", Email.getText().toString().trim());
+                    startActivity(intent);
 
                 }
                 else

@@ -1,9 +1,13 @@
 package com.savatechnology.emall.Fragments;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -12,11 +16,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.savatechnology.emall.Activities.EditProfileActivity;
+import com.savatechnology.emall.Activities.MainActivity;
 import com.savatechnology.emall.Activities.PasswordChangeActivity;
 import com.savatechnology.emall.R;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -37,8 +45,11 @@ public class AccountFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     ///////
-    TextView editProfile,changePassword;
-   // CircularImageView userPicture;
+    TextView editProfile,changePassword,logout,userName,eMail;
+    CardView userCard;
+    AlertDialog.Builder builder;
+
+    // CircularImageView userPicture;
 
     View view;
     private Context mContext;
@@ -87,6 +98,13 @@ public class AccountFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+//        SharedPreferences sh = getActivity().getSharedPreferences("MySharedPref",MODE_PRIVATE);
+//        Boolean b = sh.getBoolean("isLoggedIn",false);
+//        if(b){
+//            view = inflater.inflate(R.layout.fragment_account, container, false);
+//            init(view);
+//            return view;
+//        }
         view = inflater.inflate(R.layout.fragment_account, container, false);
         init(view);
         return view;
@@ -100,11 +118,22 @@ public class AccountFragment extends Fragment {
 
     void init(View view) {
 
-
-
+        builder = new AlertDialog.Builder(mContext);
+        eMail = view.findViewById(R.id.tvEmail);
+        SharedPreferences sh = getActivity().getSharedPreferences("MySharedPref",MODE_PRIVATE);
+        String s1 = sh.getString("email", "");
+        eMail.setText(s1);
 
         editProfile = view.findViewById(R.id.tvProfile);
         changePassword = view.findViewById(R.id.tvChangePassword);
+        logout = view.findViewById(R.id.tvLogout);
+        userCard = view.findViewById(R.id.cvUserWishProfile);
+
+        Boolean b = sh.getBoolean("isLoggedIn",false);
+        if(!b){
+            userCard.setVisibility(View.GONE);
+        }
+
        // fav = view.findViewById(R.id.tvFavourite);
 
 
@@ -122,6 +151,57 @@ public class AccountFragment extends Fragment {
 
             }
         });
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences sh = getActivity().getSharedPreferences("MySharedPref", MODE_PRIVATE);
+                SharedPreferences.Editor myEdit = sh.edit();
+               // String s1 = sh.getString("email", "");
+              //  String s2 = sh.getString("password", "");
+                Boolean b1 = sh.getBoolean("isLoggedIn",false);
+                if(!b1){
+                    Toast.makeText(mContext,"You are not logged in for logout!!", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    builder.setMessage("Do you want to logout ?")
+                            .setCancelable(false)
+                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+
+                                    // Fetching the stored data
+                                    // from the SharedPreference
+
+                                    myEdit.clear();
+                                    myEdit.apply();
+                                    Toast.makeText(mContext,"Logout Successfully", Toast.LENGTH_SHORT).show();
+                                  startActivity(new Intent(mContext, MainActivity.class));
+
+                                }
+                            })
+                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    //  Action for 'NO' Button
+                                    dialog.cancel();
+                                    //Toast.makeText(mContext,"you choose no action for alertbox", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                    //Creating dialog box
+                    AlertDialog alert = builder.create();
+                    //Setting the title manually
+                    alert.setTitle("Logout");
+                    alert.show();
+
+                }
+
+
+
+
+            }
+        });
+
+
+
 //        fav.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {

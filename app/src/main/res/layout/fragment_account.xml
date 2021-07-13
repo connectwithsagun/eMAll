@@ -66,6 +66,7 @@
                             android:layout_marginLeft="5dp"
                             android:layout_marginTop="15dp"
                             android:text="Sagun Pangeni"
+                            android:id="@+id/tvUserName"
                             android:textColor="@color/black"
                             android:textSize="@dimen/heading"
                             android:textStyle="bold" />
@@ -75,6 +76,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
                             android:layout_marginTop="5dp"
+                            android:id="@+id/tvEmail"
                             android:text="sagunpangeni136@gmail.com"
                             android:textColor="@color/black"
 
@@ -99,6 +101,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             app:cardCornerRadius="4dp"
+            android:id="@+id/cvUserWishProfile"
             app:cardBackgroundColor="@color/secodary"
 
             >

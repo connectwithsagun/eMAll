@@ -5,6 +5,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.media.Image;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
@@ -21,10 +23,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
 import com.savatechnology.emall.Activities.EditProfileActivity;
 import com.savatechnology.emall.Activities.ForgetPasswordVerificationActivity;
 import com.savatechnology.emall.Activities.HomeActivity;
@@ -36,15 +40,21 @@ import com.savatechnology.emall.R;
 import com.savatechnology.emall.Remote.ApiService;
 import com.savatechnology.emall.Remote.ApiUtil;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.regex.Pattern;
+import java.util.zip.Inflater;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static android.content.Context.MODE_PRIVATE;
 
 import static android.view.View.GONE;
 
@@ -65,12 +75,16 @@ public class LoginFragment extends Fragment {
     private String mParam2;
 
     Button Login;
-    TextView Register,Skip,ForgetPsw;
+    TextView Register,Skip,ForgetPsw, Title, DontAccount;
     EditText Email,Password;
-    //String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+    ImageView img;
+
+
+
 
     View view;
     private Context mContext;
+    private Inflater inflater;
 
 
     public LoginFragment() {
@@ -102,7 +116,6 @@ public class LoginFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
     }
 
 
@@ -110,15 +123,14 @@ public class LoginFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.activity_login, container, false);
+        view= inflater.inflate(R.layout.fragment_login, container, false);
+
 
 
 
 
         init(view);
-       //validateUser();
 
-        //userLogin(email,password);
         return view;
     }
 
@@ -140,14 +152,22 @@ public class LoginFragment extends Fragment {
         ForgetPsw=view.findViewById(R.id.tvForgetPassword);
         Email=view.findViewById(R.id.etEmail);
         Password=view.findViewById(R.id.etPassword);
+        img=view.findViewById(R.id.imgLogo);
+        Title=view.findViewById(R.id.tvTitle);
+        DontAccount=view.findViewById(R.id.tvDidnothaveanaccount);
 
 
 
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!validatePassword() | !validateEmail() ) {
+                    return;
+                }
+                else{
+                    userLogin();
+                }
 
-                userLogin();
 
 
             }
@@ -156,8 +176,46 @@ public class LoginFragment extends Fragment {
         Register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(mContext, SignUpActivity.class));
+                //startActivity(new Intent(mContext, SignUpActivity.class));
 
+               // startActivity(new Intent(mContext, RegisterFragment.class));
+                RegisterFragment fragment=new RegisterFragment();
+                FragmentManager manager=getParentFragmentManager();
+                FragmentTransaction transaction=manager.beginTransaction();
+                transaction.replace(R.id.loginFragment,fragment);
+                transaction.addToBackStack(null);
+
+                Login.setVisibility(GONE);
+                Register.setVisibility(GONE);
+                Skip.setVisibility(GONE);
+                ForgetPsw.setVisibility(GONE);
+                Email.setVisibility(GONE);
+                Password.setVisibility(GONE);
+                img.setVisibility(GONE);
+                Title.setVisibility(GONE);
+                DontAccount.setVisibility(GONE);
+
+                transaction.commit();
+
+//                RegisterFragment fragment2 = new RegisterFragment();
+//                FragmentManager fragmentManager = getParentFragmentManager();
+//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//                fragmentTransaction.replace(R.id.loginFragment, fragment2);
+//                fragmentTransaction.commit();
+
+//                BlankFragment nextFrag= new BlankFragment();
+//                getActivity().getSupportFragmentManager().beginTransaction()
+//                        .add(R.id.loginFragment, nextFrag, "findThisFragment")
+//                        .addToBackStack(null)
+//                        .commit();
+
+//                FragmentManager fragmentManager = getParentFragmentManager();
+//                BlankFragment nextFrag= new BlankFragment();
+//                fragmentManager.beginTransaction()
+//                        .remove(fragmentManager.findFragmentById(R.id.loginFragment)) // resolves to A_Fragment instance
+//                        .add(R.id.loginFragment, nextFrag, "fragment-b")
+//                        .addToBackStack("a")
+//                        .commit();
             }
         });
 
@@ -199,42 +257,55 @@ public class LoginFragment extends Fragment {
 
                 if (response.isSuccessful())
                 {
+
+
+
+                    SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MySharedPref",MODE_PRIVATE);
+
+                    SharedPreferences.Editor loginPreferences = sharedPreferences.edit();
+
+
+                    loginPreferences.putString("email", Email.getText().toString());
+                    loginPreferences.putString("password", Password.getText().toString());
+                    loginPreferences.putBoolean("isLoggedIn", true);
+                    loginPreferences.apply();
+
+
+
+
+
                     Toast.makeText(getActivity(), "Login Successfully", Toast.LENGTH_SHORT).show();
-                    Toast.makeText(getActivity(), "Welcome "+Email.getText(), Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(mContext, MainActivity.class));
+                    String name= Email.getText().toString();
+                  String  name1= name.substring(0, name.indexOf("@"));
 
+                    Toast.makeText(getActivity(), "Welcome "+name1, Toast.LENGTH_LONG).show();
 
-
-
-
+                    Intent i = new Intent(mContext, MainActivity.class);
+                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(i);
 
                 }
 
                 else
-                    {
-                        if (TextUtils.isEmpty(Email.getText().toString()) && TextUtils.isEmpty(Password.getText().toString())) {
-                            Toast.makeText(getActivity(), "Email and Password are Required", Toast.LENGTH_SHORT).show();
-                        }
-                        else  if (TextUtils.isEmpty(Email.getText().toString())) {
-                            Toast.makeText(getActivity(), "Email is Required", Toast.LENGTH_SHORT).show();
-                        }
-                        else if (TextUtils.isEmpty(Password.getText().toString())) {
-                            Toast.makeText(getActivity(), "Password is Required", Toast.LENGTH_SHORT).show();
-                        }
-                        else if(response.code()==400)
-                        {
-                            if(isValidEmailId(Email.getText().toString().trim())){
-                                //Toast.makeText(getActivity(), "Valid Email Address.", Toast.LENGTH_SHORT).show();
-                            }else{
-                                Toast.makeText(getActivity(), "InValid Email Address.", Toast.LENGTH_SHORT).show();
-                            }
-                            Toast.makeText(getActivity() ,"Email & Password doesn't match",Toast.LENGTH_LONG).show();
-                        }
+                    if (TextUtils.isEmpty(Email.getText().toString()) && TextUtils.isEmpty(Password.getText().toString())) {
+                        Toast.makeText(getActivity(), "Email and Password are Required", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        try {
+                            String val = response.errorBody().string();
+                            JSONObject obj= new JSONObject(val);
+                            String message = obj.getString("message");
 
-                        else
-                        {
-                            Toast.makeText(getActivity() ,"Login failed",Toast.LENGTH_LONG).show();
+                            Toast.makeText(getActivity(), "" + message, Toast.LENGTH_SHORT).show();
+
+
+                        } catch (IOException | JSONException e) {
+                            e.printStackTrace();
                         }
+                    }
+                    {
+
+
                      }
 
 
@@ -245,7 +316,7 @@ public class LoginFragment extends Fragment {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Toast.makeText(getActivity(), "On Failure", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "Error" +t.getMessage(), Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -260,6 +331,46 @@ public class LoginFragment extends Fragment {
                 + "([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
                 + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
                 + "([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$").matcher(email).matches();
+    }
+    private Boolean validateEmail() {
+        String val = Email.getText().toString();
+        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+
+        if (val.isEmpty()) {
+            Email.setError("Email field cannot be empty");
+            return false;
+        } else if (!val.matches(emailPattern)) {
+            Email.setError("Invalid email address");
+            return false;
+        } else {
+            Email.setError(null);
+            //Email.setErrorEnabled(false);
+            return true;
+        }
+    }
+
+    private Boolean validatePassword() {
+        String val = Password.getText().toString();
+        String passwordVal = "^" +
+                //"(?=.*[0-9])" +         //at least 1 digit
+                //"(?=.*[a-z])" +         //at least 1 lower case letter
+                //"(?=.*[A-Z])" +         //at least 1 upper case letter
+                "(?=.*[a-zA-Z])" +      //any letter
+                "(?=.*[@#$%^&+=])" +    //at least 1 special character
+                "(?=\\S+$)" +           //no white spaces
+                ".{4,}" +               //at least 4 characters
+                "$";
+
+        if (val.isEmpty()) {
+            Password.setError("Password field cannot be empty");
+            return false;
+        }
+
+        else {
+            Password.setError(null);
+            // Password.setErrorEnabled(false);
+            return true;
+        }
     }
 
 

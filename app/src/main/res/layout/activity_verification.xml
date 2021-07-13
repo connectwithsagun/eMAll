@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/verificationActivity"
     tools:context=".Activities.VerificationActivity">
 
     <ImageView
@@ -22,7 +23,7 @@
         android:layout_marginHorizontal="@dimen/margin"
         android:background="@drawable/edit_text_bg"
         android:hint="Enter Verification Code"
-        android:inputType="text"
+        android:inputType="numberDecimal"
         android:drawableLeft="@drawable/verification_icon"
         android:drawablePadding="5dp"
         android:padding="8dp"

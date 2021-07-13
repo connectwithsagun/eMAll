@@ -3,6 +3,7 @@ package com.savatechnology.emall.Activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -29,7 +30,7 @@ public class ForgetPasswordVerificationActivity extends AppCompatActivity {
     Button btSubmit;
     EditText VerificationCode;
     TextView Resend;
-    String email;
+    //String email1;
 
 
     @Override
@@ -42,18 +43,22 @@ public class ForgetPasswordVerificationActivity extends AppCompatActivity {
         Resend=findViewById(R.id.tvResend);
 
         //getting data of email address which is passed through intent from PasswordResetEmailVerificationActivity
-        Bundle bundle = getIntent().getExtras();
-        if (bundle != null) {
-            email = bundle.getString("email");
-        }
+//        Bundle bundle = getIntent().getExtras();
+//        if (bundle != null) {
+//            email1 = bundle.getString("email");
+//        }
       // Log.v("abc",Email);
 
-        Resend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                forgotPasswordEmailVerification(email);
-            }
-        });
+//        Resend.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                forgotPasswordEmailVerification(email);
+//            }
+//        });
+
+        SharedPreferences sh = getSharedPreferences("MySharedPref", MODE_PRIVATE);
+        SharedPreferences.Editor myEdit = sh.edit();
+        String email = sh.getString("emailForForgetPassword", "");
 
         btSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,9 +69,9 @@ public class ForgetPasswordVerificationActivity extends AppCompatActivity {
         });
     }
 
-    private void forgotPasswordEmailVerification(String email) {
+    private void forgotPasswordEmailVerification(String email1) {
         ApiService apiService = ApiUtil.getApiService();
-        apiService.forgotPassword(email).enqueue(new Callback<ResponseBody>() {
+        apiService.forgotPassword(email1).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful())
@@ -102,7 +107,7 @@ public class ForgetPasswordVerificationActivity extends AppCompatActivity {
 
     private void forgetPasswordVerifyToken(String email) {
         ApiService apiService = ApiUtil.getApiService();
-        apiService.forgetPasswordTokenVerify(VerificationCode.getText().toString().trim()).enqueue(new Callback<ResponseBody>() {
+        apiService.forgetPasswordTokenVerify(VerificationCode.getText().toString().trim(),email).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful())
@@ -117,9 +122,9 @@ public class ForgetPasswordVerificationActivity extends AppCompatActivity {
 
                         //passing email address for forget password verification
                          //Log.v("abc",email);
-                        Intent intent = new Intent(ForgetPasswordVerificationActivity.this, ResetPasswordActivity.class);
-                        intent.putExtra("email", email);
-                        startActivity(intent);
+//                        Intent intent = new Intent(ForgetPasswordVerificationActivity.this, ResetPasswordActivity.class);
+//                        intent.putExtra("email", email1);
+//                        startActivity(intent);
 
                     } catch (IOException | JSONException e) {
                         e.printStackTrace();
@@ -127,7 +132,7 @@ public class ForgetPasswordVerificationActivity extends AppCompatActivity {
 
                     //Toast.makeText(PasswordResetEmailVerificationActivity.this, "Email is valid ", Toast.LENGTH_SHORT).show();
 
-                   // startActivity(new Intent(ForgetPasswordVerificationActivity.this,ResetPasswordActivity.class));
+                    startActivity(new Intent(ForgetPasswordVerificationActivity.this,ResetPasswordActivity.class));
                 }
                 else{
                     Toast.makeText(ForgetPasswordVerificationActivity.this, "failed ", Toast.LENGTH_SHORT).show();
