@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide;
 
 
 import com.savatechnology.emall.Activities.SuppliersDetailActivity;
+import com.savatechnology.emall.JSONSchemas.Suppliers;
 import com.savatechnology.emall.Models.HomeSupplierList;
 import com.savatechnology.emall.R;
 
@@ -23,9 +24,9 @@ import java.util.List;
 
 public class AdapterHomeSupplier extends RecyclerView.Adapter<AdapterHomeSupplier.MyViewHolder> {
     Context context;
-    private List<HomeSupplierList> homeSupplierList;
+    private List<Suppliers> homeSupplierList;
 
-    public AdapterHomeSupplier(List<HomeSupplierList> lists, Context cntx ) {
+    public AdapterHomeSupplier(List<Suppliers> lists, Context cntx ) {
         this.homeSupplierList = lists;
         this.context = cntx;
     }
@@ -37,8 +38,8 @@ public class AdapterHomeSupplier extends RecyclerView.Adapter<AdapterHomeSupplie
     }
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        String image = homeSupplierList.get(position).getimgSupplier();
-        String supplier_name = homeSupplierList.get(position).gettvSupplierName();
+        String image = homeSupplierList.get(position).getImage();
+        String supplier_name = homeSupplierList.get(position).getName();
 
 
         //Log.v("SDc",image+product_name);

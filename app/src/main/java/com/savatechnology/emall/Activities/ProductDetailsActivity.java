@@ -14,6 +14,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,6 +31,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
     private View parent_view;
     private TextView tv_qty;
+    String abc,xyz;
 
 
 
@@ -67,6 +69,11 @@ public class ProductDetailsActivity extends AppCompatActivity {
         findViewById(R.id.image_3);
         findViewById(R.id.image_4);
         findViewById(R.id.image_5);
+
+        abc = getIntent().getStringExtra("productId");
+        xyz = getIntent().getStringExtra("supplierId");
+        Log.v("xyz",abc);
+        Log.v("abc",xyz);
 
         tv_qty = (TextView) findViewById(R.id.tv_qty);
         ((FloatingActionButton) findViewById(R.id.fab_qty_sub)).setOnClickListener(new View.OnClickListener() {

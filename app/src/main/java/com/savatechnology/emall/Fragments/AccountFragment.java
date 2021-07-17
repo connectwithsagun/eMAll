@@ -15,6 +15,9 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +28,7 @@ import com.savatechnology.emall.Activities.PasswordChangeActivity;
 import com.savatechnology.emall.R;
 
 import static android.content.Context.MODE_PRIVATE;
+import static android.view.View.GONE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -45,8 +49,11 @@ public class AccountFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     ///////
-    TextView editProfile,changePassword,logout,userName,eMail;
+    TextView editProfile,changePassword,logout,userName,eMail,Phone;
     CardView userCard;
+    LinearLayout mainLayout;
+
+
     AlertDialog.Builder builder;
 
     // CircularImageView userPicture;
@@ -122,83 +129,211 @@ public class AccountFragment extends Fragment {
         eMail = view.findViewById(R.id.tvEmail);
         SharedPreferences sh = getActivity().getSharedPreferences("MySharedPref",MODE_PRIVATE);
         String s1 = sh.getString("email", "");
+        String s2 = sh.getString("username", "");
+        String s3 = sh.getString("phone", "");
         eMail.setText(s1);
 
+
+        userName = view.findViewById(R.id.tvUserName);
         editProfile = view.findViewById(R.id.tvProfile);
         changePassword = view.findViewById(R.id.tvChangePassword);
         logout = view.findViewById(R.id.tvLogout);
         userCard = view.findViewById(R.id.cvUserWishProfile);
+        mainLayout = view.findViewById(R.id.mainLayout);
+        Phone = view.findViewById(R.id.tvPhone);
+        userName.setText(s2);
+        Phone.setText(s3);
+
 
         Boolean b = sh.getBoolean("isLoggedIn",false);
         if(!b){
             userCard.setVisibility(View.GONE);
+            editProfile.setClickable(false);
+            changePassword.setClickable(false);
+            Toast.makeText(mContext,"You are not logged in for this action!!", Toast.LENGTH_SHORT).show();
+
+
+            builder.setMessage("Do you want to login ?")
+                    .setCancelable(false)
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+
+                         //   Toast.makeText(mContext,"Logout Successfully", Toast.LENGTH_SHORT).show();
+                            LoginFragment fragment=new LoginFragment();
+                            FragmentManager manager=getParentFragmentManager();
+                            FragmentTransaction transaction=manager.beginTransaction();
+                            transaction.replace(R.id.accFragment,fragment);
+                            transaction.addToBackStack(null);
+                            mainLayout.setVisibility(GONE);
+
+
+                            transaction.commit();
+
+                        }
+                    })
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            //  Action for 'NO' Button
+                            dialog.cancel();
+                            //Toast.makeText(mContext,"you choose no action for alertbox", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+            //Creating dialog box
+            AlertDialog alert = builder.create();
+            //Setting the title manually
+            alert.setTitle("Message");
+            alert.show();
+
+
+
+
         }
+//        if(!b){
+//            Toast.makeText(mContext,"You are not logged in for this action!!", Toast.LENGTH_SHORT).show();
+////                    editProfile.setClickable(false);
+////                    changePassword.setClickable(false);
+//
+//
+//        }
 
        // fav = view.findViewById(R.id.tvFavourite);
+        else{
+            editProfile.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
 
-        editProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(mContext, EditProfileActivity.class));
-            }
-        });
-        changePassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(mContext, PasswordChangeActivity.class));
+                    startActivity(new Intent(mContext, EditProfileActivity.class));
 
-
-            }
-        });
-
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SharedPreferences sh = getActivity().getSharedPreferences("MySharedPref", MODE_PRIVATE);
-                SharedPreferences.Editor myEdit = sh.edit();
-               // String s1 = sh.getString("email", "");
-              //  String s2 = sh.getString("password", "");
-                Boolean b1 = sh.getBoolean("isLoggedIn",false);
-                if(!b1){
-                    Toast.makeText(mContext,"You are not logged in for logout!!", Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    builder.setMessage("Do you want to logout ?")
-                            .setCancelable(false)
-                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-
-                                    // Fetching the stored data
-                                    // from the SharedPreference
-
-                                    myEdit.clear();
-                                    myEdit.apply();
-                                    Toast.makeText(mContext,"Logout Successfully", Toast.LENGTH_SHORT).show();
-                                  startActivity(new Intent(mContext, MainActivity.class));
-
-                                }
-                            })
-                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    //  Action for 'NO' Button
-                                    dialog.cancel();
-                                    //Toast.makeText(mContext,"you choose no action for alertbox", Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                    //Creating dialog box
-                    AlertDialog alert = builder.create();
-                    //Setting the title manually
-                    alert.setTitle("Logout");
-                    alert.show();
 
                 }
+            });
+            changePassword.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(mContext, PasswordChangeActivity.class));
+
+
+                }
+            });
+
+            logout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    SharedPreferences sh = getActivity().getSharedPreferences("MySharedPref", MODE_PRIVATE);
+                    SharedPreferences.Editor myEdit = sh.edit();
+                    // String s1 = sh.getString("email", "");
+
+
+                    //  String s2 = sh.getString("password", "");
+                    Boolean b1 = sh.getBoolean("isLoggedIn",false);
+                    if(!b1){
+                        Toast.makeText(mContext,"You are not logged in for logout!!", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        builder.setMessage("Do you want to logout ?")
+                                .setCancelable(false)
+                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+
+                                        // Fetching the stored data
+                                        // from the SharedPreference
+
+                                        myEdit.clear();
+                                        myEdit.apply();
+                                        Toast.makeText(mContext,"Logout Successfully", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(mContext, MainActivity.class));
+
+                                    }
+                                })
+                                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        //  Action for 'NO' Button
+                                        dialog.cancel();
+                                        //Toast.makeText(mContext,"you choose no action for alertbox", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                        //Creating dialog box
+                        AlertDialog alert = builder.create();
+                        //Setting the title manually
+                        alert.setTitle("Logout");
+                        alert.show();
+
+                    }
 
 
 
 
-            }
-        });
+                }
+            });
+        }
+
+//        editProfile.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//
+//                    startActivity(new Intent(mContext, EditProfileActivity.class));
+//
+//
+//            }
+//        });
+//        changePassword.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(mContext, PasswordChangeActivity.class));
+//
+//
+//            }
+//        });
+//
+//        logout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                SharedPreferences sh = getActivity().getSharedPreferences("MySharedPref", MODE_PRIVATE);
+//                SharedPreferences.Editor myEdit = sh.edit();
+//               // String s1 = sh.getString("email", "");
+//              //  String s2 = sh.getString("password", "");
+//                Boolean b1 = sh.getBoolean("isLoggedIn",false);
+//                if(!b1){
+//                    Toast.makeText(mContext,"You are not logged in for logout!!", Toast.LENGTH_SHORT).show();
+//                }
+//                else{
+//                    builder.setMessage("Do you want to logout ?")
+//                            .setCancelable(false)
+//                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+//                                public void onClick(DialogInterface dialog, int id) {
+//
+//                                    // Fetching the stored data
+//                                    // from the SharedPreference
+//
+//                                    myEdit.clear();
+//                                    myEdit.apply();
+//                                    Toast.makeText(mContext,"Logout Successfully", Toast.LENGTH_SHORT).show();
+//                                  startActivity(new Intent(mContext, MainActivity.class));
+//
+//                                }
+//                            })
+//                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+//                                public void onClick(DialogInterface dialog, int id) {
+//                                    //  Action for 'NO' Button
+//                                    dialog.cancel();
+//                                    //Toast.makeText(mContext,"you choose no action for alertbox", Toast.LENGTH_SHORT).show();
+//                                }
+//                            });
+//                    //Creating dialog box
+//                    AlertDialog alert = builder.create();
+//                    //Setting the title manually
+//                    alert.setTitle("Logout");
+//                    alert.show();
+//
+//                }
+//
+//
+//
+//
+//            }
+//        });
 
 
 

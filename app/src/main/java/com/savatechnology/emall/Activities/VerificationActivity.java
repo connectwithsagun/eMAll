@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.savatechnology.emall.Fragments.LoginFragment;
@@ -35,6 +36,7 @@ public class VerificationActivity extends AppCompatActivity {
     EditText registerVerificationCode;
     ImageView imgVerification;
     String email;
+    RelativeLayout verificationLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +52,7 @@ public class VerificationActivity extends AppCompatActivity {
         registerVerificationCode=findViewById(R.id.etVerificationCode);
         btVerify=findViewById(R.id.btVerify);
         imgVerification=findViewById(R.id.imgLogo);
+        verificationLayout = findViewById(R.id.relativeLayoutVerificationActivity);
 
         btVerify.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,9 +84,10 @@ public class VerificationActivity extends AppCompatActivity {
                             FragmentManager manager = getSupportFragmentManager();
                             FragmentTransaction transaction = manager.beginTransaction();
                             transaction.add(R.id.verificationActivity,frag,"Test Fragment");
-                            imgVerification.setVisibility(GONE);
-                            registerVerificationCode.setVisibility(GONE);
-                            btVerify.setVisibility(GONE);
+//                            imgVerification.setVisibility(GONE);
+//                            registerVerificationCode.setVisibility(GONE);
+//                            btVerify.setVisibility(GONE);
+                            verificationLayout.setVisibility(GONE);
                             transaction.commit();
                             // startActivity(new Intent(VerificationActivity.this, LoginFragment.class));
                         }

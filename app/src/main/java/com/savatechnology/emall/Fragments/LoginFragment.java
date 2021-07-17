@@ -21,9 +21,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +37,7 @@ import com.savatechnology.emall.Activities.ForgetPasswordVerificationActivity;
 import com.savatechnology.emall.Activities.HomeActivity;
 import com.savatechnology.emall.Activities.LoginActivity;
 import com.savatechnology.emall.Activities.MainActivity;
+import com.savatechnology.emall.Activities.PasswordChangeActivity;
 import com.savatechnology.emall.Activities.PasswordResetEmailVerificationActivity;
 import com.savatechnology.emall.Activities.SignUpActivity;
 import com.savatechnology.emall.R;
@@ -76,10 +80,12 @@ public class LoginFragment extends Fragment {
 
     Button Login;
     TextView Register,Skip,ForgetPsw, Title, DontAccount;
-    EditText Email,Password;
+    EditText Email,Password,Id;
     ImageView img;
+    RelativeLayout relativeLayoutLogin;
+    String _id,username;
 
-
+    BottomNavigationView btn_nav;
 
 
     View view;
@@ -116,6 +122,7 @@ public class LoginFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
 
@@ -128,11 +135,16 @@ public class LoginFragment extends Fragment {
 
 
 
+         btn_nav=(BottomNavigationView) getActivity().findViewById(R.id.bottom_nav_view);
+        btn_nav.setVisibility(view.GONE);
+
+
 
         init(view);
 
         return view;
     }
+
 
 
 
@@ -143,8 +155,7 @@ public class LoginFragment extends Fragment {
     }
     void init(View view) {
 
-//        BottomNavigationView btn_nav=view.findViewById(R.id.bottom_nav_view);
-//        btn_nav.setVisibility(View.GONE);
+
 
         Login = view.findViewById(R.id.btLogin);
         Register = view.findViewById(R.id.tvRegister);
@@ -155,6 +166,7 @@ public class LoginFragment extends Fragment {
         img=view.findViewById(R.id.imgLogo);
         Title=view.findViewById(R.id.tvTitle);
         DontAccount=view.findViewById(R.id.tvDidnothaveanaccount);
+        relativeLayoutLogin = view.findViewById(R.id.relativeLayoutLogin);
 
 
 
@@ -184,38 +196,11 @@ public class LoginFragment extends Fragment {
                 FragmentTransaction transaction=manager.beginTransaction();
                 transaction.replace(R.id.loginFragment,fragment);
                 transaction.addToBackStack(null);
-
-                Login.setVisibility(GONE);
-                Register.setVisibility(GONE);
-                Skip.setVisibility(GONE);
-                ForgetPsw.setVisibility(GONE);
-                Email.setVisibility(GONE);
-                Password.setVisibility(GONE);
-                img.setVisibility(GONE);
-                Title.setVisibility(GONE);
-                DontAccount.setVisibility(GONE);
+                relativeLayoutLogin.setVisibility(GONE);
 
                 transaction.commit();
 
-//                RegisterFragment fragment2 = new RegisterFragment();
-//                FragmentManager fragmentManager = getParentFragmentManager();
-//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//                fragmentTransaction.replace(R.id.loginFragment, fragment2);
-//                fragmentTransaction.commit();
 
-//                BlankFragment nextFrag= new BlankFragment();
-//                getActivity().getSupportFragmentManager().beginTransaction()
-//                        .add(R.id.loginFragment, nextFrag, "findThisFragment")
-//                        .addToBackStack(null)
-//                        .commit();
-
-//                FragmentManager fragmentManager = getParentFragmentManager();
-//                BlankFragment nextFrag= new BlankFragment();
-//                fragmentManager.beginTransaction()
-//                        .remove(fragmentManager.findFragmentById(R.id.loginFragment)) // resolves to A_Fragment instance
-//                        .add(R.id.loginFragment, nextFrag, "fragment-b")
-//                        .addToBackStack("a")
-//                        .commit();
             }
         });
 
@@ -257,28 +242,49 @@ public class LoginFragment extends Fragment {
 
                 if (response.isSuccessful())
                 {
+                    try{
+                        String val= response.body().string();
+                        JSONObject obj= new JSONObject(val);
+                        String result = obj.getString("result");
+                        JSONObject obj1= new JSONObject(result);
+                        String user = obj1.getString("user");
+                        JSONObject obj2= new JSONObject(user);
+                        _id = obj2.getString("_id");
+
+
+
+
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+
 
 
 
                     SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MySharedPref",MODE_PRIVATE);
-
                     SharedPreferences.Editor loginPreferences = sharedPreferences.edit();
 
 
                     loginPreferences.putString("email", Email.getText().toString());
                     loginPreferences.putString("password", Password.getText().toString());
                     loginPreferences.putBoolean("isLoggedIn", true);
+                    loginPreferences.putString("id", _id);
+                    loginPreferences.putString("username", username);
                     loginPreferences.apply();
 
 
-
-
-
                     Toast.makeText(getActivity(), "Login Successfully", Toast.LENGTH_SHORT).show();
+
                     String name= Email.getText().toString();
                   String  name1= name.substring(0, name.indexOf("@"));
 
                     Toast.makeText(getActivity(), "Welcome "+name1, Toast.LENGTH_LONG).show();
+
+
+//                    getUserDetails();
+
 
                     Intent i = new Intent(mContext, MainActivity.class);
                     i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -323,6 +329,95 @@ public class LoginFragment extends Fragment {
 
     //}
 }
+
+//    private void getUserDetails() {
+//        SharedPreferences sh = getActivity().getSharedPreferences("MySharedPref",MODE_PRIVATE);
+//        String UserId = sh.getString("id", "");
+//        ApiService apiService = ApiUtil.getApiService();
+//        apiService.userDetailsGet(UserId).enqueue(new Callback<ResponseBody>() {
+//            @Override
+//            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+//
+//
+//                //Toast.makeText(getActivity(), "" + response.code(), Toast.LENGTH_SHORT).show();
+//
+//                if (response.isSuccessful())
+//                {
+//                    try{
+//                        String val= response.body().string();
+//                        JSONObject obj= new JSONObject(val);
+//                        String username = obj.getString("username");
+//                        String phone = obj.getString("phone");
+//                        String address = obj.getString("addres");
+//                        String gender = obj.getString("gender");
+//                        String image = obj.getString("image");
+//
+//                        //Log.v("abc",address);
+//
+//                      //  Toast.makeText(getActivity(), "" + username, Toast.LENGTH_LONG).show();
+//
+//                        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MySharedPref",MODE_PRIVATE);
+//                        SharedPreferences.Editor loginPreferences = sharedPreferences.edit();
+//                        loginPreferences.putString("username", username);
+//                        loginPreferences.putString("phone", phone);
+//                        loginPreferences.putString("address", address);
+//                        loginPreferences.putString("gender", gender);
+//                        loginPreferences.putString("image", image);
+//                        loginPreferences.apply();
+//
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//
+//
+//
+//
+//
+//
+//                    //Toast.makeText(getActivity(), "Login Successfully", Toast.LENGTH_SHORT).show();
+//
+//
+//                    Intent i = new Intent(mContext, MainActivity.class);
+//                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                    startActivity(i);
+//
+//                }
+//
+//
+//                else{
+//                    try {
+//                        String val = response.errorBody().string();
+//                        JSONObject obj= new JSONObject(val);
+//                        String message = obj.getString("message");
+//
+//                        Toast.makeText(getActivity(), "" + message, Toast.LENGTH_SHORT).show();
+//
+//
+//                    } catch (IOException | JSONException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//                {
+//
+//
+//                }
+//
+//
+//
+//
+//            }
+//
+//
+//            @Override
+//            public void onFailure(Call<ResponseBody> call, Throwable t) {
+//                Toast.makeText(mContext, "Error" +t.getMessage(), Toast.LENGTH_SHORT).show();
+//
+//            }
+//        });
+//
+//
+//    }
+
     private boolean  isValidEmailId(String email){
 
         return Pattern.compile("^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]{1}|[\\w-]{2,}))@"

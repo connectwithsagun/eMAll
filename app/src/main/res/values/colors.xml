@@ -12,12 +12,13 @@
     <color name="button_nav_bg">#EDEAEA</color>
 
 
+
     <color name="overlay_dark_30">#4D000000</color>
     <color name="light_green_700">#689F38</color>
     <color name="light_green_600">#7CB342</color>
     <color name="indigo_500">#3F51B5</color>
     <color name="light_green_500">#8BC34A</color>
-    <color name="colorPrimaryDark">#1565C0</color>
+    <color name="colorPrimaryDark">#836464</color>
     <color name="pink_700">#C2185B</color>
 
     <color name="grey_3">#f7f7f7</color>
@@ -32,6 +33,7 @@
     <color name="grey_100_">#0d0d0d</color>
     <color name="green_500">#4CAF50</color>
     <color name="grey_500">#9E9E9E</color>
+
 
 
 </resources>

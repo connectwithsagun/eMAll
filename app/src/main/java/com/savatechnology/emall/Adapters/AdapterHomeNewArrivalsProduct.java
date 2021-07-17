@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide;
 
 
 import com.savatechnology.emall.Activities.ProductDetailsActivity;
+import com.savatechnology.emall.JSONSchemas.NewArrivalProduct;
 import com.savatechnology.emall.Models.HomeNewArrivalsProductList;
 import com.savatechnology.emall.R;
 
@@ -22,9 +23,9 @@ import java.util.List;
 
 public class AdapterHomeNewArrivalsProduct extends RecyclerView.Adapter<AdapterHomeNewArrivalsProduct.MyViewHolder> {
     Context context;
-    private List<HomeNewArrivalsProductList> homeNewArrivalsProductList;
+    private List<NewArrivalProduct> homeNewArrivalsProductList;
 
-    public AdapterHomeNewArrivalsProduct(List<HomeNewArrivalsProductList> lists, Context cntx ) {
+    public AdapterHomeNewArrivalsProduct(List<NewArrivalProduct> lists, Context cntx ) {
         this.homeNewArrivalsProductList = lists;
         this.context = cntx;
     }
@@ -36,9 +37,9 @@ public class AdapterHomeNewArrivalsProduct extends RecyclerView.Adapter<AdapterH
     }
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        String image = homeNewArrivalsProductList.get(position).getimgProduct();
-        String product_name = homeNewArrivalsProductList.get(position).gettvProductName();
-        int product_price = homeNewArrivalsProductList.get(position).gettvProductPrice();
+        String image = homeNewArrivalsProductList.get(position).getImage();
+        String product_name = homeNewArrivalsProductList.get(position).getName();
+        int product_price = homeNewArrivalsProductList.get(position).getPrice();
 
         //Log.v("SDc",image+product_name);
 

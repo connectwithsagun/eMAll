@@ -8,7 +8,10 @@
     tools:context=".Activities.SignUpActivity">
 
 
-
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/relativeLayoutRegister">
 
     <ImageView
         android:id="@+id/imgLogo"
@@ -139,6 +142,10 @@
         android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="normal" />
+
+
+
+</RelativeLayout>
 
 
 

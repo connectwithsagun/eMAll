@@ -27,7 +27,9 @@
             android:label="Cart"
             android:parentActivityName=".Activities.MainActivity"></activity>
         <activity android:name=".Activities.ProductSearchActivity"></activity>
-        <activity android:name=".Activities.SignUpActivity"></activity>
+        <activity android:name=".Activities.SignUpActivity">
+
+        </activity>
         <activity
             android:name=".Activities.PasswordResetEmailVerificationActivity"
             android:label="Forget Password"

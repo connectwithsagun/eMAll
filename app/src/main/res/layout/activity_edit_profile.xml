@@ -9,13 +9,13 @@
 
 
     <EditText
-        android:id="@+id/etName"
+        android:id="@+id/etUserName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
         android:layout_marginHorizontal="@dimen/margin"
         android:background="@drawable/edit_text_bg"
-        android:hint="sagun"
+        android:hint="Enter your username here"
         android:inputType="text"
         android:drawableLeft="@drawable/username_icon"
         android:drawablePadding="5dp"
@@ -24,37 +24,101 @@
         android:textSize="16sp" />
 
     <EditText
-        android:id="@+id/etEmail"
+        android:id="@+id/etAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/etName"
         android:layout_marginTop="15dp"
+        android:layout_below="@+id/etUserName"
         android:layout_marginHorizontal="@dimen/margin"
         android:background="@drawable/edit_text_bg"
-        android:hint="abc@gmail.com"
+        android:hint="Enter your address here"
         android:inputType="text"
-        android:drawableLeft="@drawable/mail_icon"
+        android:drawableLeft="@drawable/location_icon"
         android:drawablePadding="5dp"
         android:padding="8dp"
         android:textColor="@color/black"
         android:textSize="16sp" />
-
 
     <EditText
         android:id="@+id/etPhone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/etEmail"
+        android:layout_below="@+id/etAddress"
         android:layout_marginTop="15dp"
         android:layout_marginHorizontal="@dimen/margin"
         android:background="@drawable/edit_text_bg"
-        android:hint="9821569896"
-        android:inputType="text"
+        android:hint="Enter your phone number here"
+        android:inputType="numberDecimal"
         android:drawableLeft="@drawable/phone_icon"
         android:drawablePadding="5dp"
         android:padding="8dp"
         android:textColor="@color/black"
         android:textSize="16sp" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etPhone"
+        app:cardCornerRadius="4dp"
+        android:id="@+id/cvGender">
+
+        <RadioGroup
+            android:id="@+id/radioSex"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_below="@+id/etPhone"
+            android:layout_marginTop="15dp"
+            android:drawablePadding="5dp"
+            android:padding="8dp"
+            android:layout_marginHorizontal="@dimen/margin">
+
+            <RadioButton
+                android:id="@+id/radioMale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Male"
+                android:checked="true" />
+
+            <RadioButton
+                android:id="@+id/radioFemale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Female" />
+            <RadioButton
+                android:id="@+id/radioOther"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Other" />
+
+        </RadioGroup>
+
+    </androidx.cardview.widget.CardView>
+
+
+
+<!--    <EditText-->
+<!--        android:id="@+id/etImage"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="15dp"-->
+<!--        android:layout_below="@+id/cvGender"-->
+<!--        android:layout_marginHorizontal="@dimen/margin"-->
+<!--        android:background="@drawable/edit_text_bg"-->
+<!--        android:hint="image"-->
+<!--        android:inputType="text"-->
+<!--        android:drawableLeft="@drawable/username_icon"-->
+<!--        android:drawablePadding="5dp"-->
+<!--        android:padding="8dp"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="16sp" />-->
+
+
+
+
+
+
+
 
 
 
@@ -64,7 +128,7 @@
         android:id="@+id/btSubmit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/etPhone"
+        android:layout_below="@id/cvGender"
         android:layout_marginTop="35dp"
         android:layout_marginHorizontal="@dimen/margin"
         android:text="submit"

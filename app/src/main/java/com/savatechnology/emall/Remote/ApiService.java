@@ -1,5 +1,11 @@
 package com.savatechnology.emall.Remote;
 
+import com.savatechnology.emall.JSONSchemas.FeaturedProduct;
+import com.savatechnology.emall.JSONSchemas.NewArrivalProduct;
+import com.savatechnology.emall.JSONSchemas.Suppliers;
+
+import java.util.List;
+
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -52,5 +58,52 @@ public interface ApiService {
             @Path("email") String email,
             @Field("password") String password
     );
+
+    @FormUrlEncoded
+    @PUT("auth/cpassword/{email}")
+    Call<ResponseBody> passwordChange(
+            @Path("email") String email,
+            @Field("oldpassword") String oldpassword,
+            @Field("newpassword") String newpassword
+    );
+
+    @FormUrlEncoded
+    @PUT("user/detail/{id}")
+    Call<ResponseBody> editUserInfo(
+            @Path("id") String id,
+            @Field("username") String username,
+            @Field("phone") String phone,
+            @Field("addres") String addres,
+            @Field("gender") String gender
+
+    );
+
+    @FormUrlEncoded
+    @POST("user/detail")
+    Call<ResponseBody> userDetailAdd(
+            @Field("userid") String userid,
+            @Field("username") String username,
+            @Field("phone") String phone,
+            @Field("addres") String addres,
+            @Field("gender") String gender
+
+
+    );
+
+    @GET("user/detail/{id}")
+    Call<ResponseBody> userDetailsGet(
+            @Path("id") String id
+
+
+    );
+
+    @GET("product")
+    Call<List<FeaturedProduct>> getFeaturedProduct();
+
+    @GET("supplier")
+    Call<List<Suppliers>> getSuppliers();
+
+    @GET("product/get-limit-product")
+    Call<List<NewArrivalProduct>> getLatestProduct();
 
 }

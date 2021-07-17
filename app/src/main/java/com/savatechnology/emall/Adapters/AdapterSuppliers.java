@@ -10,8 +10,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.savatechnology.emall.Activities.ProductDetailsActivity;
 import com.savatechnology.emall.Activities.SuppliersDetailActivity;
+import com.savatechnology.emall.JSONSchemas.Suppliers;
 import com.savatechnology.emall.Models.SuppliersList;
 import com.savatechnology.emall.R;
 
@@ -19,9 +21,9 @@ import java.io.Serializable;
 import java.util.List;
 
 public class AdapterSuppliers extends RecyclerView.Adapter<AdapterSuppliers.MyViewHolder> {
-    private List<SuppliersList> lists;
+    private List<Suppliers> lists;
     Context context;
-    public AdapterSuppliers(List<SuppliersList> lists ,Context cntx) {
+    public AdapterSuppliers(List<Suppliers> lists ,Context cntx) {
         this.context= cntx;
         this.lists = lists;
     }
@@ -36,13 +38,16 @@ public class AdapterSuppliers extends RecyclerView.Adapter<AdapterSuppliers.MyVi
     }
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        int image = lists.get(position).getimgSupplier();
-        String supplier_name = lists.get(position).gettvSupplierName();
-        String supplier_address = lists.get(position).gettvSupplierAddress();
+        String image = lists.get(position).getImage();
+        String supplier_name = lists.get(position).getName();
+        String supplier_address = lists.get(position).getLocation();
 
+        Glide.with(context)
+                .asBitmap()
+                .load(image)
+                .into(holder.imgSupplier);
 
-
-        holder.imgSupplier.setImageResource(image);
+      //  holder.imgSupplier.setImageResource(image);
         holder.tvSupplierName.setText(supplier_name);
         holder.tvSupplierAddress.setText(supplier_address);
 
@@ -70,7 +75,7 @@ public class AdapterSuppliers extends RecyclerView.Adapter<AdapterSuppliers.MyVi
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(context, SuppliersDetailActivity.class);
-                    intent.putExtra("Course", (Serializable) lists.get(getAdapterPosition()));
+                    //intent.putExtra("Course", (Serializable) lists.get(getAdapterPosition()));
                     context.startActivity(intent);
                 }
             });

@@ -14,16 +14,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 
 import com.savatechnology.emall.Activities.ProductDetailsActivity;
+import com.savatechnology.emall.JSONSchemas.FeaturedProduct;
 import com.savatechnology.emall.Models.HomeFeaturedProductList;
 import com.savatechnology.emall.R;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class AdapterHomeFeaturedProduct extends RecyclerView.Adapter<AdapterHomeFeaturedProduct.MyViewHolder> {
     Context context;
-    private List<HomeFeaturedProductList> homeFeaturedProductList;
+    private List<FeaturedProduct> homeFeaturedProductList;
 
-    public AdapterHomeFeaturedProduct(List<HomeFeaturedProductList> lists, Context cntx ) {
+    public AdapterHomeFeaturedProduct(List<FeaturedProduct> lists, Context cntx ) {
         this.homeFeaturedProductList = lists;
         this.context = cntx;
     }
@@ -35,9 +37,11 @@ public class AdapterHomeFeaturedProduct extends RecyclerView.Adapter<AdapterHome
     }
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        String image = homeFeaturedProductList.get(position).getimgSupplier();
-        String product_name = homeFeaturedProductList.get(position).gettvProductName();
-        int product_price = homeFeaturedProductList.get(position).gettvProductPrice();
+        String productId = homeFeaturedProductList.get(position).getId();
+        String image = homeFeaturedProductList.get(position).getImage();
+        String product_name = homeFeaturedProductList.get(position).getName();
+        int product_price = homeFeaturedProductList.get(position).getPrice();
+
 
         //Log.v("SDc",image+product_name);
 
@@ -50,6 +54,7 @@ public class AdapterHomeFeaturedProduct extends RecyclerView.Adapter<AdapterHome
 
         holder.tvProductName.setText(product_name);
         holder.tvProductPrice.setText("Rs. "+product_price+"");
+
 
 
     }
@@ -75,10 +80,13 @@ public class AdapterHomeFeaturedProduct extends RecyclerView.Adapter<AdapterHome
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(context, ProductDetailsActivity.class);
-                    // intent.putExtra("product", (Serializable) homeFeaturedProductList.get(getAdapterPosition()));
+//Log.v("abc",homeFeaturedProductList.get(getAdapterPosition()).getId());
+                    intent.putExtra("productId", (Serializable) homeFeaturedProductList.get(getAdapterPosition()).getId());
+                    intent.putExtra("supplierId", (Serializable) homeFeaturedProductList.get(getAdapterPosition()).getSupplier());
                     context.startActivity(intent);
                 }
             });
+
 
 
 

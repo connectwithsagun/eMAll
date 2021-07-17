@@ -15,12 +15,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.savatechnology.emall.Activities.ForgetPasswordVerificationActivity;
 import com.savatechnology.emall.Activities.LoginActivity;
 import com.savatechnology.emall.Activities.MainActivity;
+import com.savatechnology.emall.Activities.PasswordResetEmailVerificationActivity;
 import com.savatechnology.emall.Activities.SignUpActivity;
 import com.savatechnology.emall.Activities.VerificationActivity;
 import com.savatechnology.emall.R;
@@ -60,6 +62,7 @@ public class RegisterFragment extends Fragment {
     TextView login,registerTitle,allreadyHaveAccount;
     EditText Email, Password, Cpassword;
     ImageView imgLogo;
+    RelativeLayout relativeLayoutRegister;
 
 
     View view;
@@ -127,6 +130,7 @@ public class RegisterFragment extends Fragment {
         imgLogo = view.findViewById(R.id.imgLogo);
         registerTitle = view.findViewById(R.id.tvTitle);
         allreadyHaveAccount = view.findViewById(R.id.tvAlreadyHaveAnAccount);
+         relativeLayoutRegister = view.findViewById(R.id.relativeLayoutRegister);
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -150,14 +154,7 @@ public class RegisterFragment extends Fragment {
                 FragmentTransaction transaction=manager.beginTransaction();
                 transaction.replace(R.id.registerFragment,fragment1);
                 transaction.addToBackStack(null);
-                register.setVisibility(GONE);
-                login.setVisibility(GONE);
-                Email.setVisibility(GONE);
-                Password.setVisibility(GONE);
-                Cpassword.setVisibility(GONE);
-                imgLogo.setVisibility(GONE);
-                registerTitle.setVisibility(GONE);
-                allreadyHaveAccount.setVisibility(GONE);
+                relativeLayoutRegister.setVisibility(GONE);
                 transaction.commit();
 
 
@@ -206,9 +203,11 @@ public class RegisterFragment extends Fragment {
 
                 @Override
                 public void onFailure(Call<ResponseBody> call, Throwable t) {
-                    Toast.makeText(getActivity(), "On Failure", Toast.LENGTH_SHORT).show();
-
+                    Toast.makeText(getActivity(), "Error" +t.getMessage(), Toast.LENGTH_SHORT).show();
                 }
+
+
+
             });
         }
 

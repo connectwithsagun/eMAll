@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
@@ -18,6 +19,10 @@ import com.savatechnology.emall.Adapters.AdapterHomeNewArrivalsProduct;
 import com.savatechnology.emall.Adapters.AdapterHomeProductCollection;
 import com.savatechnology.emall.Adapters.AdapterHomeSupplier;
 import com.savatechnology.emall.Adapters.AdapterSlider;
+import com.savatechnology.emall.Adapters.AdapterSuppliers;
+import com.savatechnology.emall.JSONSchemas.FeaturedProduct;
+import com.savatechnology.emall.JSONSchemas.NewArrivalProduct;
+import com.savatechnology.emall.JSONSchemas.Suppliers;
 import com.savatechnology.emall.Models.HomeFeaturedProductList;
 import com.savatechnology.emall.Models.HomeJustForYouList;
 import com.savatechnology.emall.Models.HomeNewArrivalsProductList;
@@ -25,11 +30,18 @@ import com.savatechnology.emall.Models.HomeProductCollectionList;
 import com.savatechnology.emall.Models.HomeSupplierList;
 import com.savatechnology.emall.Models.SliderImageList;
 import com.savatechnology.emall.R;
+import com.savatechnology.emall.Remote.ApiService;
+import com.savatechnology.emall.Remote.ApiUtil;
 import com.smarteist.autoimageslider.IndicatorView.draw.controller.DrawController;
 import com.smarteist.autoimageslider.SliderView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -40,7 +52,6 @@ public class HomeFragment extends Fragment {
 
     List<SliderImageList> data;
     Context mContext;
-
 
 
     //for home product collection items
@@ -72,10 +83,6 @@ public class HomeFragment extends Fragment {
     AdapterHomeJustForYou adapterHomeJustForYou;
 
 
-
-
-
-
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -86,7 +93,6 @@ public class HomeFragment extends Fragment {
 
         fragment.setArguments(args);
         return fragment;
-
 
 
     }
@@ -111,7 +117,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
+        // rcvHomeFeaturedProduct = view.findViewById(R.id.rcvHomeFeaturedProduct);
         //for image slider
         view = inflater.inflate(R.layout.fragment_home, container, false);
 
@@ -150,97 +156,141 @@ public class HomeFragment extends Fragment {
         homeJustForYouList = new ArrayList<>();
 
 
-
-        homeJustForYouList.add(new HomeJustForYouList("https://newsladder.net/wp-content/uploads/2016/05/luxury-watches-mens.jpg", "Watch",5000));
-        homeJustForYouList.add(new HomeJustForYouList("https://1000logos.net/wp-content/uploads/2017/05/Logo-Red-Bull.png", "Cold drink",600));
-
+        homeJustForYouList.add(new HomeJustForYouList("https://newsladder.net/wp-content/uploads/2016/05/luxury-watches-mens.jpg", "Watch", 5000));
+        homeJustForYouList.add(new HomeJustForYouList("https://1000logos.net/wp-content/uploads/2017/05/Logo-Red-Bull.png", "Cold drink", 600));
 
 
         recyclerView = view.findViewById(R.id.rcvJustForYou);
         layoutManager = new GridLayoutManager(mContext, 2);
         //layoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
-        adapterHomeJustForYou = new AdapterHomeJustForYou(homeJustForYouList,mContext);
+        adapterHomeJustForYou = new AdapterHomeJustForYou(homeJustForYouList, mContext);
         recyclerView.setAdapter(adapterHomeJustForYou);
         adapterHomeJustForYou.notifyDataSetChanged();
 
 
-
     }
+
+//    private void initRecycleViewForHomeSupplier(View view) {
+//
+//        homeSupplierLists = new ArrayList<>();
+//
+//
+//
+//        homeSupplierLists.add(new HomeSupplierList("https://1000logos.net/wp-content/uploads/2017/05/Logo-Red-Bull.png", "Lungeli Traders"));
+//        homeSupplierLists.add(new HomeSupplierList("https://1000logos.net/wp-content/uploads/2017/05/Logo-Red-Bull.png", "Lungeli Traders"));
+//
+//
+//
+//        recyclerView = view.findViewById(R.id.rcvSupplier);
+//        layoutManager = new GridLayoutManager(mContext, 2);
+//        //layoutManager.setOrientation(RecyclerView.VERTICAL);
+//        recyclerView.setLayoutManager(layoutManager);
+//        adapterHomeSupplier = new AdapterHomeSupplier(homeSupplierLists,mContext);
+//        recyclerView.setAdapter(adapterHomeSupplier);
+//        adapterHomeSupplier.notifyDataSetChanged();
+//
+//
+//    }
 
     private void initRecycleViewForHomeSupplier(View view) {
 
-        homeSupplierLists = new ArrayList<>();
 
+        ApiService apiService = ApiUtil.getApiService();
+        apiService.getSuppliers().enqueue(new Callback<List<Suppliers>>() {
+            @Override
+            public void onResponse(Call<List<Suppliers>> call, Response<List<Suppliers>> response) {
+                if (response.isSuccessful()) {
+                    List<Suppliers> suppliers = response.body();
+                    recyclerView = view.findViewById(R.id.rcvSupplier);
+                    layoutManager = new GridLayoutManager(mContext, 2);
+                    //layoutManager.setOrientation(RecyclerView.VERTICAL);
+                    recyclerView.setLayoutManager(layoutManager);
+                    adapterHomeSupplier = new AdapterHomeSupplier(suppliers, mContext);
+                    recyclerView.setAdapter(adapterHomeSupplier);
+                    adapterHomeSupplier.notifyDataSetChanged();
+                }
+            }
 
+            @Override
+            public void onFailure(Call<List<Suppliers>> call, Throwable t) {
 
-        homeSupplierLists.add(new HomeSupplierList("https://1000logos.net/wp-content/uploads/2017/05/Logo-Red-Bull.png", "Lungeli Traders"));
-        homeSupplierLists.add(new HomeSupplierList("https://1000logos.net/wp-content/uploads/2017/05/Logo-Red-Bull.png", "Lungeli Traders"));
-
-
-
-        recyclerView = view.findViewById(R.id.rcvSupplier);
-        layoutManager = new GridLayoutManager(mContext, 2);
-        //layoutManager.setOrientation(RecyclerView.VERTICAL);
-        recyclerView.setLayoutManager(layoutManager);
-        adapterHomeSupplier = new AdapterHomeSupplier(homeSupplierLists,mContext);
-        recyclerView.setAdapter(adapterHomeSupplier);
-        adapterHomeSupplier.notifyDataSetChanged();
-
+            }
+        });
 
     }
+
 
     private void initRecycleViewForHomeNewArrivalsProduct(View view) {
 
 
-        homeNewArrivalsProductLists = new ArrayList<>();
 
 
 
-        homeNewArrivalsProductLists.add(new HomeNewArrivalsProductList("https://weneedfun.com/wp-content/uploads/2016/07/Muscle-Cars-16.jpg", "Car",500000));
-        homeNewArrivalsProductLists.add(new HomeNewArrivalsProductList("https://weneedfun.com/wp-content/uploads/2016/07/Muscle-Cars-16.jpg", "Car",500000));
+        ApiService apiService = ApiUtil.getApiService();
+        apiService.getLatestProduct().enqueue(new Callback<List<NewArrivalProduct>>() {
+            @Override
+            public void onResponse(Call<List<NewArrivalProduct>> call, Response<List<NewArrivalProduct>> response) {
+                if (response.isSuccessful()) {
 
 
+                    List<NewArrivalProduct> newArrivalProducts = response.body();
+                    recyclerView = view.findViewById(R.id.rcvNewArrivalproduct);
+                    layoutManager = new GridLayoutManager(mContext, 2);
+                    //layoutManager.setOrientation(RecyclerView.VERTICAL);
+                    recyclerView.setLayoutManager(layoutManager);
+                    newarrivalproductadapter = new AdapterHomeNewArrivalsProduct(newArrivalProducts, mContext);
+                    recyclerView.setAdapter(newarrivalproductadapter);
+                    newarrivalproductadapter.notifyDataSetChanged();
+                }
+            }
 
-        recyclerView = view.findViewById(R.id.rcvNewArrivalproduct);
-        layoutManager = new GridLayoutManager(mContext, 2);
-        //layoutManager.setOrientation(RecyclerView.VERTICAL);
-        recyclerView.setLayoutManager(layoutManager);
-        newarrivalproductadapter = new AdapterHomeNewArrivalsProduct(homeNewArrivalsProductLists,mContext);
-        recyclerView.setAdapter(newarrivalproductadapter);
-        newarrivalproductadapter.notifyDataSetChanged();
-
-
+            @Override
+            public void onFailure(Call<List<NewArrivalProduct>> call, Throwable t) {
+            }
+        });
     }
 
+    //    private void initRecycleViewForHomeFeaturedProduct(View view) {
+//
+//        homeFeaturedProductLists = new ArrayList<>();
+//
+//        homeFeaturedProductLists.add(new HomeFeaturedProductList("https://www.sheffield-systems.co.uk/wp-content/uploads/2017/06/mobile-phones.jpg", "Mobiles",10000));
+//        homeFeaturedProductLists.add(new HomeFeaturedProductList("https://www.sheffield-systems.co.uk/wp-content/uploads/2017/06/mobile-phones.jpg", "Mobiles",10000));
+//
+//      recyclerView = view.findViewById(R.id.rcvHomeFeaturedProduct);
+//        layoutManager = new GridLayoutManager(mContext, 2);
+//        //layoutManager.setOrientation(RecyclerView.VERTICAL);
+//        recyclerView.setLayoutManager(layoutManager);
+//        featureproductadapter = new AdapterHomeFeaturedProduct(homeFeaturedProductLists,mContext);
+//        recyclerView.setAdapter(featureproductadapter);
+//        featureproductadapter.notifyDataSetChanged();
+//    }
     private void initRecycleViewForHomeFeaturedProduct(View view) {
+        ApiService apiService = ApiUtil.getApiService();
+        apiService.getFeaturedProduct().enqueue(new Callback<List<FeaturedProduct>>() {
+            @Override
+            public void onResponse(Call<List<FeaturedProduct>> call, Response<List<FeaturedProduct>> response) {
+                if (response.isSuccessful()) {
+                    List<FeaturedProduct> featuredProducts = response.body();
+                    recyclerView = view.findViewById(R.id.rcvHomeFeaturedProduct);
+                    layoutManager = new GridLayoutManager(mContext, 2);
+                    //layoutManager.setOrientation(RecyclerView.VERTICAL);
+                    recyclerView.setLayoutManager(layoutManager);
+                    featureproductadapter = new AdapterHomeFeaturedProduct(featuredProducts, mContext);
+                    recyclerView.setAdapter(featureproductadapter);
+                    featureproductadapter.notifyDataSetChanged();
+                }
+            }
 
+            @Override
+            public void onFailure(Call<List<FeaturedProduct>> call, Throwable t) {
 
-
-        homeFeaturedProductLists = new ArrayList<>();
-
-
-
-        homeFeaturedProductLists.add(new HomeFeaturedProductList("https://www.sheffield-systems.co.uk/wp-content/uploads/2017/06/mobile-phones.jpg", "Mobiles",10000));
-        homeFeaturedProductLists.add(new HomeFeaturedProductList("https://www.sheffield-systems.co.uk/wp-content/uploads/2017/06/mobile-phones.jpg", "Mobiles",10000));
-
-
-
-
-        recyclerView = view.findViewById(R.id.rcvHomeFeaturedProduct);
-        layoutManager = new GridLayoutManager(mContext, 2);
-        //layoutManager.setOrientation(RecyclerView.VERTICAL);
-        recyclerView.setLayoutManager(layoutManager);
-        featureproductadapter = new AdapterHomeFeaturedProduct(homeFeaturedProductLists,mContext);
-        recyclerView.setAdapter(featureproductadapter);
-        featureproductadapter.notifyDataSetChanged();
-
-
-
-
-
+            }
+        });
 
     }
+
 
     private void initRecycleViewForHomeProduct(View view) {
 
@@ -248,24 +298,20 @@ public class HomeFragment extends Fragment {
         lists = new ArrayList<>();
 
 
-
-
         lists.add(new HomeProductCollectionList("https://getwallpapers.com/wallpaper/full/b/a/7/1404433-pepsi-logo-wallpaper-2560x1600-mobile.jpg", "Cold Drinks"));
         lists.add(new HomeProductCollectionList("https://getwallpapers.com/wallpaper/full/b/a/7/1404433-pepsi-logo-wallpaper-2560x1600-mobile.jpg", "Cold Drinks"));
         lists.add(new HomeProductCollectionList("https://getwallpapers.com/wallpaper/full/b/a/7/1404433-pepsi-logo-wallpaper-2560x1600-mobile.jpg", "Cold Drinks"));
-
 
 
         recyclerView = view.findViewById(R.id.rcvHomeProduct);
         layoutManager = new GridLayoutManager(mContext, 3);
         //layoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new AdapterHomeProductCollection(lists,mContext);
+        adapter = new AdapterHomeProductCollection(lists, mContext);
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
 
     }
-
-
 }
+
