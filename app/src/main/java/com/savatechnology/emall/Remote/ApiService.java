@@ -2,6 +2,7 @@ package com.savatechnology.emall.Remote;
 
 import com.savatechnology.emall.JSONSchemas.FeaturedProduct;
 import com.savatechnology.emall.JSONSchemas.NewArrivalProduct;
+import com.savatechnology.emall.JSONSchemas.SupplierProduct;
 import com.savatechnology.emall.JSONSchemas.Suppliers;
 
 import java.util.List;
@@ -105,5 +106,15 @@ public interface ApiService {
 
     @GET("product/get-limit-product")
     Call<List<NewArrivalProduct>> getLatestProduct();
+
+    @GET("supplier/{id}")
+    Call<ResponseBody> getSupplierDetail(
+            @Path("id") String id
+    );
+
+    @GET("product/supplier-id/{id}")
+    Call<List<SupplierProduct>> getSupplierProduct(
+            @Path("id") String id
+            );
 
 }

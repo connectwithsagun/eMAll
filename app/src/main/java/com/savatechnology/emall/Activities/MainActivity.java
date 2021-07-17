@@ -283,13 +283,22 @@ public class MainActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.action_cart:
-                Intent i = new Intent(this, CartActivity.class);
-                this.startActivity(i);
-                return true;
-            case R.id.action_settings:
-                Intent i1 = new Intent(this, SettingsFragment.class);
-                this.startActivity(i1);
-                return true;
+
+                SharedPreferences sh = MainActivity.this.getSharedPreferences("MySharedPref",MODE_PRIVATE);
+                Boolean b = sh.getBoolean("isLoggedIn",false);
+                if(b){
+                    Intent i = new Intent(this, CartActivity.class);
+                    this.startActivity(i);
+                    return true;
+                }
+                else{
+                    Toast.makeText(MainActivity.this,"Login first",Toast.LENGTH_LONG);
+                }
+
+//            case R.id.action_settings:
+//                Intent i1 = new Intent(this, SettingsFragment.class);
+//                this.startActivity(i1);
+//                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

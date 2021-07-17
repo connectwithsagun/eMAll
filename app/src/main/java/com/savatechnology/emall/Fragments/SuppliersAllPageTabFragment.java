@@ -94,13 +94,13 @@ public class SuppliersAllPageTabFragment extends Fragment {
 
     private void initRecycleView(View view) {
 
-        recyclerView = view.findViewById(R.id.recyclerView);
-        layoutManager=new GridLayoutManager(mContext,2);
-        //layoutManager.setOrientation(RecyclerView.VERTICAL);
-        recyclerView.setLayoutManager(layoutManager);
-        adapter = new AdapterSupplierProduct(lists);
-        recyclerView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+//        recyclerView = view.findViewById(R.id.recyclerView);
+//        layoutManager=new GridLayoutManager(mContext,2);
+//        //layoutManager.setOrientation(RecyclerView.VERTICAL);
+//        recyclerView.setLayoutManager(layoutManager);
+//        adapter = new AdapterSupplierProduct(lists, mContext);
+//        recyclerView.setAdapter(adapter);
+//        adapter.notifyDataSetChanged();
     }
 
     private void initData() {

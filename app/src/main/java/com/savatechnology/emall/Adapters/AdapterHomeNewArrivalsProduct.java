@@ -19,6 +19,7 @@ import com.savatechnology.emall.JSONSchemas.NewArrivalProduct;
 import com.savatechnology.emall.Models.HomeNewArrivalsProductList;
 import com.savatechnology.emall.R;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class AdapterHomeNewArrivalsProduct extends RecyclerView.Adapter<AdapterHomeNewArrivalsProduct.MyViewHolder> {
@@ -77,7 +78,12 @@ public class AdapterHomeNewArrivalsProduct extends RecyclerView.Adapter<AdapterH
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(context, ProductDetailsActivity.class);
-                    // intent.putExtra("product", (Serializable) homeFeaturedProductList.get(getAdapterPosition()));
+                    intent.putExtra("productId", (Serializable) homeNewArrivalsProductList.get(getAdapterPosition()).getId());
+                    intent.putExtra("productName", (Serializable) homeNewArrivalsProductList.get(getAdapterPosition()).getName());
+                    intent.putExtra("productPrize", (Serializable) homeNewArrivalsProductList.get(getAdapterPosition()).getPrice());
+                    intent.putExtra("productImage", (Serializable) homeNewArrivalsProductList.get(getAdapterPosition()).getImage());
+                    intent.putExtra("productDescription", (Serializable) homeNewArrivalsProductList.get(getAdapterPosition()).getDesc());
+                    intent.putExtra("supplierId", (Serializable) homeNewArrivalsProductList.get(getAdapterPosition()).getSupplier());
                     context.startActivity(intent);
                 }
             });

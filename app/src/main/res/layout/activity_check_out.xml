@@ -37,22 +37,17 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/tvUserName"
         android:text="Debid Magar"
         android:drawableLeft="@drawable/id_icon"
         android:drawablePadding="10dp"
         android:textSize="@dimen/heading"
         />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Syangja"
-        android:drawableLeft="@drawable/home_icon"
-        android:drawablePadding="10dp"
-        android:textSize="@dimen/heading"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/tvUserAddress"
         android:text="Gaindakot-2, Nawalpur"
         android:drawableLeft="@drawable/location_icon"
         android:drawablePadding="10dp"
@@ -61,6 +56,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/tvUserPhone"
         android:text="9805485022"
         android:drawableLeft="@drawable/phone_icon"
         android:drawablePadding="10dp"
@@ -69,6 +65,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/tvUserGmail"
         android:text="debidmagar@gmail.com"
         android:drawableLeft="@drawable/mail_icon"
         android:drawablePadding="10dp"

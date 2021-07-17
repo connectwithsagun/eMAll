@@ -76,7 +76,17 @@ public class AdapterHomeSupplier extends RecyclerView.Adapter<AdapterHomeSupplie
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(context, SuppliersDetailActivity.class);
-                   // intent.putExtra("Course", (Serializable) homeSupplierList.get(getAdapterPosition()));
+//                    intent.putExtra("Course", (Serializable) homeSupplierList.get(getAdapterPosition()));
+//                    intent.putExtra("supplierName",name);
+//                    intent.putExtra("supplierLocation",location);
+//                    intent.putExtra("supplierPhone",phone);
+//                    intent.putExtra("supplierImage",image);
+                    Log.v("abc", String.valueOf(homeSupplierList.get(getAdapterPosition()).getPhone()));
+
+                    intent.putExtra("supplierName", (Serializable) homeSupplierList.get(getAdapterPosition()).getName());
+                    intent.putExtra("supplierLocation", (Serializable) homeSupplierList.get(getAdapterPosition()).getLocation());
+                    intent.putExtra("supplierPhone", (Serializable) String.valueOf(homeSupplierList.get(getAdapterPosition()).getPhone()));
+                    intent.putExtra("supplierImage", (Serializable) homeSupplierList.get(getAdapterPosition()).getImage());
                     context.startActivity(intent);
                 }
             });

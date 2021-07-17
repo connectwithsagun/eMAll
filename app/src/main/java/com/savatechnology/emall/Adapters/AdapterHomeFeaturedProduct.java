@@ -80,8 +80,12 @@ public class AdapterHomeFeaturedProduct extends RecyclerView.Adapter<AdapterHome
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(context, ProductDetailsActivity.class);
-//Log.v("abc",homeFeaturedProductList.get(getAdapterPosition()).getId());
+Log.v("abc",homeFeaturedProductList.get(getAdapterPosition()).getId());
                     intent.putExtra("productId", (Serializable) homeFeaturedProductList.get(getAdapterPosition()).getId());
+                    intent.putExtra("productName", (Serializable) homeFeaturedProductList.get(getAdapterPosition()).getName());
+                    intent.putExtra("productPrize", (Serializable) homeFeaturedProductList.get(getAdapterPosition()).getPrice());
+                    intent.putExtra("productImage", (Serializable) homeFeaturedProductList.get(getAdapterPosition()).getImage());
+                    intent.putExtra("productDescription", (Serializable) homeFeaturedProductList.get(getAdapterPosition()).getDesc());
                     intent.putExtra("supplierId", (Serializable) homeFeaturedProductList.get(getAdapterPosition()).getSupplier());
                     context.startActivity(intent);
                 }

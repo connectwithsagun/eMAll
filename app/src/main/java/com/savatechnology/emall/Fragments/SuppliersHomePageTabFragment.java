@@ -1,6 +1,7 @@
 package com.savatechnology.emall.Fragments;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,12 +12,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.savatechnology.emall.Adapters.AdapterHomeFeaturedProduct;
+import com.savatechnology.emall.Adapters.AdapterHomeNewArrivalsProduct;
 import com.savatechnology.emall.Adapters.AdapterSupplierProduct;
+import com.savatechnology.emall.Adapters.AdapterSuppliers;
+import com.savatechnology.emall.JSONSchemas.FeaturedProduct;
+import com.savatechnology.emall.JSONSchemas.NewArrivalProduct;
+import com.savatechnology.emall.JSONSchemas.SupplierProduct;
 import com.savatechnology.emall.Models.SupplierProductList;
 import com.savatechnology.emall.R;
+import com.savatechnology.emall.Remote.ApiService;
+import com.savatechnology.emall.Remote.ApiUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -92,13 +107,41 @@ public class SuppliersHomePageTabFragment extends Fragment {
 
     private void initRecycleView(View view) {
 
-        recyclerView = view.findViewById(R.id.recyclerView);
-        layoutManager=new GridLayoutManager(mContext,2);
-        //layoutManager.setOrientation(RecyclerView.VERTICAL);
-        recyclerView.setLayoutManager(layoutManager);
-        adapter = new AdapterSupplierProduct(lists);
-        recyclerView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+//        recyclerView = view.findViewById(R.id.recyclerView);
+//        layoutManager=new GridLayoutManager(mContext,2);
+//        //layoutManager.setOrientation(RecyclerView.VERTICAL);
+//        recyclerView.setLayoutManager(layoutManager);
+//        adapter = new AdapterSupplierProduct(lists);
+//        recyclerView.setAdapter(adapter);
+//        adapter.notifyDataSetChanged();
+
+        SharedPreferences sh = getActivity().getSharedPreferences("MySharedPref",MODE_PRIVATE);
+        String s1 = sh.getString("sId", "");
+        ApiService apiService = ApiUtil.getApiService();
+        apiService.getSupplierProduct(s1).enqueue(new Callback<List<SupplierProduct>>() {
+            @Override
+            public void onResponse(Call<List<SupplierProduct>> call, Response<List<SupplierProduct>> response) {
+                if (response.isSuccessful()) {
+                    List<SupplierProduct> featuredProducts = response.body();
+                    recyclerView = view.findViewById(R.id.tab1);
+                    layoutManager = new GridLayoutManager(mContext, 2);
+                    //layoutManager.setOrientation(RecyclerView.VERTICAL);
+                    recyclerView.setLayoutManager(layoutManager);
+                    adapter = new AdapterSupplierProduct(featuredProducts,mContext);
+                    recyclerView.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<SupplierProduct>> call, Throwable t) {
+
+            }
+        });
+
+
     }
 
     private void initData() {

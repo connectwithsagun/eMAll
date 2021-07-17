@@ -1,4 +1,5 @@
 package com.savatechnology.emall.Adapters;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,14 +9,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-import com.savatechnology.emall.Models.SupplierProductList;
+import com.bumptech.glide.Glide;
+import com.savatechnology.emall.JSONSchemas.SupplierProduct;
 import com.savatechnology.emall.R;
 
 import java.util.List;
 
 public class AdapterSupplierProduct extends RecyclerView.Adapter<AdapterSupplierProduct.MyViewHolder> {
-    private List<SupplierProductList> lists;
-    public AdapterSupplierProduct(List<SupplierProductList> lists) {
+    Context context;
+    private List<SupplierProduct> lists;
+    public AdapterSupplierProduct(List<SupplierProduct> lists, Context mContext) {
         this.lists = lists;
     }
     @NonNull
@@ -26,13 +29,19 @@ public class AdapterSupplierProduct extends RecyclerView.Adapter<AdapterSupplier
     }
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        int image = lists.get(position).getimageProduct();
-        String product_name = lists.get(position).gettvProductName();
-        String product_price = lists.get(position).gettvProductPrice();
+        String image = lists.get(position).getImage();
+        String product_name = lists.get(position).getName();
+        int product_price = lists.get(position).getPrice();
 
 
 
-        holder.imageProduct.setImageResource(image);
+     //   holder.imageProduct.setImageResource(image);
+
+
+        Glide.with(context)
+                .asBitmap()
+                .load(image)
+                .into(holder.imageProduct);
         holder.tvProductName.setText(product_name);
         holder.tvProductPrice.setText(product_price);
 

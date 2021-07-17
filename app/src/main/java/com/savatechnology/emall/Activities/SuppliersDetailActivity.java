@@ -3,9 +3,14 @@ package com.savatechnology.emall.Activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Adapter;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 import com.savatechnology.emall.Adapters.PageAdapter;
@@ -17,6 +22,9 @@ public class SuppliersDetailActivity extends AppCompatActivity {
     TabItem tabItem1,tabItem2;
     ViewPager viewPager;
     PageAdapter pageAdapter;
+    ImageView imageSupplier;
+    TextView supplierName,supplierLocation,supplierPhone;
+    String sName,sLocation,sPhone,sImage,sId;
 
 
     @Override
@@ -24,6 +32,31 @@ public class SuppliersDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_suppliers_detail);
 
+        supplierName =findViewById(R.id.tvSupplierName);
+        supplierLocation =findViewById(R.id.tvSupplierLocation);
+        supplierPhone =findViewById(R.id.tvSupplierPhone);
+        imageSupplier = (ImageView)findViewById(R.id.imageSupplier);
+
+        sName = getIntent().getStringExtra("supplierName");
+        sLocation = getIntent().getStringExtra("supplierLocation");
+        sPhone = getIntent().getStringExtra("supplierPhone");
+        sImage = getIntent().getStringExtra("supplierImage");
+        sId = getIntent().getStringExtra("supplierId");
+
+        supplierName.setText(sName);
+        supplierLocation.setText(sLocation);
+        supplierPhone.setText(sPhone);
+
+        // loading supplier image
+        Glide.with(this)
+                .asBitmap()
+                .load(sImage)
+                .into(imageSupplier);
+//Log.v("abc",sPhone);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
+        SharedPreferences.Editor loginPreferences = sharedPreferences.edit();
+        loginPreferences.putString("sId", sId);
 
         tabLayout=(TabLayout)findViewById(R.id.tab_layout1);
         tabItem1=(TabItem)findViewById(R.id.tab1);
@@ -38,6 +71,7 @@ public class SuppliersDetailActivity extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
+
 
                 if(tab.getPosition()==0 || tab.getPosition()==1 )
                     pageAdapter.notifyDataSetChanged();
