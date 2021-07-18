@@ -8,9 +8,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.savatechnology.emall.Adapters.AdapterHomeFeaturedProduct;
 import com.savatechnology.emall.Adapters.AdapterHomeNewArrivalsProduct;
@@ -24,6 +26,7 @@ import com.savatechnology.emall.R;
 import com.savatechnology.emall.Remote.ApiService;
 import com.savatechnology.emall.Remote.ApiUtil;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +45,7 @@ public class SuppliersHomePageTabFragment extends Fragment {
 
 
     RecyclerView recyclerView;
-    List<SupplierProductList> lists;
+    List<SupplierProduct> lists;
     AdapterSupplierProduct adapter;
     Context mContext;
     GridLayoutManager layoutManager;
@@ -93,7 +96,8 @@ public class SuppliersHomePageTabFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        initData();
+      initData();
+     //   Log.v("SupplierHomePage","sthgdtyhn");
         view = inflater.inflate(R.layout.fragment_suppliers_home_page_tab, container, false);
         initRecycleView(view);
         return view;
@@ -111,19 +115,26 @@ public class SuppliersHomePageTabFragment extends Fragment {
 //        layoutManager=new GridLayoutManager(mContext,2);
 //        //layoutManager.setOrientation(RecyclerView.VERTICAL);
 //        recyclerView.setLayoutManager(layoutManager);
-//        adapter = new AdapterSupplierProduct(lists);
+//        adapter = new AdapterSupplierProduct(lists,mContext);
 //        recyclerView.setAdapter(adapter);
 //        adapter.notifyDataSetChanged();
-
+//
         SharedPreferences sh = getActivity().getSharedPreferences("MySharedPref",MODE_PRIVATE);
         String s1 = sh.getString("sId", "");
+        //Log.v("SupplierHomePage", String.valueOf(s1));
         ApiService apiService = ApiUtil.getApiService();
         apiService.getSupplierProduct(s1).enqueue(new Callback<List<SupplierProduct>>() {
             @Override
             public void onResponse(Call<List<SupplierProduct>> call, Response<List<SupplierProduct>> response) {
+//                try {
+//                    Log.v("SupplierHomePage",response.errorBody().string());
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
                 if (response.isSuccessful()) {
                     List<SupplierProduct> featuredProducts = response.body();
-                    recyclerView = view.findViewById(R.id.tab1);
+
+                    recyclerView = view.findViewById(R.id.recyclerView);
                     layoutManager = new GridLayoutManager(mContext, 2);
                     //layoutManager.setOrientation(RecyclerView.VERTICAL);
                     recyclerView.setLayoutManager(layoutManager);
@@ -132,12 +143,15 @@ public class SuppliersHomePageTabFragment extends Fragment {
                     adapter.notifyDataSetChanged();
 
 
+                }else{
+                    Toast.makeText(mContext, "Ërror while fetching products", Toast.LENGTH_SHORT).show();
+
                 }
             }
 
             @Override
             public void onFailure(Call<List<SupplierProduct>> call, Throwable t) {
-
+                Toast.makeText(mContext, "Ërror while fetching products", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -147,11 +161,11 @@ public class SuppliersHomePageTabFragment extends Fragment {
     private void initData() {
 
         lists = new ArrayList<>();
-
-        lists.add(new SupplierProductList(R.drawable.laptop,"Gaming Laptop","86000"));
-        lists.add(new SupplierProductList(R.drawable.laptop,"Gaming Laptop","86000"));
-        lists.add(new SupplierProductList(R.drawable.laptop,"Gaming Laptop","86000"));
-        lists.add(new SupplierProductList(R.drawable.laptop,"Gaming Laptop","86000"));
+//
+//        lists.add(new SupplierProductList(R.drawable.laptop,"Gaming Laptop","25"));
+//        lists.add(new SupplierProductList(R.drawable.laptop,"Gaming Laptop","3"));
+//        lists.add(new SupplierProductList(R.drawable.laptop,"Gaming Laptop","2"));
+//        lists.add(new SupplierProductList(R.drawable.laptop,"Gaming Laptop","0"));
 
 
     }

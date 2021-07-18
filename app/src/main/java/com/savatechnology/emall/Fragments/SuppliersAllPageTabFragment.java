@@ -1,6 +1,7 @@
 package com.savatechnology.emall.Fragments;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,15 +11,27 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 
+import com.savatechnology.emall.Adapters.AdapterSupplierAllProduct;
 import com.savatechnology.emall.Adapters.AdapterSupplierProduct;
 
+import com.savatechnology.emall.JSONSchemas.FeaturedProduct;
+import com.savatechnology.emall.JSONSchemas.SupplierProduct;
 import com.savatechnology.emall.Models.SupplierProductList;
 import com.savatechnology.emall.R;
+import com.savatechnology.emall.Remote.ApiService;
+import com.savatechnology.emall.Remote.ApiUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,8 +42,8 @@ public class SuppliersAllPageTabFragment extends Fragment {
 
 
     RecyclerView recyclerView;
-    List<SupplierProductList> lists;
-    AdapterSupplierProduct adapter;
+    List<SupplierProduct> lists;
+    AdapterSupplierAllProduct adapter;
     Context mContext;
     GridLayoutManager layoutManager;
     private View view;
@@ -101,16 +114,51 @@ public class SuppliersAllPageTabFragment extends Fragment {
 //        adapter = new AdapterSupplierProduct(lists, mContext);
 //        recyclerView.setAdapter(adapter);
 //        adapter.notifyDataSetChanged();
+
+
+        SharedPreferences sh = getActivity().getSharedPreferences("MySharedPref",MODE_PRIVATE);
+        String s1 = sh.getString("sId", "");
+        //Log.v("SupplierHomePage", String.valueOf(s1));
+        ApiService apiService = ApiUtil.getApiService();
+        apiService.getSupplierProduct(s1).enqueue(new Callback<List<SupplierProduct>>() {
+            @Override
+            public void onResponse(Call<List<SupplierProduct>> call, Response<List<SupplierProduct>> response) {
+
+                if (response.isSuccessful()) {
+                    List<SupplierProduct> featuredProducts = response.body();
+
+                    recyclerView = view.findViewById(R.id.recyclerView);
+                    layoutManager = new GridLayoutManager(mContext, 2);
+                    //layoutManager.setOrientation(RecyclerView.VERTICAL);
+                    recyclerView.setLayoutManager(layoutManager);
+                    adapter = new AdapterSupplierAllProduct(featuredProducts,mContext);
+                    recyclerView.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+
+
+                }else{
+                    Toast.makeText(mContext, "Ërror while fetching products", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<SupplierProduct>> call, Throwable t) {
+                Toast.makeText(mContext, "Ërror while fetching products", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
     }
 
     private void initData() {
 
         lists = new ArrayList<>();
 
-        lists.add(new SupplierProductList(R.drawable.laptop,"Gaming Laptop","86000"));
-        lists.add(new SupplierProductList(R.drawable.laptop,"Gaming Laptop","86000"));
-        lists.add(new SupplierProductList(R.drawable.laptop,"Gaming Laptop","86000"));
-        lists.add(new SupplierProductList(R.drawable.laptop,"Gaming Laptop","86000"));
+//        lists.add(new SupplierProductList(R.drawable.laptop,"Gaming Laptop","86000"));
+//        lists.add(new SupplierProductList(R.drawable.laptop,"Gaming Laptop","86000"));
+//        lists.add(new SupplierProductList(R.drawable.laptop,"Gaming Laptop","86000"));
+//        lists.add(new SupplierProductList(R.drawable.laptop,"Gaming Laptop","86000"));
 
 
     }

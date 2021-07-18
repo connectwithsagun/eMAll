@@ -42,7 +42,7 @@ public class SuppliersDetailActivity extends AppCompatActivity {
         sPhone = getIntent().getStringExtra("supplierPhone");
         sImage = getIntent().getStringExtra("supplierImage");
         sId = getIntent().getStringExtra("supplierId");
-
+//Log.v("xyz",sId);
         supplierName.setText(sName);
         supplierLocation.setText(sLocation);
         supplierPhone.setText(sPhone);
@@ -57,6 +57,7 @@ public class SuppliersDetailActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
         SharedPreferences.Editor loginPreferences = sharedPreferences.edit();
         loginPreferences.putString("sId", sId);
+        loginPreferences.apply();
 
         tabLayout=(TabLayout)findViewById(R.id.tab_layout1);
         tabItem1=(TabItem)findViewById(R.id.tab1);

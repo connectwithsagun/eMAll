@@ -46,7 +46,7 @@
                     android:textSize="@dimen/heading"
                     android:layout_marginHorizontal="10dp"
                     android:textColor="@color/black"
-                    android:id="@+id/tvProductPrice"
+                    android:id="@+id/tvItemProductPrice"
                     android:textStyle="bold"
                     android:text="Rs.900"
                     android:layout_gravity="start"

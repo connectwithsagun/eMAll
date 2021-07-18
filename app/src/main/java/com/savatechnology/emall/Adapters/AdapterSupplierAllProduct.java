@@ -10,16 +10,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.bumptech.glide.Glide;
+import com.savatechnology.emall.JSONSchemas.FeaturedProduct;
 import com.savatechnology.emall.JSONSchemas.SupplierProduct;
 import com.savatechnology.emall.Models.SupplierProductList;
 import com.savatechnology.emall.R;
 
 import java.util.List;
 
-public class AdapterSupplierProduct extends RecyclerView.Adapter<AdapterSupplierProduct.MyViewHolder> {
+public class AdapterSupplierAllProduct extends RecyclerView.Adapter<AdapterSupplierAllProduct.MyViewHolder> {
     Context context;
     private List<SupplierProduct> lists;
-    public AdapterSupplierProduct(List<SupplierProduct> lists, Context mContext) {
+    public AdapterSupplierAllProduct(List<SupplierProduct> lists, Context mContext) {
         this.lists = lists;
         context = mContext;
     }
