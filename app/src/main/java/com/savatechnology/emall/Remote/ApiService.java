@@ -1,5 +1,6 @@
 package com.savatechnology.emall.Remote;
 
+import com.savatechnology.emall.JSONSchemas.Cart;
 import com.savatechnology.emall.JSONSchemas.FeaturedProduct;
 import com.savatechnology.emall.JSONSchemas.NewArrivalProduct;
 import com.savatechnology.emall.JSONSchemas.SupplierProduct;
@@ -116,5 +117,28 @@ public interface ApiService {
     Call<List<SupplierProduct>> getSupplierProduct(
             @Path("id") String id
             );
+
+    @FormUrlEncoded
+@POST("cart")
+    Call<ResponseBody> createCart(
+            @Field("userId") String userId,
+            @Field("productId") String productId
+
+
+    );
+
+    @FormUrlEncoded
+    @POST("wishlist")
+    Call<ResponseBody> createWishList(
+            @Field("userId") String userId,
+            @Field("productId") String productId
+
+
+    );
+
+    @GET("cart/product-by-user/{id}")
+    Call<List<Cart>> getCartList(
+            @Path("id") String id
+    );
 
 }

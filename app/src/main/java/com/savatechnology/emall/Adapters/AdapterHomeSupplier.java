@@ -81,12 +81,13 @@ public class AdapterHomeSupplier extends RecyclerView.Adapter<AdapterHomeSupplie
 //                    intent.putExtra("supplierLocation",location);
 //                    intent.putExtra("supplierPhone",phone);
 //                    intent.putExtra("supplierImage",image);
-                    Log.v("abc", String.valueOf(homeSupplierList.get(getAdapterPosition()).getPhone()));
+                  //  Log.v("abc", String.valueOf(homeSupplierList.get(getAdapterPosition()).getPhone()));
 
                     intent.putExtra("supplierName", (Serializable) homeSupplierList.get(getAdapterPosition()).getName());
                     intent.putExtra("supplierLocation", (Serializable) homeSupplierList.get(getAdapterPosition()).getLocation());
                     intent.putExtra("supplierPhone", (Serializable) String.valueOf(homeSupplierList.get(getAdapterPosition()).getPhone()));
                     intent.putExtra("supplierImage", (Serializable) homeSupplierList.get(getAdapterPosition()).getImage());
+                    intent.putExtra("supplierId",  homeSupplierList.get(getAdapterPosition()).getId());
                     context.startActivity(intent);
                 }
             });

@@ -250,10 +250,19 @@ public class LoginFragment extends Fragment {
                         String user = obj1.getString("user");
                         JSONObject obj2= new JSONObject(user);
                         _id = obj2.getString("_id");
+//                        Log.v("user id get",_id);
 
 
+                        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MySharedPref",MODE_PRIVATE);
+                        SharedPreferences.Editor loginPreferences = sharedPreferences.edit();
 
 
+                        loginPreferences.putString("email", Email.getText().toString());
+                        loginPreferences.putString("password", Password.getText().toString());
+                        loginPreferences.putBoolean("isLoggedIn", true);
+                        loginPreferences.putString("id", _id);
+                        loginPreferences.putString("username", username);
+                        loginPreferences.apply();
 
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -263,17 +272,9 @@ public class LoginFragment extends Fragment {
 
 
 
-                    SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MySharedPref",MODE_PRIVATE);
-                    SharedPreferences.Editor loginPreferences = sharedPreferences.edit();
 
 
-                    loginPreferences.putString("email", Email.getText().toString());
-                    loginPreferences.putString("password", Password.getText().toString());
-                    loginPreferences.putBoolean("isLoggedIn", true);
-                    loginPreferences.putString("id", _id);
-                    loginPreferences.putString("username", username);
-                    loginPreferences.apply();
-
+                     //   Log.v("user id get",_id);
 
                     Toast.makeText(getActivity(), "Login Successfully", Toast.LENGTH_SHORT).show();
 

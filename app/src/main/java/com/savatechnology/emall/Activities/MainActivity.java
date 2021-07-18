@@ -110,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
     private void getUserDetails() {
         SharedPreferences sh = getSharedPreferences("MySharedPref", MODE_PRIVATE);
         String UserId = sh.getString("id", "");
+        //Log.v("USer ID GET",UserId);
         ApiService apiService = ApiUtil.getApiService();
         apiService.userDetailsGet(UserId).enqueue(new Callback<ResponseBody>() {
             @Override
@@ -127,8 +128,12 @@ public class MainActivity extends AppCompatActivity {
                         String address = obj.getString("addres");
                         String gender = obj.getString("gender");
                         String image = obj.getString("image");
+                      //  String id = obj.getString("id");
 
-                        //Log.v("abc",address);
+//                        Log.v("USer ID GET",address);
+//                        Log.v("USer ID GET",phone);
+//                        Log.v("USer ID GET",gender);
+                       // Log.v("USer ID GET",id);
 
                         //  Toast.makeText(getActivity(), "" + username, Toast.LENGTH_LONG).show();
 
@@ -139,6 +144,7 @@ public class MainActivity extends AppCompatActivity {
                         loginPreferences.putString("address", address);
                         loginPreferences.putString("gender", gender);
                         loginPreferences.putString("image", image);
+                        //loginPreferences.putString("id", id);
                         loginPreferences.apply();
 
                     } catch (Exception e) {

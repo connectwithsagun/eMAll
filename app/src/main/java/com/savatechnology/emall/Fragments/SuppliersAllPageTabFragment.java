@@ -117,7 +117,7 @@ public class SuppliersAllPageTabFragment extends Fragment {
 
 
         SharedPreferences sh = getActivity().getSharedPreferences("MySharedPref",MODE_PRIVATE);
-        String s1 = sh.getString("sId", "");
+        String s1 = sh.getString("supplierId", "");
         //Log.v("SupplierHomePage", String.valueOf(s1));
         ApiService apiService = ApiUtil.getApiService();
         apiService.getSupplierProduct(s1).enqueue(new Callback<List<SupplierProduct>>() {

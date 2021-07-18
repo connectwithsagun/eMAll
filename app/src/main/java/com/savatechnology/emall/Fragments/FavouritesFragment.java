@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -30,6 +31,7 @@ public class FavouritesFragment extends Fragment {
     AdapterFavouriteList adapter;
     Context mContext;
     LinearLayoutManager layoutManager;
+    ImageView img;
     private View view;
 
 
@@ -72,6 +74,7 @@ public class FavouritesFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
@@ -91,6 +94,9 @@ public class FavouritesFragment extends Fragment {
         mContext = context;
     }
 
+
+
+
     private void initRecycleView(View view) {
 
         recyclerView = view.findViewById(R.id.favRecyclerView);
@@ -100,6 +106,7 @@ public class FavouritesFragment extends Fragment {
         adapter = new AdapterFavouriteList(lists);
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+
     }
 
     private void initData() {

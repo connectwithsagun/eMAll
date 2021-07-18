@@ -78,7 +78,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="@drawable/favourite_icon"
-            android:id="@+id/ImgIcon"
+            android:id="@+id/imgFavouriteIcon"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="20dp"
             android:layout_marginLeft="75dp"

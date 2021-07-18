@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,9 +18,18 @@ import com.savatechnology.emall.Activities.SuppliersDetailActivity;
 import com.savatechnology.emall.JSONSchemas.Suppliers;
 import com.savatechnology.emall.Models.SuppliersList;
 import com.savatechnology.emall.R;
+import com.savatechnology.emall.Remote.ApiService;
+import com.savatechnology.emall.Remote.ApiUtil;
+
+import org.json.JSONObject;
 
 import java.io.Serializable;
 import java.util.List;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AdapterSuppliers extends RecyclerView.Adapter<AdapterSuppliers.MyViewHolder> {
     private List<Suppliers> lists;
@@ -75,8 +86,58 @@ public class AdapterSuppliers extends RecyclerView.Adapter<AdapterSuppliers.MyVi
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(context, SuppliersDetailActivity.class);
-                    //intent.putExtra("Course", (Serializable) lists.get(getAdapterPosition()));
+                   intent.putExtra("supplierId", lists.get(getAdapterPosition()).getId());
                     context.startActivity(intent);
+
+           //         String abc = lists.get(getAdapterPosition()).getId();
+
+
+//                    ApiService apiService = ApiUtil.getApiService();
+//                    apiService.getSupplierDetail(abc).enqueue(new Callback<ResponseBody>() {
+//                        @Override
+//                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+//                            if(response.isSuccessful()){
+//                                try {
+//                                    String val = response.body().string();
+//                                    JSONObject obj = new JSONObject(val);
+//                                    String name = obj.getString("name");
+//                                    String location = obj.getString("location");
+//                                    String phone = obj.getString("phone");
+//                                    String image = obj.getString("image");
+//
+////                                Log.v("abc",name);
+////                                Log.v("abc",location);
+////                                Log.v("abc",phone);
+////                                Log.v("abc",image);
+//
+//                                    Intent intent = new Intent(context, SuppliersDetailActivity.class);
+//                                    intent.putExtra("supplierName",name);
+//                                    intent.putExtra("supplierLocation",location);
+//                                    intent.putExtra("supplierPhone",phone);
+//                                    intent.putExtra("supplierImage",image);
+//                                    intent.putExtra("supplierId",abc);
+//                                    context.startActivity(intent);
+//
+//                                } catch (Exception e) {
+//                                    e.printStackTrace();
+//                                }
+//                                // startActivity(new Intent(ProductDetailsActivity.this,SuppliersDetailActivity.class));
+//                            }
+//                            else{
+//                                Toast.makeText(context, "" +response.errorBody(), Toast.LENGTH_SHORT);
+//
+//                            }
+//
+//                        }
+//
+//                        @Override
+//                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+//                            Toast.makeText(context, "Error" + t.getMessage(), Toast.LENGTH_SHORT);
+//                        }
+//                    });
+
+
+
                 }
             });
 

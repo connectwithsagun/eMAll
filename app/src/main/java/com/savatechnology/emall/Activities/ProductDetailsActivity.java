@@ -14,8 +14,10 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.savatechnology.emall.Adapters.AdapterHomeFeaturedProduct;
 import com.savatechnology.emall.Adapters.AdapterHomeSupplier;
 import com.savatechnology.emall.Fragments.LoginFragment;
+import com.savatechnology.emall.JSONSchemas.FeaturedProduct;
 import com.savatechnology.emall.JSONSchemas.Suppliers;
 import com.savatechnology.emall.R;
 import com.savatechnology.emall.Remote.ApiService;
@@ -58,15 +60,11 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
     private View parent_view;
     private TextView tv_qty;
-    String pDesc,pName,pImage,supplierId;
+    String pDesc, pName, pImage, supplierId, pId;
     Integer pPrize;
     ImageView imageProduct;
     AlertDialog.Builder builder;
-    TextView ProductName,ProductPrize,ProductDesc;
-
-
-
-
+    TextView ProductName, ProductPrize, ProductDesc,FavouriteIcon;
 
 
     @Override
@@ -89,34 +87,71 @@ public class ProductDetailsActivity extends AppCompatActivity {
 //        findViewById(R.id.image_5);
 
 
-
-
         ProductPrize = findViewById(R.id.tvProductPrize);
         ProductDesc = findViewById(R.id.tvProductDescription);
         ProductName = findViewById(R.id.tvProductName);
-        imageProduct = (ImageView)findViewById(R.id.imgProduct);
+        imageProduct = (ImageView) findViewById(R.id.imgProduct);
+        FavouriteIcon = findViewById(R.id.tvFavouriteIcon);
+
+        FavouriteIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Intent intent = new Intent(ProductDetailsActivity.this,SuppliersDetailActivity.class);
+//                startActivity(intent);
+                SharedPreferences sh = ProductDetailsActivity.this.getSharedPreferences("MySharedPref", MODE_PRIVATE);
+                String uId = sh.getString("id","");
+                // Log.v("xyz",uId);
+                ApiService apiService = ApiUtil.getApiService();
+                apiService.createWishList(uId, pId).enqueue(new Callback<ResponseBody>() {
+                    @Override
+
+
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        if(response.isSuccessful()){
+                            Toast.makeText(ProductDetailsActivity.this, "Product Added to Wishlist Successfully",Toast.LENGTH_SHORT).show();
+//                            Intent intent = new Intent(ProductDetailsActivity.this, ProductDetailsActivity.class);
+//                            startActivity(intent);
+                        }
+                        else{
+                            Toast.makeText(ProductDetailsActivity.this, ""+response.errorBody(),Toast.LENGTH_SHORT).show();
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        Toast.makeText(ProductDetailsActivity.this, "Error" +t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
+
+            }
+        });
+
+
 
         builder = new AlertDialog.Builder(this);
 
-        pPrize = getIntent().getIntExtra("productPrize",0);
+        pPrize = getIntent().getIntExtra("productPrize", 0);
         pName = getIntent().getStringExtra("productName");
         pDesc = getIntent().getStringExtra("productDescription");
         pImage = getIntent().getStringExtra("productImage");
         supplierId = getIntent().getStringExtra("supplierId");
+        pId = getIntent().getStringExtra("productId");
 
-        ProductPrize.setText("Rs. "+pPrize.toString());
+        ProductPrize.setText("Rs. " + pPrize.toString());
         ProductName.setText(pName);
         ProductDesc.setText(pDesc);
-//        Log.v("abc",supplierId);
+//        Log.v("abc",pId);
 
-       // loading product image
+        // loading product image
         Glide.with(this)
                 .asBitmap()
                 .load(pImage)
-               // .apply(new RequestOptions().override(250,500))
+                // .apply(new RequestOptions().override(250,500))
                 .into(imageProduct);
-
-
 
 
 //        tv_qty = (TextView) findViewById(R.id.tvProductQuantity);
@@ -154,7 +189,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                 apiService.getSupplierDetail(supplierId).enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                        if(response.isSuccessful()){
+                        if (response.isSuccessful()) {
                             try {
                                 String val = response.body().string();
                                 JSONObject obj = new JSONObject(val);
@@ -169,20 +204,19 @@ public class ProductDetailsActivity extends AppCompatActivity {
 //                                Log.v("abc",image);
 
                                 Intent intent = new Intent(ProductDetailsActivity.this, SuppliersDetailActivity.class);
-                                intent.putExtra("supplierName",name);
-                                intent.putExtra("supplierLocation",location);
-                                intent.putExtra("supplierPhone",phone);
-                                intent.putExtra("supplierImage",image);
-                                intent.putExtra("supplierId",supplierId);
+                                intent.putExtra("supplierName", name);
+                                intent.putExtra("supplierLocation", location);
+                                intent.putExtra("supplierPhone", phone);
+                                intent.putExtra("supplierImage", image);
+                                intent.putExtra("supplierId", supplierId);
                                 startActivity(intent);
 
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
-                           // startActivity(new Intent(ProductDetailsActivity.this,SuppliersDetailActivity.class));
-                        }
-                        else{
-                            Toast.makeText(ProductDetailsActivity.this, "" +response.errorBody(), Toast.LENGTH_SHORT).show();
+                            // startActivity(new Intent(ProductDetailsActivity.this,SuppliersDetailActivity.class));
+                        } else {
+                            Toast.makeText(ProductDetailsActivity.this, "" + response.errorBody(), Toast.LENGTH_SHORT).show();
 
                         }
 
@@ -190,69 +224,61 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<ResponseBody> call, Throwable t) {
-                       Toast.makeText(ProductDetailsActivity.this, "Error" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ProductDetailsActivity.this, "Error" + t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
 
 
             }
         });
+//        Log.v("abc",pId);
+//        Log.v("xyz",supplierId);
+        SharedPreferences sh = ProductDetailsActivity.this.getSharedPreferences("MySharedPref", MODE_PRIVATE);
+        Boolean b = sh.getBoolean("isLoggedIn", false);
+
+              //  Log.v("xyz",uId);
 
         ((AppCompatButton) findViewById(R.id.bt_add_to_cart)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences sh = ProductDetailsActivity.this.getSharedPreferences("MySharedPref",MODE_PRIVATE);
-                Boolean b = sh.getBoolean("isLoggedIn",false);
-                if(!b){
-                    Toast.makeText(ProductDetailsActivity.this,"You are not logged in for this action!!", Toast.LENGTH_SHORT).show();
+
+                if (!b) {
+                    Toast.makeText(ProductDetailsActivity.this, "You are not logged in for this action!!", Toast.LENGTH_SHORT).show();
+                } else
+                    {
+                    addCart();
+                }
+              }
+
+        });
+    }
+
+    private void addCart() {
+        SharedPreferences sh = ProductDetailsActivity.this.getSharedPreferences("MySharedPref", MODE_PRIVATE);
+        String uId = sh.getString("id","");
+       // Log.v("xyz",uId);
+        ApiService apiService = ApiUtil.getApiService();
+        apiService.createCart(uId, pId).enqueue(new Callback<ResponseBody>() {
+            @Override
+
+
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(response.isSuccessful()){
+                    Toast.makeText(ProductDetailsActivity.this, "Product Added to Cart Successfully",Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(ProductDetailsActivity.this, CartActivity.class);
+                    startActivity(intent);
                 }
                 else{
-                    startActivity(new Intent(ProductDetailsActivity.this,CartActivity.class));
+                    Toast.makeText(ProductDetailsActivity.this, ""+response.errorBody(),Toast.LENGTH_SHORT).show();
                 }
-
-
 
 
             }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(ProductDetailsActivity.this, "Error" +t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
         });
-
-//Log.v("abc",tv_qty.toString());
-
-
-
-
-//
-
     }
-
-
-
-
-
-
-
-
-//    public void setSize(View v) {
-//        Button bt = (Button) v;
-//        bt.setEnabled(false);
-//        bt.setTextColor(Color.WHITE);
-//        for (int id : array_size_bt) {
-//            if (v.getId() != id) {
-//                Button bt_unselect = (Button) findViewById(id);
-//                bt_unselect.setEnabled(true);
-//                bt_unselect.setTextColor(Color.BLACK);
-//            }
-//        }
-//    }
-//
-//    public void setColor(View v) {
-//        ((FloatingActionButton) v).setImageResource(R.drawable.ic_done);
-//        for (int id : array_color_fab) {
-//            if (v.getId() != id) {
-//                ((FloatingActionButton) findViewById(id)).setImageResource(android.R.color.transparent);
-//            }
-//        }
-//    }
-
-
 }

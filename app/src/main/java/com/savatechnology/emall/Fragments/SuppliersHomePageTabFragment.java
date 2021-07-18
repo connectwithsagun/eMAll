@@ -120,8 +120,8 @@ public class SuppliersHomePageTabFragment extends Fragment {
 //        adapter.notifyDataSetChanged();
 //
         SharedPreferences sh = getActivity().getSharedPreferences("MySharedPref",MODE_PRIVATE);
-        String s1 = sh.getString("sId", "");
-        //Log.v("SupplierHomePage", String.valueOf(s1));
+        String s1 = sh.getString("supplierId", "");
+//        Log.v("SupplierHomePage", String.valueOf(s1));
         ApiService apiService = ApiUtil.getApiService();
         apiService.getSupplierProduct(s1).enqueue(new Callback<List<SupplierProduct>>() {
             @Override
@@ -144,7 +144,7 @@ public class SuppliersHomePageTabFragment extends Fragment {
 
 
                 }else{
-                    Toast.makeText(mContext, "Ërror while fetching products", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, "Ërror while fetching products"+response.errorBody(), Toast.LENGTH_SHORT).show();
 
                 }
             }

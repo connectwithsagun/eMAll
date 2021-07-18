@@ -8,9 +8,11 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.appcompat.view.menu.MenuView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.savatechnology.emall.JSONSchemas.Cart;
 import com.savatechnology.emall.Models.CartList;
 import com.savatechnology.emall.R;
 
@@ -18,8 +20,8 @@ import java.util.List;
 
 public class AdapterCart extends RecyclerView.Adapter<AdapterCart.MyViewHolder> {
     Context context;
-    private List<CartList> lists;
-    public AdapterCart(List<CartList> lists,Context context) {
+    private List<Cart> lists;
+    public AdapterCart(List<Cart> lists,Context context) {
         this.lists = lists;
         this.context = context;
     }
@@ -31,16 +33,18 @@ public class AdapterCart extends RecyclerView.Adapter<AdapterCart.MyViewHolder> 
     }
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        String image = lists.get(position).getimgProduct();
-        String product_name = lists.get(position).gettvProductTitle();
-        int product_price = lists.get(position).gettvProductPrice();
-        int product_shipping_cost = lists.get(position).gettvShippingCost();
+        String image = lists.get(position).getProduct().getImage();
+        String product_name = lists.get(position).getProduct().getName();
+        int product_price = lists.get(position).getProduct().getPrice();
+       // int product_shipping_cost = lists.get(position).getProduct().get;
+
+
 
         //Log.v("abc",image);
 
         //adding images from online
 
-        Log.v("abc", String.valueOf(product_price));
+      //  Log.v("abc", String.valueOf(product_price));
 
         Glide.with(context)
                 .asBitmap()
@@ -50,11 +54,7 @@ public class AdapterCart extends RecyclerView.Adapter<AdapterCart.MyViewHolder> 
 
         holder.tvProductTitle.setText(product_name);
         holder.tvProductPrice.setText("Rs " +product_price);
-        holder.tvShippingCost.setText("Rs "+product_shipping_cost);
-
-
-
-
+     //   holder.tvShippingCost.setText("Rs "+product_shipping_cost);
 
     }
     @Override
@@ -71,9 +71,10 @@ public class AdapterCart extends RecyclerView.Adapter<AdapterCart.MyViewHolder> 
             imgProduct = itemView.findViewById(R.id.imgProduct);
             tvProductTitle =(TextView) itemView.findViewById(R.id.tvProductTitle);
             tvProductPrice =(TextView) itemView.findViewById(R.id.tvProductPrice);
-            tvShippingCost =(TextView) itemView.findViewById(R.id.tvShippingCost);
+           // tvShippingCost =(TextView) itemView.findViewById(R.id.tvShippingCost);
 
 
         }
+
     }
 }

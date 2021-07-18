@@ -69,6 +69,7 @@
                             android:id="@+id/tvFavouriteIcon"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:clickable="true"
                             android:layout_marginLeft="100dp"
                             android:drawableEnd="@drawable/favourite_icon"
                             android:drawableRight="@drawable/favourite_icon" />
@@ -107,23 +108,23 @@
                     </LinearLayout>
 
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_large"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="@dimen/spacing_large"-->
+<!--                        android:gravity="center_vertical"-->
+<!--                        android:orientation="horizontal">-->
 
-                        <androidx.appcompat.widget.AppCompatRatingBar
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:clickable="true"
-                            android:numStars="5"
-                            android:rating="3.5"
-                            android:stepSize="1" />
+<!--                        <androidx.appcompat.widget.AppCompatRatingBar-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:clickable="true"-->
+<!--                            android:numStars="5"-->
+<!--                            android:rating="3.5"-->
+<!--                            android:stepSize="1" />-->
 
 
-                    </LinearLayout>
+<!--                    </LinearLayout>-->
 
 
                 </LinearLayout>
